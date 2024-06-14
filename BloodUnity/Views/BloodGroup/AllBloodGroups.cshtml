@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BloodUnity.Models.BloodGroupsMV>
+
+@{
+    ViewBag.Title = "Blood Groups";
+}
+
+<div class="col-md-8">
+    <div class="contact-form-block">
+        <h2 class="contact-title">Blood Groups</h2>
+        <p>
+            @Html.ActionLink("New Blood Group", "Create", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodGroup)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodGroup)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BloodGroupID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.BloodGroupID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
