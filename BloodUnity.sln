@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodUnity", "BloodUnity\BloodUnity.csproj", "{BFBCD06E-1ACB-4458-BC37-6F4A78889F1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseLayer", "DatabaseLayer\DatabaseLayer.csproj", "{C7948B98-F9BA-46B6-ACCA-EB6EA9397BB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BFBCD06E-1ACB-4458-BC37-6F4A78889F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFBCD06E-1ACB-4458-BC37-6F4A78889F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFBCD06E-1ACB-4458-BC37-6F4A78889F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7948B98-F9BA-46B6-ACCA-EB6EA9397BB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7948B98-F9BA-46B6-ACCA-EB6EA9397BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7948B98-F9BA-46B6-ACCA-EB6EA9397BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7948B98-F9BA-46B6-ACCA-EB6EA9397BB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
