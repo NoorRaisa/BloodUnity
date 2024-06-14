@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BloodUnity.Models.RequestTypeMV>
+
+@{
+    ViewBag.Title = "All Request Types";
+}
+
+<div class="col-md-8">
+    <div class="contact-form-block">
+        <h2 class="contact-title">All Request Types</h2>
+        <p>
+            @Html.ActionLink("New Request Type", "Create", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestType)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestType)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.RequestTypeID },new {@class="btn btn-primary"}) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.RequestTypeID },new {@class="btn btn-danger"})
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model BloodUnity.Models.UserTypeMV
+
+@{
+    ViewBag.Title = "User Type";
+}
+
+<div class="col-md-6">
+    <div class="contact-form-block">
+        <h2 class="contact-title">Add New User Type</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+
+                Enter User Type
+                @Html.EditorFor(model => model.UserType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserType, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" style="float:right;padding:5px 24px" value="Create" class="btn btn-theme" />
+                @Html.ActionLink("Back", "AllUserTypes", null, new { @class = "btn btn-theme-invert" })
+            </div>
+        }
+
+    </div>
+</div>

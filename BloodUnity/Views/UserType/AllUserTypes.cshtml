@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BloodUnity.Models.UserTypeMV>
+
+@{
+    ViewBag.Title = "All User Types";
+}
+
+<div class="col-md-8">
+    <div class="contact-form-block">
+        <h2 class="contact-title">All User Types</h2>
+        <p>
+            @Html.ActionLink("New User Type", "Create", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserType)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserType)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.UserTypeID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserTypeID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

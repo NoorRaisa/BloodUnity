@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -111,10 +118,26 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountStatusController.cs" />
+    <Compile Include="Controllers\BloodGroupController.cs" />
+    <Compile Include="Controllers\CityTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\RequestTypeController.cs" />
+    <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountStatusMV.cs" />
+    <Compile Include="Models\BloodBankMV.cs" />
+    <Compile Include="Models\BloodGroupsMV.cs" />
+    <Compile Include="Models\DonorMV.cs" />
+    <Compile Include="Models\HospitalMV.cs" />
+    <Compile Include="Models\RegistrationMV.cs" />
+    <Compile Include="Models\RequestTypeMV.cs" />
+    <Compile Include="Models\SeekerMV.cs" />
+    <Compile Include="Models\UserMV.cs" />
+    <Compile Include="Models\UserTypeMV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +157,110 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Template\css\animate.css" />
+    <Content Include="Content\Template\css\bootstrap-rtl.min.css" />
+    <Content Include="Content\Template\css\bootstrap-social.css" />
+    <Content Include="Content\Template\css\bootstrap.min.css" />
+    <Content Include="Content\Template\css\font-awesome.min.css" />
+    <Content Include="Content\Template\css\owl.carousel.css" />
+    <Content Include="Content\Template\css\owl.theme.css" />
+    <Content Include="Content\Template\css\styles-rtl.css" />
+    <Content Include="Content\Template\css\styles.css" />
+    <Content Include="Content\Template\css\venobox.css" />
+    <Content Include="Content\Template\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Template\images\about_feat_bg.jpg" />
+    <Content Include="Content\Template\images\appointment.jpg" />
+    <Content Include="Content\Template\images\appointment_female_bg.jpg" />
+    <Content Include="Content\Template\images\blog_1.jpg" />
+    <Content Include="Content\Template\images\blog_2.jpg" />
+    <Content Include="Content\Template\images\blog_3.jpg" />
+    <Content Include="Content\Template\images\blog_thumb_1.jpg" />
+    <Content Include="Content\Template\images\blog_thumb_2.jpg" />
+    <Content Include="Content\Template\images\blog_thumb_3.jpg" />
+    <Content Include="Content\Template\images\close.gif" />
+    <Content Include="Content\Template\images\counter_bg.jpg" />
+    <Content Include="Content\Template\images\cta-bg-img.jpg" />
+    <Content Include="Content\Template\images\down_arrow.png" />
+    <Content Include="Content\Template\images\event_1.jpg" />
+    <Content Include="Content\Template\images\event_2.jpg" />
+    <Content Include="Content\Template\images\event_3.jpg" />
+    <Content Include="Content\Template\images\event_4.jpg" />
+    <Content Include="Content\Template\images\event_single.jpg" />
+    <Content Include="Content\Template\images\favicon.png" />
+    <Content Include="Content\Template\images\gallery_1.jpg" />
+    <Content Include="Content\Template\images\gallery_2.jpg" />
+    <Content Include="Content\Template\images\gallery_3.jpg" />
+    <Content Include="Content\Template\images\gallery_4.jpg" />
+    <Content Include="Content\Template\images\gallery_5.jpg" />
+    <Content Include="Content\Template\images\gallery_6.jpg" />
+    <Content Include="Content\Template\images\gallery_7.jpg" />
+    <Content Include="Content\Template\images\gallery_8.jpg" />
+    <Content Include="Content\Template\images\header-bg.jpg" />
+    <Content Include="Content\Template\images\highlight_1.png" />
+    <Content Include="Content\Template\images\highlight_2.png" />
+    <Content Include="Content\Template\images\highlight_3.png" />
+    <Content Include="Content\Template\images\highlight_4.png" />
+    <Content Include="Content\Template\images\highlight_5.png" />
+    <Content Include="Content\Template\images\home_1_slider_1.jpg" />
+    <Content Include="Content\Template\images\home_1_slider_2.jpg" />
+    <Content Include="Content\Template\images\loader.gif" />
+    <Content Include="Content\Template\images\logo-footer.png" />
+    <Content Include="Content\Template\images\logo.png" />
+    <Content Include="Content\Template\images\logo_1.jpg" />
+    <Content Include="Content\Template\images\logo_1.png" />
+    <Content Include="Content\Template\images\logo_2.jpg" />
+    <Content Include="Content\Template\images\logo_2.png" />
+    <Content Include="Content\Template\images\logo_3.jpg" />
+    <Content Include="Content\Template\images\logo_3.png" />
+    <Content Include="Content\Template\images\logo_4.jpg" />
+    <Content Include="Content\Template\images\logo_4.png" />
+    <Content Include="Content\Template\images\logo_5.jpg" />
+    <Content Include="Content\Template\images\logo_5.png" />
+    <Content Include="Content\Template\images\logo_6.jpg" />
+    <Content Include="Content\Template\images\logo_6.png" />
+    <Content Include="Content\Template\images\logo_7.jpg" />
+    <Content Include="Content\Template\images\logo_7.png" />
+    <Content Include="Content\Template\images\logo_8.jpg" />
+    <Content Include="Content\Template\images\logo_8.png" />
+    <Content Include="Content\Template\images\next.gif" />
+    <Content Include="Content\Template\images\pattern_1.png" />
+    <Content Include="Content\Template\images\preload-circle.png" />
+    <Content Include="Content\Template\images\preload.png" />
+    <Content Include="Content\Template\images\prev.gif" />
+    <Content Include="Content\Template\images\process_1.jpg" />
+    <Content Include="Content\Template\images\process_2.jpg" />
+    <Content Include="Content\Template\images\process_3.jpg" />
+    <Content Include="Content\Template\images\process_4.jpg" />
+    <Content Include="Content\Template\images\separator.png" />
+    <Content Include="Content\Template\images\service_1.jpg" />
+    <Content Include="Content\Template\images\team_5.jpg" />
+    <Content Include="Content\Template\images\team_6.jpg" />
+    <Content Include="Content\Template\images\team_7.jpg" />
+    <Content Include="Content\Template\images\team_9.jpg" />
+    <Content Include="Content\Template\images\team_feat_bg.jpg" />
+    <Content Include="Content\Template\images\testimonial_bg.jpg" />
+    <Content Include="Content\Template\images\testimony_feat_bg.jpg" />
+    <Content Include="Content\Template\images\testimony_feat_img.jpg" />
+    <Content Include="Content\Template\images\uparr-48-b.png" />
+    <Content Include="Content\Template\images\user_1.jpg" />
+    <Content Include="Content\Template\images\user_2.jpg" />
+    <Content Include="Content\Template\images\user_3.jpg" />
+    <Content Include="Content\Template\images\user_4.jpg" />
+    <Content Include="Content\Template\js\bootstrap.min.js" />
+    <Content Include="Content\Template\js\custom-scripts.js" />
+    <Content Include="Content\Template\js\gmaps.js" />
+    <Content Include="Content\Template\js\jquery.backTop.min.js" />
+    <Content Include="Content\Template\js\jquery.counterup.min.js" />
+    <Content Include="Content\Template\js\jquery.countTo.js" />
+    <Content Include="Content\Template\js\jquery.easing.min.js" />
+    <Content Include="Content\Template\js\jquery.gmap.min.js" />
+    <Content Include="Content\Template\js\jquery.min.js" />
+    <Content Include="Content\Template\js\jquery.stellar.min.js" />
+    <Content Include="Content\Template\js\owl.carousel.min.js" />
+    <Content Include="Content\Template\js\venobox.min.js" />
+    <Content Include="Content\Template\js\waypoints-sticky.min.js" />
+    <Content Include="Content\Template\js\waypoints.min.js" />
+    <Content Include="Content\Template\js\wow.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -143,6 +270,17 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Template\css\less\layout.less" />
+    <Content Include="Content\Template\css\less\mixins.less" />
+    <Content Include="Content\Template\css\less\reset.less" />
+    <Content Include="Content\Template\css\less\styles.less" />
+    <Content Include="Content\Template\css\less\variables.less" />
+    <Content Include="Content\Template\css\styles.css.map" />
+    <Content Include="Content\Template\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Template\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\Template\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\Template\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\Template\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -168,11 +306,33 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\CityTables\Create.cshtml" />
+    <Content Include="Views\CityTables\Delete.cshtml" />
+    <Content Include="Views\CityTables\Details.cshtml" />
+    <Content Include="Views\CityTables\Edit.cshtml" />
+    <Content Include="Views\CityTables\Index.cshtml" />
+    <Content Include="Views\Home\MainHome.cshtml" />
+    <Content Include="Views\RequestType\AllRequestType.cshtml" />
+    <Content Include="Views\RequestType\Create.cshtml" />
+    <Content Include="Views\RequestType\Edit.cshtml" />
+    <Content Include="Views\RequestType\Delete.cshtml" />
+    <Content Include="Views\UserType\AllUserTypes.cshtml" />
+    <Content Include="Views\UserType\Create.cshtml" />
+    <Content Include="Views\UserType\Edit.cshtml" />
+    <Content Include="Views\UserType\Delete.cshtml" />
+    <Content Include="Views\BloodGroup\AllBloodGroups.cshtml" />
+    <Content Include="Views\BloodGroup\Create.cshtml" />
+    <Content Include="Views\BloodGroup\Edit.cshtml" />
+    <Content Include="Views\BloodGroup\Delete.cshtml" />
+    <Content Include="Views\AccountStatus\AllAccountStatus.cshtml" />
+    <Content Include="Views\AccountStatus\Create.cshtml" />
+    <Content Include="Views\AccountStatus\Edit.cshtml" />
+    <Content Include="Views\AccountStatus\Delete.cshtml" />
+    <Content Include="Views\Registration\UserRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Database\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -200,6 +360,12 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.csproj">
+      <Project>{c7948b98-f9ba-46b6-acca-eb6ea9397bb2}</Project>
+      <Name>DatabaseLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -235,7 +401,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

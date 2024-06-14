@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Dtabase_Layer;
+using DatabaseLayer;
 
 namespace BloodUnity.Controllers
 {
@@ -38,7 +38,8 @@ namespace BloodUnity.Controllers
         // GET: CityTables/Create
         public ActionResult Create()
         {
-            return View();
+            var city = new CityTable(); 
+            return View(city);
         }
 
         // POST: CityTables/Create
