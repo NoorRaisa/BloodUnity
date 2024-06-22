@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b871ca36cbff45608b39840586cef519" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.AccountStatusTable" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.BloodBankStockTable" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.BloodBankTable" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.BloodGroupsTable" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.CityTable" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.DonorTable" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.GenderTable" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.HospitalTable" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.RequestTable" Width="1.5" PointX="13" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.RequestTypeTable" Width="1.5" PointX="10.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.SeekerTable" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.UserTable" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineBloodBankDbModel.UserTypeTable" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_UserTable_AccountStatusTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_BloodBankStockTable_BloodBankTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_BloodBankStockTable_BloodGroupsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_BloodBankTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_BloodBankTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_DonorTable_BloodGroupsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_SeekerTable_BloodGroupsTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_DonorTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_HospitalTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_SeekerTable_CityTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_DonorTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_SeekerTable_GenderTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_HospitalTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_RequestTable_RequestTypeTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_SeekerTable_UserTable" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineBloodBankDbModel.FK_UserTable_UserTypeTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

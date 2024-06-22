@@ -1,5 +1,4 @@
 ﻿using BloodUnity.Models;
-using DatabaseLayer;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,12 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 namespace BloodUnity.Controllers
 {
     public class AccountStatusController : Controller
     {
-        OnlineBloodBankDbEntities DB = new OnlineBloodBankDbEntities();
+        private OnlineBloodBankDbEntities DB = new OnlineBloodBankDbEntities();
         public ActionResult AllAccountStatus()
         {
             var accountStatuses = DB.AccountStatusTables.ToList();

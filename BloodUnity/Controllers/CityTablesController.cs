@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BloodUnity.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,18 +7,15 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DatabaseLayer;
-
 namespace BloodUnity.Controllers
 {
     public class CityTablesController : Controller
     {
-        private OnlineBloodBankDbEntities db = new OnlineBloodBankDbEntities();
-
+        OnlineBloodBankDbEntities DB = new OnlineBloodBankDbEntities();
         // GET: CityTables
         public ActionResult Index()
         {
-            return View(db.CityTables.ToList());
+            return View(DB.CityTables.ToList());
         }
 
         // GET: CityTables/Details/5
@@ -27,7 +25,7 @@ namespace BloodUnity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CityTable cityTable = db.CityTables.Find(id);
+            CityTable cityTable = DB.CityTables.Find(id);
             if (cityTable == null)
             {
                 return HttpNotFound();
@@ -51,8 +49,8 @@ namespace BloodUnity.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CityTables.Add(cityTable);
-                db.SaveChanges();
+                DB.CityTables.Add(cityTable);
+                DB.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +64,7 @@ namespace BloodUnity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CityTable cityTable = db.CityTables.Find(id);
+            CityTable cityTable = DB.CityTables.Find(id);
             if (cityTable == null)
             {
                 return HttpNotFound();
@@ -83,8 +81,8 @@ namespace BloodUnity.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cityTable).State = EntityState.Modified;
-                db.SaveChanges();
+                DB.Entry(cityTable).State = EntityState.Modified;
+                DB.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(cityTable);
@@ -97,7 +95,7 @@ namespace BloodUnity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CityTable cityTable = db.CityTables.Find(id);
+            CityTable cityTable = DB.CityTables.Find(id);
             if (cityTable == null)
             {
                 return HttpNotFound();
@@ -110,9 +108,9 @@ namespace BloodUnity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CityTable cityTable = db.CityTables.Find(id);
-            db.CityTables.Remove(cityTable);
-            db.SaveChanges();
+            CityTable cityTable = DB.CityTables.Find(id);
+            DB.CityTables.Remove(cityTable);
+            DB.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +118,7 @@ namespace BloodUnity.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                DB.Dispose();
             }
             base.Dispose(disposing);
         }

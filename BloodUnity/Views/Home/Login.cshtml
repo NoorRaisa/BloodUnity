@@ -1,0 +1,84 @@
+﻿@model BloodUnity.Models.UserMV
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login-Blood Unity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Reddrop Buddies - Blood Donation Campaign & Multi-Concept Activism Template">
+    <meta name="author" content="xenioushk">
+    <link rel="shortcut icon" href="~/Content/Template/images/favicon.png" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- The styles -->
+    <link rel="stylesheet" href="~/Content/Template/css/bootstrap.min.css" />
+    <link href="~/Content/Template/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Template/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Template/css/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Template/css/venobox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="~/Content/Template/css/styles.css" />
+    <style>
+        body, html{
+            height:100%;
+            margin:0;
+        }
+        .bg {
+            background-image: url('../../content/template/images/login.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            background-attachment:fixed;
+        }
+    </style>
+</head>
+<body class="bg">
+    <div id="preloader">
+        <span class="margin-bottom"><img src="~/Content/Template/images/loader.gif" alt="" /></span>
+    </div>
+
+    <div class="container" align="center">
+        <div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn" style="width:40%">
+            <h3 class="join-heading join-heading-alt">Login</h3>
+            @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "appoinment-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group col-md-12">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control col-md-4", @placeholder = "Enter Username", @type = "text" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-12">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-md-4", @placeholder = "Enter Password", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <button id="btn_submit" class="btn btn-theme" type="submit">LOGIN</button>
+                    @Html.ActionLink("BACK To HOME", "MainHome", "Home", null, new { @id = "btn_submit", @class = "btn btn-theme btn-theme-invert" })
+                </div>
+            }
+        </div>
+    </div>
+
+    <script src="~/Content/Template/js/jquery.min.js"></script>
+    <script src="~/Content/Template/js/bootstrap.min.js"></script>
+    <script src="~/Content/Template/js/wow.min.js"></script>
+    <script src="~/Content/Template/js/jquery.backTop.min.js "></script>
+    <script src="~/Content/Template/js/waypoints.min.js"></script>
+    <script src="~/Content/Template/js/waypoints-sticky.min.js"></script>
+    <script src="~/Content/Template/js/owl.carousel.min.js"></script>
+    <script src="~/Content/Template/js/jquery.stellar.min.js"></script>
+    <script src="~/Content/Template/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/Template/js/venobox.min.js"></script>
+    <script src="~/Content/Template/js/custom-scripts.js"></script>
+</body>
+</html>

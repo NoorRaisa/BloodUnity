@@ -58,6 +58,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -129,15 +131,69 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountStatusMV.cs" />
+    <Compile Include="Models\AccountStatusTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BloodBankMV.cs" />
+    <Compile Include="Models\BloodBankStockTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BloodBankTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BloodGroupsMV.cs" />
+    <Compile Include="Models\BloodGroupsTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CityTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DonorMV.cs" />
+    <Compile Include="Models\DonorTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GenderTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HospitalMV.cs" />
+    <Compile Include="Models\HospitalTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnlineBloodDonationModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineBloodDonationModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnlineBloodDonationModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OnlineBloodDonationModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\RegistrationMV.cs" />
+    <Compile Include="Models\RequestTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RequestTypeMV.cs" />
+    <Compile Include="Models\RequestTypeTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SeekerMV.cs" />
+    <Compile Include="Models\SeekerTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserMV.cs" />
+    <Compile Include="Models\UserTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserTypeMV.cs" />
+    <Compile Include="Models\UserTypeTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +260,7 @@
     <Content Include="Content\Template\images\home_1_slider_1.jpg" />
     <Content Include="Content\Template\images\home_1_slider_2.jpg" />
     <Content Include="Content\Template\images\loader.gif" />
+    <Content Include="Content\Template\images\login.jpg" />
     <Content Include="Content\Template\images\logo-footer.png" />
     <Content Include="Content\Template\images\logo.png" />
     <Content Include="Content\Template\images\logo_1.jpg" />
@@ -264,6 +321,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\OnlineBloodDonationModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineBloodDonationModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\OnlineBloodDonationModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
+      <LastGenOutput>OnlineBloodDonationModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -281,6 +348,13 @@
     <Content Include="Content\Template\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\Template\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\Template\fonts\FontAwesome.otf" />
+    <EntityDeploy Include="Models\OnlineBloodDonationModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OnlineBloodDonationModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\OnlineBloodDonationModel.edmx.diagram">
+      <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -328,7 +402,11 @@
     <Content Include="Views\AccountStatus\Create.cshtml" />
     <Content Include="Views\AccountStatus\Edit.cshtml" />
     <Content Include="Views\AccountStatus\Delete.cshtml" />
-    <Content Include="Views\Registration\UserRegistration.cshtml" />
+    <Content Include="Views\Registration\HospitalUser.cshtml" />
+    <Content Include="Views\Registration\DonorUser.cshtml" />
+    <Content Include="Views\Registration\BloodBankUser.cshtml" />
+    <Content Include="Views\Registration\SeekerUser.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -362,10 +440,7 @@
     <Content Include="Scripts\jquery-3.7.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.csproj">
-      <Project>{c7948b98-f9ba-46b6-acca-eb6ea9397bb2}</Project>
-      <Name>DatabaseLayer</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
