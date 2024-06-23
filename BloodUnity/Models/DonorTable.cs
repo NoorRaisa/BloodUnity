@@ -23,6 +23,7 @@ namespace BloodUnity.Models
         public string Location { get; set; }
         public int CityID { get; set; }
         public int UserID { get; set; }
+        public Nullable<int> GenderID { get; set; }
     
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
         public virtual CityTable CityTable { get; set; }
