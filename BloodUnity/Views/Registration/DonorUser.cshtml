@@ -1,58 +1,65 @@
 ﻿@model BloodUnity.Models.RegistrationMV
 @{
-    ViewBag.Title = "Donor User";
+    ViewBag.Title = "Donor Registration";
 }
 
-<h2>Donor User</h2>
+<div class="container" align="center">
+    <div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn" style="width:70%">
+        <h3 class="join-heading join-heading-alt">Donor Registration Form</h3>
+        @using (Html.BeginForm("DonorUser", "Registration", FormMethod.Post, new { @class = "appoinment-form", @name = "form1", @onsubmit = "required(); return false;" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.UserTypeID)
+            @Html.HiddenFor(model => model.User.UserID)
+            @Html.HiddenFor(model => model.User.UserName)
+            @Html.HiddenFor(model => model.User.Password)
+            @Html.HiddenFor(model => model.User.AccountStatus)
+            @Html.HiddenFor(model => model.User.AccountStatusID)
+            @Html.HiddenFor(model => model.User.Description)
+            @Html.HiddenFor(model => model.User.EmailAddress)
 
-<div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn">
-    <h3 class="join-heading join-heading-alt">Registration</h3>
-    @using (Html.BeginForm("SelectUser", "Registration", FormMethod.Post, new { @class = "appoinment-form", @name = "form1", @onsubmit = "required(); return false;" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control", @placeholder = "User Name", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.User.EmailAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", @type = "email", @name = "email" } })
-            @Html.ValidationMessageFor(model => model.User.EmailAddress, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.User.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password", @type = "password", @name = "pass" } })
-            @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            <div class="select-style">
-                @Html.DropDownList("UserTypeID", null, "--Relationship--", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danger" })
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.Donor.FullName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Full Name", @type = "text" } })
+                @Html.ValidationMessageFor(model => model.Donor.FullName, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact Number", @type = "text", @name = "phone" } })
-            @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
-        </div>
-
-
-        <div class="form-group col-md-6">
-            <div class="select-style">
-                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control", @name = "city" })
-                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact No " } })
+                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
             </div>
-        </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.Donor.NID, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter NID", @type = "text" } })
+                @Html.ValidationMessageFor(model => model.Donor.NID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                <div class="select-style">
+                    @Html.DropDownList("BloodGroupID", null, "--Select Blood Group--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="select-style">
+                    @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control", @name = "city" })
+                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.Donor.LastDonationDate, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Donation Date" } })
+                @Html.ValidationMessageFor(model => model.Donor.LastDonationDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.Donor.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address", @type = "text" } })
+                @Html.ValidationMessageFor(model => model.Donor.Location, "", new { @class = "text-danger" })
+            </div>
 
-        <div class="form-group col-md-12 col-sm-12 col-xs-12">
-            @Html.TextAreaFor(model => model.User.Description, 4, 12, new { @class = "form-control", @placeholder = "Why You Want to Join Us?", @type = "text", @name = "desc" })
-            @Html.ValidationMessageFor(model => model.User.Description, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12">
 
-            <button id="btn_submit" class="btn btn-theme" type="submit">SUBMIT</button>
+                <button id="btn_submit" class="btn btn-theme" type="submit">SUBMIT</button>
 
 
-        </div>
+            </div>
 
-    }
-</div> <!-- end .appointment-form-wrapper  -->
+        }
+    </div> <!-- end .appointment-form-wrapper  -->
+</div>
+

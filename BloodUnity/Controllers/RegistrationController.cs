@@ -1,6 +1,8 @@
 ﻿using BloodUnity.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,6 +71,8 @@ namespace BloodUnity.Controllers
                             user.UserTypeID = registrationMV.UserTypeID;
                             user.Description = registrationMV.User.Description;
                             DB.UserTables.Add(user);
+                       
+
 
                             var hospital = new HospitalTable();
                             hospital.FullName = registrationMV.Hospital.FullName;
@@ -80,7 +84,7 @@ namespace BloodUnity.Controllers
                             hospital.CityID = registrationMV.CityID;
                             hospital.UserID = user.UserID;
                             DB.HospitalTables.Add(hospital);
-                            DB.SaveChanges();
+                            
                             transaction.Commit();
                             ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
                             return RedirectToAction("MainHome", "Home");
@@ -104,17 +108,83 @@ namespace BloodUnity.Controllers
 
         public ActionResult DonorUser()
         {
-            ViewBag.UserTypeID = new SelectList(DB.UserTypeTables.Where(ut => ut.UserTypeID > 1).ToList(), "UserTypeID", "UserType", registrationmv.UserTypeID);
+
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
             return View(registrationmv);
+            /*ViewBag.UserTypeID = new SelectList(DB.UserTypeTables.Where(ut => ut.UserTypeID > 1).ToList(), "UserTypeID", "UserType", registrationmv.UserTypeID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+            return View(registrationmv);*/
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DonorUser(RegistrationMV registrationMV)
         {
+            if (ModelState.IsValid)
+            {
+                var checktitle = DB.DonorTables.Where(h => h.FullName == registrationMV.Donor.FullName.Trim() && h.NID == registrationMV.Donor.NID).FirstOrDefault(); ///if title is registered or not
+                if (checktitle == null)
+                {
+                    using (var transaction = DB.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var user = new UserTable();
+                            user.UserName = registrationMV.User.UserName;
+                            user.Password = registrationMV.User.Password;
+                            user.EmailAddress = registrationMV.User.EmailAddress;
+                            user.AccountStatusID = 1;
+                            user.UserTypeID = registrationMV.UserTypeID;
+                            user.Description = registrationMV.User.Description;
+                            DB.UserTables.Add(user);
+                            //DB.SaveChanges();
+
+                            var Donor = new DonorTable();
+                            Donor.FullName = registrationMV.Donor.FullName;
+                            Donor.BloodGroupID = registrationMV.BloodGroupID;
+                            Donor.Location = registrationMV.Donor.Location;
+                            Donor.ContactNo = registrationMV.ContactNo;
+                            Donor.LastDonationDate = registrationMV.Donor.LastDonationDate;
+                            Donor.NID = registrationMV.Donor.NID;
+                            Donor.CityID = registrationMV.CityID;
+                            Donor.UserID = user.UserID;
+                            DB.DonorTables.Add(Donor);
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
+                            return RedirectToAction("MainHome", "Home");
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            Console.WriteLine(e);
+                            ModelState.AddModelError(string.Empty, "Please Provide Correct Information!");
+                            transaction.Rollback();
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            Console.WriteLine(e);
+                            ModelState.AddModelError(string.Empty, "Please Provide Correct Information!");
+                            transaction.Rollback();
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Donor Already Registered!");
+                }
+            }
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", registrationMV.BloodGroupID);
+
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
+            return View(registrationMV);
+            /*
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
-            return View();
+            return View();*/
         }
+
+    
         public ActionResult BloodBankUser()
         {
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
@@ -133,12 +203,14 @@ namespace BloodUnity.Controllers
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
             return View(registrationmv);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SeekerUser(RegistrationMV registrationMV)
-        {
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
-            return View();
-        }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult SeekerUser(RegistrationMV registrationMV)
+    {
+        ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+        return View();
+       }
     }
 }
+
+
