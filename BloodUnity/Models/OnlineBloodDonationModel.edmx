@@ -61,7 +61,9 @@
             <PropertyRef Name="CampaignID" />
           </Key>
           <Property Name="CampaignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CampaignTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
           <Property Name="BloodBankID" Type="int" Nullable="false" />
+          <Property Name="CampaignPhoto" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="CampaignDate" Type="date" Nullable="false" />
           <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
@@ -1016,6 +1018,8 @@
           <Property Name="CampaignDetails" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BloodBankStockDetailTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankStockDetailTable_CampaignTable" FromRole="CampaignTable" ToRole="BloodBankStockDetailTable" />
           <NavigationProperty Name="BloodBankTable" Relationship="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable" FromRole="CampaignTable" ToRole="BloodBankTable" />
+          <Property Name="CampaignTitle" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="CampaignPhoto" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_BloodBankStockDetailTable_BloodBankStockTable">
           <End Type="OnlineBloodBankDbModel.BloodBankStockTable" Role="BloodBankStockTable" Multiplicity="1" />
@@ -1248,6 +1252,8 @@
           <EntitySetMapping Name="CampaignTables">
             <EntityTypeMapping TypeName="OnlineBloodBankDbModel.CampaignTable">
               <MappingFragment StoreEntitySet="CampaignTable">
+                <ScalarProperty Name="CampaignPhoto" ColumnName="CampaignPhoto" />
+                <ScalarProperty Name="CampaignTitle" ColumnName="CampaignTitle" />
                 <ScalarProperty Name="CampaignDetails" ColumnName="CampaignDetails" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />

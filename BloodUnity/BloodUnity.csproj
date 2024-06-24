@@ -135,6 +135,9 @@
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BloodBankMV.cs" />
+    <Compile Include="Models\BloodBankStockDetailTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BloodBankStockTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
@@ -143,6 +146,9 @@
     </Compile>
     <Compile Include="Models\BloodGroupsMV.cs" />
     <Compile Include="Models\BloodGroupsTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CampaignTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CityTable.cs">

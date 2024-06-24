@@ -27,6 +27,8 @@ namespace BloodUnity.Models
         public System.TimeSpan EndTime { get; set; }
         public string Location { get; set; }
         public string CampaignDetails { get; set; }
+        public string CampaignTitle { get; set; }
+        public string CampaignPhoto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodBankStockDetailTable> BloodBankStockDetailTables { get; set; }
