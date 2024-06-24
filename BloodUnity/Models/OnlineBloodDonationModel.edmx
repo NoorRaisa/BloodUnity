@@ -299,6 +299,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DonorTable_GenderTable">
+          <End Role="GenderTable" Type="Self.GenderTable" Multiplicity="0..1" />
+          <End Role="DonorTable" Type="Self.DonorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="DonorTable">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DonorTable_UserTable">
           <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
           <End Role="DonorTable" Type="Self.DonorTable" Multiplicity="*" />
@@ -479,6 +491,10 @@
             <End Role="CityTable" EntitySet="CityTable" />
             <End Role="DonorTable" EntitySet="DonorTable" />
           </AssociationSet>
+          <AssociationSet Name="FK_DonorTable_GenderTable" Association="Self.FK_DonorTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTable" />
+            <End Role="DonorTable" EntitySet="DonorTable" />
+          </AssociationSet>
           <AssociationSet Name="FK_DonorTable_UserTable" Association="Self.FK_DonorTable_UserTable">
             <End Role="UserTable" EntitySet="UserTable" />
             <End Role="DonorTable" EntitySet="DonorTable" />
@@ -604,6 +620,7 @@
           <NavigationProperty Name="UserTable" Relationship="Self.FK_DonorTable_UserTable" FromRole="DonorTable" ToRole="UserTable" />
           <Property Name="GenderID" Type="Int32" />
           <NavigationProperty Name="BloodBankStockDetailTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankStockDetailTable_DonorTable" FromRole="DonorTable" ToRole="BloodBankStockDetailTable" />
+          <NavigationProperty Name="GenderTable" Relationship="OnlineBloodBankDbModel.FK_DonorTable_GenderTable" FromRole="DonorTable" ToRole="GenderTable" />
         </EntityType>
         <EntityType Name="GenderTable">
           <Key>
@@ -612,6 +629,7 @@
           <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="SeekerTables" Relationship="Self.FK_SeekerTable_GenderTable" FromRole="GenderTable" ToRole="SeekerTable" />
+          <NavigationProperty Name="DonorTables" Relationship="OnlineBloodBankDbModel.FK_DonorTable_GenderTable" FromRole="GenderTable" ToRole="DonorTable" />
         </EntityType>
         <EntityType Name="HospitalTable">
           <Key>
@@ -988,6 +1006,10 @@
             <End Role="BloodBankTable" EntitySet="BloodBankTables" />
             <End Role="CampaignTable" EntitySet="CampaignTables" />
           </AssociationSet>
+          <AssociationSet Name="FK_DonorTable_GenderTable" Association="OnlineBloodBankDbModel.FK_DonorTable_GenderTable">
+            <End Role="GenderTable" EntitySet="GenderTables" />
+            <End Role="DonorTable" EntitySet="DonorTables" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BloodBankStockDetailTable">
           <Key>
@@ -1078,6 +1100,18 @@
             </Principal>
             <Dependent Role="CampaignTable">
               <PropertyRef Name="BloodBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DonorTable_GenderTable">
+          <End Type="OnlineBloodBankDbModel.GenderTable" Role="GenderTable" Multiplicity="0..1" />
+          <End Type="OnlineBloodBankDbModel.DonorTable" Role="DonorTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderTable">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="DonorTable">
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
