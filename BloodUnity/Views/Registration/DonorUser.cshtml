@@ -33,6 +33,12 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="select-style">
+                    @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="select-style">
                     @Html.DropDownList("BloodGroupID", null, "--Select Blood Group--", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
                 </div>

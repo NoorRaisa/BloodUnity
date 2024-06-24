@@ -111,6 +111,7 @@ namespace BloodUnity.Controllers
 
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
             return View(registrationmv);
             /*ViewBag.UserTypeID = new SelectList(DB.UserTypeTables.Where(ut => ut.UserTypeID > 1).ToList(), "UserTypeID", "UserType", registrationmv.UserTypeID);
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
@@ -146,6 +147,7 @@ namespace BloodUnity.Controllers
                             Donor.ContactNo = registrationMV.ContactNo;
                             Donor.LastDonationDate = registrationMV.Donor.LastDonationDate;
                             Donor.NID = registrationMV.Donor.NID;
+                            Donor.GenderID = registrationMV.GenderID;
                             Donor.CityID = registrationMV.CityID;
                             Donor.UserID = user.UserID;
                             DB.DonorTables.Add(Donor);
