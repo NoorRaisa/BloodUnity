@@ -14,6 +14,12 @@ namespace BloodUnity.Models
     
     public partial class BloodBankStockTable
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BloodBankStockTable()
+        {
+            this.BloodBankStockDetailTables = new HashSet<BloodBankStockDetailTable>();
+        }
+    
         public int BloodBankStockID { get; set; }
         public int BloodBankID { get; set; }
         public int BloodGroupID { get; set; }
@@ -23,5 +29,7 @@ namespace BloodUnity.Models
     
         public virtual BloodBankTable BloodBankTable { get; set; }
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BloodBankStockDetailTable> BloodBankStockDetailTables { get; set; }
     }
 }

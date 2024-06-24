@@ -3,7 +3,7 @@
     ViewBag.Title = "Blood Bank";
 }
 
-<div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn">
+<div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn" style="width:70%">
     <h3 class="join-heading join-heading-alt">Blood Bank Registration</h3>
     @using (Html.BeginForm("BloodBankUser", "Registration", FormMethod.Post, new { @class = "appoinment-form", @name = "form1", @onsubmit = "required(); return false;" }))
     {

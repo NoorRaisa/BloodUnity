@@ -18,6 +18,7 @@ namespace BloodUnity.Models
         public BloodBankTable()
         {
             this.BloodBankStockTables = new HashSet<BloodBankStockTable>();
+            this.CampaignTables = new HashSet<CampaignTable>();
         }
     
         public int BloodBankID { get; set; }
@@ -34,5 +35,7 @@ namespace BloodUnity.Models
         public virtual ICollection<BloodBankStockTable> BloodBankStockTables { get; set; }
         public virtual CityTable CityTable { get; set; }
         public virtual UserTable UserTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CampaignTable> CampaignTables { get; set; }
     }
 }

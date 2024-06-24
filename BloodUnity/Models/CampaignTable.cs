@@ -12,29 +12,24 @@ namespace BloodUnity.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class DonorTable
+    public partial class CampaignTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DonorTable()
+        public CampaignTable()
         {
             this.BloodBankStockDetailTables = new HashSet<BloodBankStockDetailTable>();
         }
     
-        public int DonorID { get; set; }
-        public string FullName { get; set; }
-        public int BloodGroupID { get; set; }
-        public System.DateTime LastDonationDate { get; set; }
-        public string ContactNo { get; set; }
-        public string NID { get; set; }
+        public int CampaignID { get; set; }
+        public int BloodBankID { get; set; }
+        public System.DateTime CampaignDate { get; set; }
+        public System.TimeSpan StartTime { get; set; }
+        public System.TimeSpan EndTime { get; set; }
         public string Location { get; set; }
-        public int CityID { get; set; }
-        public int UserID { get; set; }
-        public Nullable<int> GenderID { get; set; }
+        public string CampaignDetails { get; set; }
     
-        public virtual BloodGroupsTable BloodGroupsTable { get; set; }
-        public virtual CityTable CityTable { get; set; }
-        public virtual UserTable UserTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodBankStockDetailTable> BloodBankStockDetailTables { get; set; }
+        public virtual BloodBankTable BloodBankTable { get; set; }
     }
 }
