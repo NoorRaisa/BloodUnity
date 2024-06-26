@@ -25,14 +25,14 @@
         @Html.ValidationMessageFor(model => model.Seeker.FullName, "", new { @class = "text-danger" })
     </div>
             <div class="form-group col-md-6">
-                <label style="float:left;">Your Age</label>
+                <label style="float:left;">Seeker Age</label>
                 @Html.EditorFor(model => model.Seeker.Age, new { htmlAttributes = new { @class = "form-control",@type = "text" } })
                 @Html.ValidationMessageFor(model => model.Seeker.Age, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
                 <label style="float:left;">Seeker Contact No</label>
-                @Html.EditorFor(model => model.Seeker.ContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact No " } })
-                @Html.ValidationMessageFor(model => model.Seeker.ContactNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact No " } })
+                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-6">
                 <label style="float:left;">Seeker NID</label>
@@ -41,23 +41,27 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="select-style">
+                    <label style="float:left;">Seeker Gender</label>
                     @Html.DropDownList("GenderID", null, "--Select Gender--", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.GenderID, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <div class="select-style">
+                    <label style="float:left;">Seeker Blood Group</label>
                     @Html.DropDownList("BloodGroupID", null, "--Select Blood Group--", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.BloodGroupID, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <div class="select-style">
+                    <label style="float:left;">Seeker City</label>
                     @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control", @name = "city" })
                     @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
                 </div>
             </div>
-           <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
+                <label style="float:left;">Seeker Address</label>
                 @Html.EditorFor(model => model.Seeker.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address", @type = "text" } })
                 @Html.ValidationMessageFor(model => model.Seeker.Address, "", new { @class = "text-danger" })
             </div>

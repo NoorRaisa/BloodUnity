@@ -286,7 +286,7 @@ namespace BloodUnity.Controllers
                             seeker.Address = registrationMV.Seeker.Address;
                             seeker.ContactNo = registrationMV.ContactNo;
                             seeker.RegistrationDate = DateTime.Now;
-                            seeker.NID = registrationMV.Donor.NID;
+                            seeker.NID = registrationMV.Seeker.NID;
                             seeker.GenderID = registrationMV.GenderID;
                             seeker.CityID = registrationMV.CityID;
                             seeker.UserID = user.UserID;
