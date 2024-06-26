@@ -40,10 +40,10 @@
 
                     <div class="col-md-8 col-sm-12">
 
-                        <p>
+                        <!---<p>
                             <span><i class="fa fa-building-o"></i> <strong>Contact: </strong>  AUST</span>
                             <span>&nbsp;<i class="fa fa-phone"></i> <strong>Call Us:</strong> +8801760603954</span>
-                        </p>
+                        </p>-->
 
                     </div>
 
@@ -63,9 +63,9 @@
                             {
                                 @Html.ActionLink("Sign Out", "Logout", "Home", null, new { @class = "btn btn-theme" })
                             }
-                            
+
                         </div>
-                       
+
                     </div>
 
                 </div>
@@ -85,82 +85,76 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="logo" href="index.html"><img alt="" src="~/Content/Template/images/logo.png"></a>
+                        <a class="logo" href="#"><img alt="" src="~/Content/Template/images/logo.png"></a>
                     </div>
+                    @{
+                        int usertypeid = 0;
+                        int userid = 0;
+                        string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+                        string userID = Convert.ToString(Session["UserID"]);
+                        int.TryParse(sessionusertype, out usertypeid);
+                        int.TryParse(userID, out userid);
 
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
 
-                            <li>
-                                <a href="#">Home</a>
-                                <ul class="drop-down">
-                                    <li><a href="index.html" title="Home Layout 01">Home 01</a></li>
-                                    <li><a href="home-2.html" title="Home Layout 02">Home 02</a></li>
-                                </ul>
-                            </li>
+                                <li>
+                                    <a href="#">Home</a>
+                                    <ul class="drop-down">
+                                        <li><a href="index.html" title="Home Layout 01">Home 01</a></li>
+                                        <li><a href="home-2.html" title="Home Layout 02">Home 02</a></li>
+                                    </ul>
+                                </li>
+                                @if (usertypeid == 1)
+                                {
+                                    <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")" title="New Accounts Request">Accounts Request</a></li>
+                                }
+                                <li>
+                                    <a href="#">Campaign</a>
+                                    <ul class="drop-down">
+                                        <li><a href="events.html">All Campaigns</a></li>
+                                        <li><a href="event-single.html">Single Campaign</a></li>
+                                    </ul>
+                                </li>
 
-
-                            <li><a href="about-us.html" title="About Us">About Us</a></li>
-
-                            <li>
-                                <a href="#">Campaign</a>
-                                <ul class="drop-down">
-                                    <li><a href="events.html">All Campaigns</a></li>
-                                    <li><a href="event-single.html">Single Campaign</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="drop">
-                                <a href="#">Pages</a>
-                                <ul class="drop-down">
-
-                                    <li class="drop">
-                                        <a href="#">Elements</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="element-cta.html">CTA/PROMO BOX</a></li>
-                                            <li><a href="element-counter.html">Fun Facts</a></li>
-                                            <li><a href="element-logos.html">Logos/Clients</a></li>
-                                            <li><a href="element-process.html">Process</a></li>
-                                            <li><a href="element-highlights.html">Highlights Box</a></li>
-                                            <li><a href="element-service.html">Services</a></li>
-                                            <li><a href="element-subscribe.html">Subscribe</a></li>
-                                            <li><a href="element-team.html">Team</a></li>
-                                            <li><a href="element-feedback.html">Testimonials</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="drop">
-                                        <a href="#">Gallery</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="gallery-1.html">Layout 01</a></li>
-                                            <li><a href="gallery-2.html">Layout 02</a></li>
+                                @if (usertypeid == 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">Account Status</a></li>
+                                            <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood Group</a></li>
+                                            <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
+                                            <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request Type</a></li>
+                                            <li><a href="@Url.Content("~/UserType/AllUserTypes")">User Type</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign Out</a></li>
 
                                         </ul>
                                     </li>
-                                    <li><a href="faq.html" title="FAQ">FAQ</a></li>
-                                    <li><a href="404.html" title="404 Page">404 Page</a></li>
-                                    <li class="drop">
-                                        <a href="#">Level 3</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="#">Level 3.1</a></li>
-                                            <li><a href="#">Level 3.2</a></li>
-                                            <li><a href="#">Level 3.3</a></li>
+                                }
+                                else if (usertypeid > 1)
+                                {
+                                    <li>
+                                        <a href="#">Setting</a>
+                                        <ul class="drop-down">
+                                            <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
+                                            <li><a href="@Url.Content("~/Home/Logout")">Sign Out</a></li>
                                         </ul>
                                     </li>
-                                </ul>
-                            </li>
+                                }
+                                <li>
+                                    <a href="#">Blog</a>
+                                    <ul class="drop-down">
+                                        <li><a href="blog.html">All Posts</a></li>
+                                        <li><a href="single.html">Single Page</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="about-us.html" title="About Us">About Us</a></li>
 
-                            <li>
-                                <a href="#">Blog</a>
-                                <ul class="drop-down">
-                                    <li><a href="blog.html">All Posts</a></li>
-                                    <li><a href="single.html">Single Page</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -373,7 +367,7 @@
 
     <a id="backTop">Back To Top</a>
 
-    
+
     <script src="~/Content/Template/js/jquery.min.js"></script>
     <script src="~/Content/Template/js/bootstrap.min.js"></script>
     <script src="~/Content/Template/js/wow.min.js"></script>

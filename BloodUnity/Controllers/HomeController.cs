@@ -78,7 +78,7 @@ namespace BloodUnity.Controllers
 
                         if (user.UserTypeID == 1)//admin
                         {
-                            return RedirectToAction("MainHome");
+                            return RedirectToAction("AllNewUserRequests","Accounts");
                         }
                         else if (user.UserTypeID == 2)//donor
                         {
