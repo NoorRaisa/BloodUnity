@@ -956,7 +956,7 @@
             <End Role="UserTable" EntitySet="UserTables" />
             <End Role="DonorTable" EntitySet="DonorTables" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="BloodBankStockDetailTable">
           <Key>
             <PropertyRef Name="BloodBankStockDetailID" />
@@ -1117,7 +1117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
