@@ -19,6 +19,7 @@ namespace BloodUnity.Models
         public int GenderID { get; set; }
         public string Gender { get; set; }
         public System.DateTime RegistrationDate { get; set; }
+        public string Address { get; set; }
         public int UserID { get; set; }
         public string UserName { get; set; }
     }
