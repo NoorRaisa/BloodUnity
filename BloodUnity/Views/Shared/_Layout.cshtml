@@ -54,7 +54,18 @@
                             <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
                             <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
                             <a href="#"><i class="fa fa-youtube rounded-box"></i></a>
+                            @if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+                            {
+                                @Html.ActionLink("Sign In", "Login", "Home", null, new { @class = "btn btn-theme" })
+                            }
+
+                            else
+                            {
+                                @Html.ActionLink("Sign Out", "Logout", "Home", null, new { @class = "btn btn-theme" })
+                            }
+                            
                         </div>
+                       
                     </div>
 
                 </div>
@@ -346,7 +357,7 @@
                 <div class="row clearfix">
 
                     <div class="col-md-12 col-sm-12 text-center">
-                        <p class="copyright-text"> Copyright 2018 - Blood Buddies by BlueWindLab. All Rights Reserved. </p>
+                        <p class="copyright-text"> Copyright 2024 - Blood Unity. All Rights Reserved. </p>
                     </div>  <!-- end .col-sm-6  -->
 
                 </div> <!-- end .row  -->

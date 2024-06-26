@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BloodUnity.Models.UserTable>
+
+@{
+    ViewBag.Title = "AllNewUserRequests";
+}
+
+<div class="col-md-12">
+    <div class="contact-form-block">
+        <h2 class="contact-title">All New User Requests</h2>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Relationship
+                </th>
+                <th>
+                    User Name
+                </th>
+
+                <th>
+                    Email Address
+                </th>
+                <th>
+                    Message
+                </th>
+                <th>
+                    Account Status
+                </th>
+
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserTypeTable.UserType)
+                    </td>
+                    <td>
+                        @Html.ActionLink(item.UserName, "UserDetails", new {id=item.UserID})
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountStatusTable.AccountStatus)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Approved", "UserApproved", new { id = item.UserID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Rejected", "UserRejected", new { id = item.UserID }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

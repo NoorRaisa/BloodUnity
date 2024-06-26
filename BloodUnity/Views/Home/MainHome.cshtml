@@ -59,7 +59,17 @@
                             <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
                             <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
                             <a href="#"><i class="fa fa-youtube rounded-box"></i></a>
+                            @if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+                            {
+                                @Html.ActionLink("Sign In", "Login", "Home", null, new { @class = "btn btn-theme" })
+                            }
+
+                            else
+                            {
+                                @Html.ActionLink("Sign Out", "Logout", "Home", null, new { @class = "btn btn-theme" })
+                            }
                         </div>
+                        
                     </div>
 
                 </div>
@@ -1118,7 +1128,7 @@
     <a id="backTop">Back To Top</a>
 
     <script type="text/javascript">
-        alert('@ViewData["Message"]');
+        @*alert('@ViewData["Message"]');*@
     </script>
     <script src="~/Content/Template/js/jquery.min.js"></script>
     <script src="~/Content/Template/js/bootstrap.min.js"></script>

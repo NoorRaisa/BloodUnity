@@ -14,6 +14,10 @@ namespace BloodUnity.Controllers
         OnlineBloodBankDbEntities DB=new OnlineBloodBankDbEntities();
         public ActionResult AllRequestType()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var requesttypes= DB.RequestTypeTables.ToList();
             var listrequesttypes = new List<RequestTypeMV>();
             foreach (var requesttype in requesttypes)
@@ -25,7 +29,11 @@ namespace BloodUnity.Controllers
             }
             return View(listrequesttypes);
         }
-        public ActionResult Create() { 
+        public ActionResult Create() {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var requesttype=new RequestTypeMV();
             return View(requesttype);
         }
@@ -33,7 +41,11 @@ namespace BloodUnity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(RequestTypeMV requestTypeMV)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if (ModelState.IsValid)
             {
                 var checkrequest = DB.RequestTypeTables.Where(b => b.RequestType == requestTypeMV.RequestType).FirstOrDefault();
                 if (checkrequest == null)
@@ -55,6 +67,10 @@ namespace BloodUnity.Controllers
         }
         public ActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var requesttype=DB.RequestTypeTables.Find(id);
             if(requesttype==null)
             {
@@ -69,7 +85,11 @@ namespace BloodUnity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(RequestTypeMV requestTypeMV)
         {
-            if(ModelState.IsValid)
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if (ModelState.IsValid)
             {
                 var checkrequest = DB.RequestTypeTables.Where(b => b.RequestType == requestTypeMV.RequestType && b.RequestTypeID != requestTypeMV.RequestTypeID).FirstOrDefault();
                 if (checkrequest == null)
@@ -92,7 +112,11 @@ namespace BloodUnity.Controllers
 
         public ActionResult Delete(int? id) 
         {
-            if(id==null)
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if (id==null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -111,6 +135,10 @@ namespace BloodUnity.Controllers
 
         public ActionResult DeleteConfirmed(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var requesttype = DB.RequestTypeTables.Find(id);
             DB.RequestTypeTables.Remove(requesttype);
             DB.SaveChanges();

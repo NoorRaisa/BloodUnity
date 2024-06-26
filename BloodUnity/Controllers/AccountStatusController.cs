@@ -13,6 +13,10 @@ namespace BloodUnity.Controllers
         private OnlineBloodBankDbEntities DB = new OnlineBloodBankDbEntities();
         public ActionResult AllAccountStatus()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountStatuses = DB.AccountStatusTables.ToList();
             var listaccountstatus = new List<AccountStatusMV>();
             foreach (var accountstatus in accountStatuses)
@@ -26,6 +30,10 @@ namespace BloodUnity.Controllers
         }
         public ActionResult Create()
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountStatuses = new AccountStatusMV();
             return View(accountStatuses);
         }
@@ -33,6 +41,10 @@ namespace BloodUnity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(AccountStatusMV AccountStatusMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var checkstatus = DB.AccountStatusTables.Where(b => b.AccountStatus == AccountStatusMV.AccountStatus).FirstOrDefault();
@@ -55,6 +67,10 @@ namespace BloodUnity.Controllers
         }
         public ActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountStatus = DB.AccountStatusTables.Find(id);
             if (accountStatus == null)
             {
@@ -69,6 +85,10 @@ namespace BloodUnity.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AccountStatusMV AccountStatusMV)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (ModelState.IsValid)
             {
                 var checkstatus = DB.AccountStatusTables.Where(b => b.AccountStatus == AccountStatusMV.AccountStatus && b.AccountStatusID != AccountStatusMV.AccountStatusID).FirstOrDefault();
@@ -92,6 +112,10 @@ namespace BloodUnity.Controllers
 
         public ActionResult Delete(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,6 +135,10 @@ namespace BloodUnity.Controllers
 
         public ActionResult DeleteConfirmed(int? id)
         {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var accountstatus = DB.AccountStatusTables.Find(id);
             DB.AccountStatusTables.Remove(accountstatus);
             DB.SaveChanges();
