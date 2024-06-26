@@ -249,16 +249,79 @@ namespace BloodUnity.Controllers
         }
         public ActionResult SeekerUser()
         {
-            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
+            
             return View(registrationmv);
         }
     [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult SeekerUser(RegistrationMV registrationMV)
     {
-        ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
-        return View();
-       }
+
+            if (ModelState.IsValid)
+            {
+                var checktitle = DB.SeekerTables.Where(h => h.FullName == registrationMV.Seeker.FullName.Trim() && h.NID == registrationMV.Donor.NID).FirstOrDefault(); ///if title is registered or not
+                if (checktitle == null)
+                {
+                    using (var transaction = DB.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            var user = new UserTable();
+                            user.UserName = registrationMV.User.UserName;
+                            user.Password = registrationMV.User.Password;
+                            user.EmailAddress = registrationMV.User.EmailAddress;
+                            user.AccountStatusID = 1;
+                            user.UserTypeID = registrationMV.UserTypeID;
+                            user.Description = registrationMV.User.Description;
+                            DB.UserTables.Add(user);
+                            //DB.SaveChanges();
+
+                            var seeker = new SeekerTable();
+                            seeker.FullName = registrationMV.Seeker.FullName;
+                            seeker.Age = registrationMV.Seeker.Age;
+                            seeker.BloodGroupID = registrationMV.BloodGroupID;
+                            seeker.Address = registrationMV.Seeker.Address;
+                            seeker.ContactNo = registrationMV.ContactNo;
+                            seeker.RegistrationDate = DateTime.Now;
+                            seeker.NID = registrationMV.Donor.NID;
+                            seeker.GenderID = registrationMV.GenderID;
+                            seeker.CityID = registrationMV.CityID;
+                            seeker.UserID = user.UserID;
+                            DB.SeekerTables.Add(seeker);
+                            DB.SaveChanges();
+                            transaction.Commit();
+                            ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
+                            return RedirectToAction("MainHome", "Home");
+                        }
+                        catch (DbEntityValidationException e)
+                        {
+                            Console.WriteLine(e);
+                            ModelState.AddModelError(string.Empty, "Please Provide Correct Information!");
+                            transaction.Rollback();
+                        }
+                        catch (DbUpdateException e)
+                        {
+                            Console.WriteLine(e);
+                            ModelState.AddModelError(string.Empty, "Please Provide Correct Information!");
+                            transaction.Rollback();
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Seeker Already Registered!");
+                }
+            }
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", registrationMV.BloodGroupID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", registrationMV.GenderID);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
+            return View(registrationMV);
+        }
     }
 }
 
