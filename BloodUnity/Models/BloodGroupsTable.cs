@@ -18,9 +18,9 @@ namespace BloodUnity.Models
         public BloodGroupsTable()
         {
             this.BloodBankStockTables = new HashSet<BloodBankStockTable>();
-            this.DonorTables = new HashSet<DonorTable>();
             this.SeekerTables = new HashSet<SeekerTable>();
             this.BloodBankStockDetailTables = new HashSet<BloodBankStockDetailTable>();
+            this.DonorTables = new HashSet<DonorTable>();
         }
     
         public int BloodGroupID { get; set; }
@@ -29,10 +29,10 @@ namespace BloodUnity.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodBankStockTable> BloodBankStockTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DonorTable> DonorTables { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SeekerTable> SeekerTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodBankStockDetailTable> BloodBankStockDetailTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DonorTable> DonorTables { get; set; }
     }
 }

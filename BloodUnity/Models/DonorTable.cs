@@ -31,11 +31,11 @@ namespace BloodUnity.Models
         public int UserID { get; set; }
         public Nullable<int> GenderID { get; set; }
     
-        public virtual BloodGroupsTable BloodGroupsTable { get; set; }
-        public virtual CityTable CityTable { get; set; }
-        public virtual UserTable UserTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BloodBankStockDetailTable> BloodBankStockDetailTables { get; set; }
+        public virtual BloodGroupsTable BloodGroupsTable { get; set; }
+        public virtual CityTable CityTable { get; set; }
         public virtual GenderTable GenderTable { get; set; }
+        public virtual UserTable UserTable { get; set; }
     }
 }

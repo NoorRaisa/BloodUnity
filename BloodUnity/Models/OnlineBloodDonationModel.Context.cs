@@ -30,7 +30,6 @@ namespace BloodUnity.Models
         public virtual DbSet<BloodBankTable> BloodBankTables { get; set; }
         public virtual DbSet<BloodGroupsTable> BloodGroupsTables { get; set; }
         public virtual DbSet<CityTable> CityTables { get; set; }
-        public virtual DbSet<DonorTable> DonorTables { get; set; }
         public virtual DbSet<GenderTable> GenderTables { get; set; }
         public virtual DbSet<HospitalTable> HospitalTables { get; set; }
         public virtual DbSet<RequestTable> RequestTables { get; set; }
@@ -40,5 +39,6 @@ namespace BloodUnity.Models
         public virtual DbSet<UserTypeTable> UserTypeTables { get; set; }
         public virtual DbSet<BloodBankStockDetailTable> BloodBankStockDetailTables { get; set; }
         public virtual DbSet<CampaignTable> CampaignTables { get; set; }
+        public virtual DbSet<DonorTable> DonorTables { get; set; }
     }
 }

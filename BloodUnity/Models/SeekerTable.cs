@@ -24,6 +24,7 @@ namespace BloodUnity.Models
         public int GenderID { get; set; }
         public System.DateTime RegistrationDate { get; set; }
         public int UserID { get; set; }
+        public string Address { get; set; }
     
         public virtual BloodGroupsTable BloodGroupsTable { get; set; }
         public virtual CityTable CityTable { get; set; }
