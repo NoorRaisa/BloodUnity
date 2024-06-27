@@ -19,7 +19,7 @@ namespace BloodUnity.Controllers
             return View();
         }
 
-        public ActionResult Hostpital()
+        public ActionResult Hospital()
         {
             return View();
         }

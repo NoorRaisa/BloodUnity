@@ -124,6 +124,7 @@
     <Compile Include="Controllers\AccountStatusController.cs" />
     <Compile Include="Controllers\BloodGroupController.cs" />
     <Compile Include="Controllers\CityTablesController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RequestTypeController.cs" />
@@ -418,6 +419,10 @@
     <Content Include="Views\Accounts\AllNewUserRequests.cshtml" />
     <Content Include="Views\Accounts\UserDetails.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\Dashboard\Donor.cshtml" />
+    <Content Include="Views\Dashboard\Seeker.cshtml" />
+    <Content Include="Views\Dashboard\Hostpital.cshtml" />
+    <Content Include="Views\Dashboard\BloodBank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
