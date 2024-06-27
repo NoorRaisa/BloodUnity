@@ -142,7 +142,7 @@ namespace BloodUnity.Controllers
                                 Session["Location"] = hospital.Location;
                                 Session["CityID"] = hospital.CityID;
                                 Session["City"] = hospital.CityTable.City;
-                                return RedirectToAction("Hostpital", "Dashboard");
+                                return RedirectToAction("Hospital", "Dashboard");
                             }
                             else
                             {

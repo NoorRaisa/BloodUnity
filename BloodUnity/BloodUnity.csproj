@@ -421,8 +421,8 @@
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\Dashboard\Donor.cshtml" />
     <Content Include="Views\Dashboard\Seeker.cshtml" />
-    <Content Include="Views\Dashboard\Hostpital.cshtml" />
     <Content Include="Views\Dashboard\BloodBank.cshtml" />
+    <Content Include="Views\Dashboard\Hospital.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
