@@ -22,7 +22,6 @@ namespace BloodUnity.Controllers
 
             return View(user);
         }
-
         public ActionResult EditUserProfile(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -59,7 +58,7 @@ namespace BloodUnity.Controllers
                 userprofile.CityID = seeker.CityID;
                 userprofile.BloodGroupID = seeker.BloodGroupID;
                 userprofile.GenderID = seeker.GenderID;
-               
+                
 
             }
 
@@ -104,7 +103,7 @@ namespace BloodUnity.Controllers
 
                 userprofile.Donor.DonorID = donor.DonorID;
                 userprofile.Donor.FullName = donor.FullName;
-                userprofile.Donor.GenderID = donor.GenderID;
+                userprofile.Donor.GenderID = (int)donor.GenderID;
                 userprofile.Donor.BloodGroupID = donor.BloodGroupID;
                 userprofile.Donor.LastDonationDate = donor.LastDonationDate;
                 userprofile.Donor.ContactNo = donor.ContactNo;
@@ -117,24 +116,110 @@ namespace BloodUnity.Controllers
                 userprofile.ContactNo = donor.ContactNo;
                 userprofile.CityID = donor.CityID;
                 userprofile.BloodGroupID = donor.BloodGroupID;
-                userprofile.GenderID = donor.GenderID;
+                userprofile.GenderID = (int)donor.GenderID;
 
             }
 
-            return View(user);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", userprofile.CityID);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", userprofile.BloodGroupID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", userprofile.GenderID);
+            return View(userprofile);
 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditUserProfile(RegistrationMV registrationMVid)
+        public ActionResult EditUserProfile(RegistrationMV userprofile)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
-            //var user = DB.UserTables.Find(id);
+            if(ModelState.IsValid)
+            {
+                var checkuseremail = DB.UserTables.Where(u => u.EmailAddress == userprofile.User.EmailAddress && u.UserID!=userprofile.User.UserID).FirstOrDefault();
+                if(checkuseremail == null) 
+                {
+                    try
+                    {
+                        var user = DB.UserTables.Find(userprofile.User.UserID);
+                        user.EmailAddress = userprofile.User.EmailAddress;
+                        DB.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                        DB.SaveChanges();
 
-            return View(registrationMVid);
+                        if (userprofile.Donor.DonorID > 0)
+                        {
+                            var donor = DB.DonorTables.Find(userprofile.Donor.DonorID);
+                            donor.FullName = userprofile.Donor.FullName;
+                            donor.BloodGroupID = userprofile.BloodGroupID;
+                            donor.GenderID = userprofile.GenderID;
+                            donor.ContactNo = userprofile.Donor.ContactNo;
+                            donor.NID = userprofile.Donor.NID;
+                            donor.CityID = userprofile.CityID;
+                            donor.Location = userprofile.Donor.Location;
+                            DB.Entry(donor).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+                        }
+                        else if (userprofile.Seeker.SeekerID > 0)
+                        {
+                            var seeker = DB.SeekerTables.Find(userprofile.Seeker.SeekerID);
+                            seeker.FullName = userprofile.Seeker.FullName;
+                            seeker.BloodGroupID = userprofile.BloodGroupID;
+                            seeker.GenderID = userprofile.GenderID;
+                            seeker.Age = userprofile.Seeker.Age;
+                            seeker.ContactNo = userprofile.Seeker.ContactNo;
+                            seeker.NID = userprofile.Seeker.NID;
+                            seeker.CityID = userprofile.CityID;
+                            seeker.Address = userprofile.Seeker.Address;
+                            DB.Entry(seeker).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+                        }
+                        else if (userprofile.BloodBank.BloodBankID > 0)
+                        {
+                            var bloodbank = DB.BloodBankTables.Find(userprofile.BloodBank.BloodBankID);
+                            bloodbank.BloodBankName = userprofile.BloodBank.BloodBankName;
+                            bloodbank.PhoneNo = userprofile.BloodBank.PhoneNo;
+                            bloodbank.Email = userprofile.BloodBank.Email;
+                            bloodbank.Website = userprofile.BloodBank.Website;
+                            bloodbank.CItyID = userprofile.CityID;
+                            bloodbank.Address = userprofile.BloodBank.Address;
+                            DB.Entry(bloodbank).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+                        }
+                        else if (userprofile.Hospital.HospitalID > 0)
+                        {
+                            var hospital = DB.HospitalTables.Find(userprofile.Hospital.HospitalID);
+                            hospital.FullName = userprofile.Hospital.FullName;
+                            hospital.PhoneNo = userprofile.Hospital.PhoneNo;
+                            hospital.Email = userprofile.Hospital.Email;
+                            hospital.Website = userprofile.Hospital.Website;
+                            hospital.CityID = userprofile.CityID;
+                            hospital.Address = userprofile.Hospital.Address;
+                            DB.Entry(hospital).State = System.Data.Entity.EntityState.Modified;
+                            DB.SaveChanges();
+                        }
+                        return RedirectToAction("UserProfile", "User", new {id=userprofile.User.UserID});
+                    }
+                    catch
+                    {
+                        ModelState.AddModelError(string.Empty, "Some Data is Incorrect!Please Provide Correct Details");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User Email Already Exists!");
+                }
+
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Some Data is Incorrect!Please Provide Correct Details");
+            }
+            //var user = DB.UserTables.Find(id);
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", userprofile.CityID);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", userprofile.BloodGroupID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", userprofile.GenderID);
+
+            return View(userprofile);
 
         }
 

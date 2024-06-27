@@ -423,6 +423,7 @@
     <Content Include="Views\Dashboard\Seeker.cshtml" />
     <Content Include="Views\Dashboard\BloodBank.cshtml" />
     <Content Include="Views\Dashboard\Hospital.cshtml" />
+    <Content Include="Views\User\EditUserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
