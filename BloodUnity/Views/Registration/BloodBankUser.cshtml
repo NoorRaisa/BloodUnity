@@ -3,59 +3,61 @@
     ViewBag.Title = "Blood Bank";
 }
 
-<div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn" style="width:70%">
-    <h3 class="join-heading join-heading-alt">Blood Bank Registration</h3>
-    @using (Html.BeginForm("BloodBankUser", "Registration", FormMethod.Post, new { @class = "appoinment-form", @name = "form1", @onsubmit = "required(); return false;" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.UserTypeID)
-        @Html.HiddenFor(model => model.User.UserID)
-        @Html.HiddenFor(model => model.User.UserName)
-        @Html.HiddenFor(model => model.User.Password)
-        @Html.HiddenFor(model => model.User.AccountStatus)
-        @Html.HiddenFor(model => model.User.AccountStatusID)
-        @Html.HiddenFor(model => model.User.Description)
-        @Html.HiddenFor(model => model.User.EmailAddress)
+<div class="container" align="center">
+    <div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn" style="width:70%">
+        <h3 class="join-heading join-heading-alt">Blood Bank Registration</h3>
+        @using (Html.BeginForm("BloodBankUser", "Registration", FormMethod.Post, new { @class = "appoinment-form", @name = "form1", @onsubmit = "required(); return false;" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.UserTypeID)
+            @Html.HiddenFor(model => model.User.UserID)
+            @Html.HiddenFor(model => model.User.UserName)
+            @Html.HiddenFor(model => model.User.Password)
+            @Html.HiddenFor(model => model.User.AccountStatus)
+            @Html.HiddenFor(model => model.User.AccountStatusID)
+            @Html.HiddenFor(model => model.User.Description)
+            @Html.HiddenFor(model => model.User.EmailAddress)
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.BloodBank.BloodBankName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Blood Bank Name", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.BloodBank.BloodBankName, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Phone No ", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.BloodBank.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email ", @type = "email" } })
-            @Html.ValidationMessageFor(model => model.BloodBank.Email, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.BloodBank.Website, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Website (http://www.websitename.com) ", @type = "url" } })
-            @Html.ValidationMessageFor(model => model.BloodBank.Website, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group col-md-6">
-            @Html.EditorFor(model => model.BloodBank.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address ", @type = "text" } })
-            @Html.ValidationMessageFor(model => model.BloodBank.Location, "", new { @class = "text-danger" })
-        </div>
-
-
-
-
-        <div class="form-group col-md-6">
-            <div class="select-style">
-                @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control", @name = "city" })
-                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.BloodBank.BloodBankName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Blood Bank Name", @type = "text" } })
+                @Html.ValidationMessageFor(model => model.BloodBank.BloodBankName, "", new { @class = "text-danger" })
             </div>
-        </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Phone No ", @type = "text" } })
+                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.BloodBank.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email ", @type = "email" } })
+                @Html.ValidationMessageFor(model => model.BloodBank.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.BloodBank.Website, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Website (http://www.websitename.com) ", @type = "url" } })
+                @Html.ValidationMessageFor(model => model.BloodBank.Website, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.EditorFor(model => model.BloodBank.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Address ", @type = "text" } })
+                @Html.ValidationMessageFor(model => model.BloodBank.Location, "", new { @class = "text-danger" })
+            </div>
 
 
-        <div class="form-group col-md-12 col-sm-12 col-xs-12">
-
-            <button id="btn_submit" class="btn btn-theme" type="submit">SUBMIT</button>
 
 
-        </div>
+            <div class="form-group col-md-6">
+                <div class="select-style">
+                    @Html.DropDownList("CityID", null, "--Your City--", new { @class = "form-control", @name = "city" })
+                    @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    }
-</div> <!-- end .appointment-form-wrapper  -->
+
+            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+
+                <button id="btn_submit" class="btn btn-theme" type="submit">SUBMIT</button>
+
+
+            </div>
+
+        }
+    </div> <!-- end .appointment-form-wrapper  -->
+</div>

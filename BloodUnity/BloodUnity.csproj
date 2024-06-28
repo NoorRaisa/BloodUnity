@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AccountStatusController.cs" />
+    <Compile Include="Controllers\BloodBankController.cs" />
     <Compile Include="Controllers\BloodGroupController.cs" />
     <Compile Include="Controllers\CityTablesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Models\BloodBankStockDetailTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BloodBankStockMV.cs" />
     <Compile Include="Models\BloodBankStockTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
@@ -244,6 +246,7 @@
     <Content Include="Content\Template\images\blog_thumb_3.jpg" />
     <Content Include="Content\Template\images\close.gif" />
     <Content Include="Content\Template\images\counter_bg.jpg" />
+    <Content Include="Content\Template\images\cover.png" />
     <Content Include="Content\Template\images\cta-bg-img.jpg" />
     <Content Include="Content\Template\images\down_arrow.png" />
     <Content Include="Content\Template\images\event_1.jpg" />
@@ -424,6 +427,7 @@
     <Content Include="Views\Dashboard\BloodBank.cshtml" />
     <Content Include="Views\Dashboard\Hospital.cshtml" />
     <Content Include="Views\User\EditUserProfile.cshtml" />
+    <Content Include="Views\BloodBank\BloodBankStock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

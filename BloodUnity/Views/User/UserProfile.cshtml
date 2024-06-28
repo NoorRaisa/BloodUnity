@@ -3,7 +3,18 @@
 @{
     ViewBag.Title = "Profile";
 }
+<style>
+    dt {
+        float: left;
+        clear: left;
+        width: 8em;
+    }
 
+    dd {
+        margin: 0 0 0 9em;
+        padding: 0 0 2.5em 0;
+    }
+</style>
 <div class="col-md-12">
     <div class="contact-form-block">
         <h2 class="contact-title">User Profile</h2>
@@ -16,7 +27,7 @@
             <hr />
             <dl class="dl-horizontal">
                 <dt>
-                    User Name
+                    User Name:
                 </dt>
 
                 <dd>
@@ -25,7 +36,7 @@
 
 
                 <dt>
-                    Email Address
+                    Email Address:
                 </dt>
 
                 <dd>
@@ -33,7 +44,7 @@
                 </dd>
 
                 <dt>
-                    Message
+                    Message:
                 </dt>
 
                 <dd>
@@ -41,7 +52,7 @@
                 </dd>
 
                 <dt>
-                    Account Status
+                    Account Status:
                 </dt>
 
                 <dd>
@@ -49,7 +60,7 @@
                 </dd>
 
                 <dt>
-                    Relationship
+                    Relationship:
                 </dt>
 
                 <dd>
@@ -69,42 +80,42 @@
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Hospital Name
+                                Hospital Name:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => hospital.FullName)
                             </dd>
                             <dt>
-                                Phone Number
+                                Phone Number:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => hospital.PhoneNo)
                             </dd>
                             <dt>
-                                Email Address
+                                Email Address:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => hospital.Email)
                             </dd>
                             <dt>
-                                Website
+                                Website:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => hospital.Website)
                             </dd>
                             <dt>
-                                City
+                                City:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => hospital.CityTable.City)
                             </dd>
                             <dt>
-                                Address
+                                Address:
                             </dt>
 
                             <dd>
@@ -123,56 +134,56 @@
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Donor Name
+                                Donor Name:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.FullName)
                             </dd>
                             <dt>
-                                Blood Group
+                                Blood Group:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.BloodGroupsTable.BloodGroup)
                             </dd>
                             <dt>
-                                Gender
+                                Gender:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.GenderTable.Gender)
                             </dd>
                             <dt>
-                                Phone Number
+                                Phone Number:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.ContactNo)
                             </dd>
                             <dt>
-                                NID
+                                NID:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.NID)
                             </dd>
                             <dt>
-                                Last Donation Date
+                                Last Donation Date:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.LastDonationDate)
                             </dd>
                             <dt>
-                                City
+                                City:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => donor.CityTable.City)
                             </dd>
                             <dt>
-                                Address
+                                Address:
                             </dt>
 
                             <dd>
@@ -190,7 +201,7 @@
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Blood Bank Name
+                                Blood Bank Name:
                             </dt>
 
                             <dd>
@@ -198,35 +209,35 @@
                             </dd>
 
                             <dt>
-                                Phone Number
+                                Phone Number:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => bloodbank.PhoneNo)
                             </dd>
                             <dt>
-                                Email Address
+                                Email Address:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => bloodbank.Email)
                             </dd>
                             <dt>
-                                Website
+                                Website:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => bloodbank.Website)
                             </dd>
                             <dt>
-                                City
+                                City:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => bloodbank.CityTable.City)
                             </dd>
                             <dt>
-                                Address
+                                Address:
                             </dt>
 
                             <dd>
@@ -245,41 +256,42 @@
                         <hr />
                         <dl class="dl-horizontal">
                             <dt>
-                                Seeker Name
+                                Seeker Name:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => seeker.FullName)
                             </dd>
                             <dt>
-                                Blood Group
+                                Blood Group:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => seeker.BloodGroupsTable.BloodGroup)
                             </dd>
                             <dt>
-                                Gender
+                                Gender:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => seeker.GenderTable.Gender)
                             </dd>
                             <dt>
-                                Phone Number
+                                Phone Number:
                             </dt>
+                            <dd>
+                                @Html.DisplayFor(model => seeker.ContactNo)
+                            </dd>
                             <dt>
-                                Age
+                                Age:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => seeker.Age)
                             </dd>
-                            <dd>
-                                @Html.DisplayFor(model => seeker.ContactNo)
-                            </dd>
+
                             <dt>
-                                NID
+                                NID:
                             </dt>
 
                             <dd>
@@ -287,14 +299,14 @@
                             </dd>
 
                             <dt>
-                                City
+                                City:
                             </dt>
 
                             <dd>
                                 @Html.DisplayFor(model => seeker.CityTable.City)
                             </dd>
                             <dt>
-                                Address
+                                Address:
                             </dt>
 
                             <dd>

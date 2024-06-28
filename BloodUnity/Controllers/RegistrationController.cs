@@ -21,21 +21,21 @@ namespace BloodUnity.Controllers
             //ViewBag.msg = "";
             registrationmv= registrationMV;
             if (registrationMV.UserTypeID == 2 && registrationMV.ContactNo!= null && registrationMV.User.Description!=null && registrationMV.CityID.ToString()!=null 
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null)
+                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length>=5)
             {
                 return RedirectToAction("DonorUser");
             }
             
             else if (registrationMV.UserTypeID == 3 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null)
+                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
                 return RedirectToAction("SeekerUser");
 
             else if (registrationMV.UserTypeID == 4 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null)
+                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5) 
                 return RedirectToAction("HospitalUser");
 
             else if (registrationMV.UserTypeID == 5 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null)
+                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
                 return RedirectToAction("BloodBankUser");
             else
             {
