@@ -7,7 +7,7 @@
 <div class="col-md-6">
     <div class="contact-form-block">
         <h2 class="contact-title">Add New Campaign</h2>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("NewCampaign", "BloodBank", FormMethod.Post, new {enctype="multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
 

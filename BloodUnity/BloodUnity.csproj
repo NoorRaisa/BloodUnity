@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper_Class\FileHelpers.cs" />
     <Compile Include="Models\AccountStatusMV.cs" />
     <Compile Include="Models\AccountStatusTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
