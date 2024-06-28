@@ -153,6 +153,7 @@
     <Compile Include="Models\BloodGroupsTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CampaignMV.cs" />
     <Compile Include="Models\CampaignTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
@@ -224,6 +225,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CampaignPhoto\donation.jpg" />
     <Content Include="Content\Template\css\animate.css" />
     <Content Include="Content\Template\css\bootstrap-rtl.min.css" />
     <Content Include="Content\Template\css\bootstrap-social.css" />
@@ -428,6 +430,8 @@
     <Content Include="Views\Dashboard\Hospital.cshtml" />
     <Content Include="Views\User\EditUserProfile.cshtml" />
     <Content Include="Views\BloodBank\BloodBankStock.cshtml" />
+    <Content Include="Views\BloodBank\NewCampaign.cshtml" />
+    <Content Include="Views\BloodBank\AllCampaigns.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

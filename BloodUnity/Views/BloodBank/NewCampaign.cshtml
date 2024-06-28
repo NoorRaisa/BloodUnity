@@ -1,0 +1,67 @@
+﻿@model BloodUnity.Models.CampaignMV
+
+@{
+    ViewBag.Title = "New Campaign";
+}
+
+<div class="col-md-6">
+    <div class="contact-form-block">
+        <h2 class="contact-title">Add New Campaign</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                Enter Campaign Title
+                @Html.EditorFor(model => model.CampaignTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CampaignTitle, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                Campaign Date
+                @Html.EditorFor(model => model.CampaignDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CampaignDate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                Start Time
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                End Time
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                Campaign Banner
+                    <span class="btn btn-theme-invert btn-file">
+                        @Html.TextBoxFor(model => model.CampaignPhotoFile, new {type="file"})
+                    </span>
+            </div>
+            <div class="form-group">
+                Enter Location
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                Campaign Details
+                @Html.EditorFor(model => model.CampaignDetails, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CampaignDetails, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" style="float:right;padding:5px 24px" value="Create" class="btn btn-theme" />
+                @Html.ActionLink("Back", "AllCampaigs", null, new { @class = "btn btn-theme-invert" })
+            </div>
+        }
+
+    </div>
+</div>
+
+

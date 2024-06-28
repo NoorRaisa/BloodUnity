@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BloodUnity.Models.CampaignTable>
+
+@{
+    ViewBag.Title = "Campaigns";
+}
+
+<div class="col-md-8">
+    <div class="contact-form-block">
+        <h2 class="contact-title">Blood Bank Campaigns</h2>
+        <p>
+            @Html.ActionLink("New Campaign", "NewCampaign", null, new { @class = "btn btn-theme" })
+            @Html.ActionLink("Campaign History", "CampaignHistory", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CampaignDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CampaignDetails)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CampaignTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CampaignPhoto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BloodBankTable.BloodBankName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CampaignDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CampaignDetails)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CampaignTitle)
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.CampaignPhoto))
+                        {
+                            <img src="@Url.Content(item.CampaignPhoto)" alt="Image"
+                                 style="width:100px;height:150px;max-width:100%;height:auto;" />
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodBankTable.BloodBankName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CampaignID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CampaignID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CampaignID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

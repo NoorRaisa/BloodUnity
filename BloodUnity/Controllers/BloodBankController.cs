@@ -42,13 +42,56 @@ namespace BloodUnity.Controllers
             return View(list);
         }
 
+        public ActionResult AllCampaigns()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            int bloodbankID = 0;
+            int.TryParse(Convert.ToString(Session["BloodBankID"]), out bloodbankID);
+            var allcampaigns = DB.CampaignTables.Where(c => c.BloodBankID == bloodbankID);
+            return View(allcampaigns);
+        }
+
         public ActionResult NewCampaign()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
-            return View();
+            var campaignMV=new CampaignMV();
+            return View(campaignMV);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewCampaign(CampaignMV campaignMV)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int bloodbankID = 0;
+            int.TryParse(Convert.ToString(Session["BloodBankID"]), out bloodbankID);
+            campaignMV.BloodBankID= bloodbankID;
+            if(ModelState.IsValid)
+            {
+                var campaign = new CampaignTable();
+                campaign.BloodBankID = bloodbankID;
+                campaign.CampaignDate = campaignMV.CampaignDate;
+                campaign.StartTime = campaignMV.StartTime;
+                campaign.EndTime = campaignMV.EndTime;
+                campaign.Location=campaignMV.Location;
+                campaign.CampaignDetails = campaignMV.CampaignDetails;
+                campaign.CampaignTitle = campaignMV.CampaignTitle;
+                campaign.CampaignPhoto = "~/Content/CampaignPhoto/donation.jpg";
+                DB.CampaignTables.Add(campaign);
+                DB.SaveChanges();
+                return RedirectToAction("AllCampaigns");
+            }
+
+            return View(campaignMV);
         }
     }
 }
