@@ -11,9 +11,11 @@ namespace BloodUnity.Controllers
     public class HomeController : Controller
     {
         OnlineBloodBankDbEntities DB = new OnlineBloodBankDbEntities();
-        public ActionResult Index()
+        public ActionResult AllCampaigns()
         {
-            return View();
+            var date = DateTime.Now.AddDays(1);
+            var allcampaigns = DB.CampaignTables.ToList();
+            return View(allcampaigns);
         }
 
         public ActionResult About()

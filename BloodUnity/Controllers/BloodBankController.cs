@@ -87,17 +87,17 @@ namespace BloodUnity.Controllers
                 campaign.Location=campaignMV.Location;
                 campaign.CampaignDetails = campaignMV.CampaignDetails;
                 campaign.CampaignTitle = campaignMV.CampaignTitle;
-                campaign.CampaignPhoto = "~/Content/CampaignPhoto/donation.jpg";
+                campaign.CampaignPhoto = "~/Content/CampaignPhoto";
                 DB.CampaignTables.Add(campaign);
                 DB.SaveChanges();
                 if(campaignMV.CampaignPhotoFile != null)
                 {
-                    var folder = "~/Content/CampaignPhotos";
+                    var folder = "~/Content/CampaignPhoto";
                     var file = string.Format("{0}.jpg", campaignMV.CampaignID);
                     var response = FileHelpers.UploadPhoto(campaignMV.CampaignPhotoFile, folder, file);
                     if(response)
                     {
-                        var pic = string.Format("(0)/(1)", folder,file);
+                        var pic = string.Format("{0}/{1}", folder,file);
                         campaign.CampaignPhoto = pic;
                         DB.Entry(campaign).State = EntityState.Modified;
                         DB.SaveChanges();
@@ -109,5 +109,7 @@ namespace BloodUnity.Controllers
 
             return View(campaignMV);
         }
+
+  
     }
 }

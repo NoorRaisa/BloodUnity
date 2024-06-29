@@ -433,6 +433,7 @@
     <Content Include="Views\BloodBank\BloodBankStock.cshtml" />
     <Content Include="Views\BloodBank\NewCampaign.cshtml" />
     <Content Include="Views\BloodBank\AllCampaigns.cshtml" />
+    <Content Include="Views\Home\AllCampaigns.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

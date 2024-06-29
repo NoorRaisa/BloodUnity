@@ -28,7 +28,7 @@ namespace BloodUnity.Helper_Class
                         byte[] array = ms.GetBuffer();
                     }
                 }
-                return false;
+                return true;
             }
             catch
             {
