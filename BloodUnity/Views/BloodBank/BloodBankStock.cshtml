@@ -8,6 +8,7 @@
     <div class="contact-form-block">
         <h2 class="contact-title">Blood Bank Stock</h2>
         <p>
+            @Html.ActionLink("Add Blood", "AddNewDonorByBloodBank","Accounts", null, new { @class = "btn btn-theme" })
             @Html.ActionLink("New Campaign", "NewCampaign", null, new { @class = "btn btn-theme" })
             @Html.ActionLink("Campaign History", "CampaignHistory", null, new { @class = "btn btn-theme" })
         </p>

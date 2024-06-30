@@ -56,5 +56,17 @@ namespace BloodUnity.Controllers
             return RedirectToAction("AllNewUserRequests");
 
         }
+        public ActionResult AddNewDonorByBloodBank()
+        {
+            var CollectBloodMV = new CollectBloodMV();
+            return View(CollectBloodMV);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddNewDonorByBloodBank(CollectBloodMV collectBloodMV )
+        {
+            return RedirectToAction("BloodBankStock", "BloodBank");
+            ///return View(collectBloodMV);
+        }
     }
 }

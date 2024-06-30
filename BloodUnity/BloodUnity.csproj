@@ -161,6 +161,8 @@
     <Compile Include="Models\CityTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CollectBloodMV.cs" />
+    <Compile Include="Models\CollectedBloodDonorDetailMV.cs" />
     <Compile Include="Models\DonorMV.cs" />
     <Compile Include="Models\DonorTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
@@ -434,6 +436,7 @@
     <Content Include="Views\BloodBank\NewCampaign.cshtml" />
     <Content Include="Views\BloodBank\AllCampaigns.cshtml" />
     <Content Include="Views\Home\AllCampaigns.cshtml" />
+    <Content Include="Views\Accounts\AddNewDonorByBloodBank.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

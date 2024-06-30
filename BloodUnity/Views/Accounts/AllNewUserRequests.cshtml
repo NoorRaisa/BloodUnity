@@ -49,8 +49,8 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Approved", "UserApproved", new { id = item.UserID }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Rejected", "UserRejected", new { id = item.UserID }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Approve", "UserApproved", new { id = item.UserID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Reject", "UserRejected", new { id = item.UserID }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }
