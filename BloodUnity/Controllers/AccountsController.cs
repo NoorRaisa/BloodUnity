@@ -59,13 +59,20 @@ namespace BloodUnity.Controllers
         public ActionResult AddNewDonorByBloodBank()
         {
             var CollectBloodMV = new CollectBloodMV();
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender","0");
             return View(CollectBloodMV);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddNewDonorByBloodBank(CollectBloodMV collectBloodMV )
         {
+
             return RedirectToAction("BloodBankStock", "BloodBank");
+            ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", collectBloodMV.CityID);
+            ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", collectBloodMV.BloodGroupID);
+            ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", collectBloodMV.GenderID);
             ///return View(collectBloodMV);
         }
     }
