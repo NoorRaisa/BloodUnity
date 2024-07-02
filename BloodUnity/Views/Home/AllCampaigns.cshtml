@@ -112,6 +112,8 @@
                                 <ul class="drop-down">
                                     <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
                                     <li><a href="event-single.html">Single Campaign</a></li>
+                                    <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaigns</a></li>
+                                    <li><a href="@Url.Content("~/BloodBank/BloodBankStock")">Stock</a></li>
                                 </ul>
                             </li>
 
@@ -207,45 +209,48 @@
                     </div> <!-- end .col-sm-12  -->
 
                 </div> <!-- end .row  -->
-            @{     
-                int usertypeid = 0;
-               /// int userid = 0;
-                string sessionusertype = Convert.ToString(Session["UserTypeID"]);
-                int.TryParse(sessionusertype, out usertypeid);
+                @{
+                    int usertypeid = 0;
+                    /// int userid = 0;
+                    string sessionusertype = Convert.ToString(Session["UserTypeID"]);
+                    int.TryParse(sessionusertype, out usertypeid);
 
-                <div class="row margin-top-48">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-md-6 col-sm-12">
-                            <div class="event-layout-1 theme-custom-box-shadow clearfix">
-                                <figure class="event-img">
-                                    <a href="#">
-                                        <img src="@Url.Content(item.CampaignPhoto)" alt="">
-                                    </a>
-                                </figure>
-                                <div class="event-info">
-                                    <a class="event-date" href="#"><i class="fa fa-calendar-o"></i> @item.CampaignDate.ToString("dd MMMM, yyyy")</a>
-                                    <h4>
-                                        <a href="#">@item.CampaignTitle</a>
-                                    </h4>
-                                    @if (usertypeid != 5)
-                                    {
-                                        <div class="event-exceprt">@item.CampaignDetails</div>
-                                    }
-                                    <div class="event-time">
-                                        <a href="#"><i class="fa fa-clock-o"></i> @item.StartTime - @item.EndTime</a>
-                                        <a href="#"> <i class="fa fa-map-marker"></i>@(item.Location==null? "No Location" : item.Location)</a>
+                    <div class="row margin-top-48">
+                        @foreach (var item in Model)
+                        {
+                            if (item.CampaignDate == DateTime.Now.Date)
+                            {
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="event-layout-1 theme-custom-box-shadow clearfix">
+                                        <figure class="event-img">
+                                            <a href="#">
+                                                <img src="@Url.Content(item.CampaignPhoto)" alt="">
+                                            </a>
+                                        </figure>
+                                        <div class="event-info">
+                                            <a class="event-date" href="#"><i class="fa fa-calendar-o"></i> @item.CampaignDate.ToString("dd MMMM, yyyy")</a>
+                                            <h4>
+                                                <a href="#">@item.CampaignTitle</a>
+                                            </h4>
+                                            @if (usertypeid != 5)
+                                            {
+                                                <div class="event-exceprt">@item.CampaignDetails</div>
+                                            }
+                                            <div class="event-time">
+                                                <a href="#"><i class="fa fa-clock-o"></i> @item.StartTime - @item.EndTime</a>
+                                                <a href="#"> <i class="fa fa-map-marker"></i>@(item.Location == null ? "No Location" : item.Location)</a>
+                                            </div>
+                                            @if (usertypeid == 5)
+                                            {
+                                                <a href="@Url.Content("~/BloodBank/BloodBankStock")" class="btn btn-theme">Collect Blood</a>
+                                            }
+                                        </div>
                                     </div>
-                                    @if (usertypeid == 5)
-                                    {
-                                        <a href="@Url.Content("~/BloodBank/BloodBankStock")" class="btn btn-theme">Collect Blood</a>
-                                    }
                                 </div>
-                            </div>
-                        </div>
-                    }
+                            }
+                        }
 
-                </div>
+                    </div>
                 }
             </div> <!--  end .container  -->
 

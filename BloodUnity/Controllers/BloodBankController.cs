@@ -19,9 +19,11 @@ namespace BloodUnity.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            var list = new List<BloodBankStockMV>();
             int bloodbankID = 0;
-            int.TryParse(Convert.ToString(Session["BloodBankID"]),out bloodbankID);
+            string bloodbankid = Convert.ToString(Session["BloodBankID"]);
+            int.TryParse(bloodbankid, out bloodbankID);
+            
+            var list = new List<BloodBankStockMV>();
             var stocklist = DB.BloodBankStockTables.Where(b => b.BloodBankID == bloodbankID);
             foreach(var stock in stocklist)
             {
