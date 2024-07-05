@@ -4,7 +4,7 @@
     ViewBag.Title = "Campaigns";
 }
 
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="contact-form-block">
         <h2 class="contact-title">Blood Bank Campaigns</h2>
         <p>
@@ -14,30 +14,29 @@
         <table class="table table-hover">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.CampaignDate)
+                   Campaign Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.StartTime)
+                  Start Time
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EndTime)
+                    End Time
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Location)
+                    Location
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CampaignDetails)
+                    Campaign Details
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CampaignTitle)
+                    Campaign Title
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CampaignPhoto)
+                    Campaign Banner
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.BloodBankTable.BloodBankName)
+                    Blood Bank Name
                 </th>
-                <th></th>
             </tr>
 
             @foreach (var item in Model)
@@ -71,11 +70,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.BloodBankTable.BloodBankName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.CampaignID }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.CampaignID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.CampaignID })
                     </td>
                 </tr>
             }

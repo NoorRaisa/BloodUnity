@@ -212,14 +212,13 @@
                 @{
                     int usertypeid = 0;
                     /// int userid = 0;
+                    var date = DateTime.Now.Date;
                     string sessionusertype = Convert.ToString(Session["UserTypeID"]);
                     int.TryParse(sessionusertype, out usertypeid);
 
                     <div class="row margin-top-48">
                         @foreach (var item in Model)
                         {
-                            if (item.CampaignDate == DateTime.Now.Date)
-                            {
                                 <div class="col-md-6 col-sm-12">
                                     <div class="event-layout-1 theme-custom-box-shadow clearfix">
                                         <figure class="event-img">
@@ -240,14 +239,14 @@
                                                 <a href="#"><i class="fa fa-clock-o"></i> @item.StartTime - @item.EndTime</a>
                                                 <a href="#"> <i class="fa fa-map-marker"></i>@(item.Location == null ? "No Location" : item.Location)</a>
                                             </div>
-                                            @if (usertypeid == 5)
+                                            @if (usertypeid == 5 && item.CampaignDate==date)
                                             {
                                                 <a href="@Url.Content("~/BloodBank/BloodBankStock")" class="btn btn-theme">Collect Blood</a>
                                             }
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            
                         }
 
                     </div>

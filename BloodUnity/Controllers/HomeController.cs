@@ -13,8 +13,8 @@ namespace BloodUnity.Controllers
         OnlineBloodBankDbEntities DB = new OnlineBloodBankDbEntities();
         public ActionResult AllCampaigns()
         {
-            var date = DateTime.Now.AddDays(1);
-            var allcampaigns = DB.CampaignTables.ToList();
+            var date = DateTime.Now.Date;
+            var allcampaigns = DB.CampaignTables.Where(c=>c.CampaignDate>=date).ToList();
             return View(allcampaigns);
         }
 
@@ -35,6 +35,11 @@ namespace BloodUnity.Controllers
         {
             var message = ViewData["Message"] == null ? "Welcome to Blood Unity" : ViewData["Message"];
             ViewData["Message"] = message;
+
+            var date = DateTime.Now.Date;
+            var allcampaigns = DB.CampaignTables.Where(c => c.CampaignDate >= date).ToList();
+            ViewBag.AllCampaigns = allcampaigns;
+
             var registration = new RegistrationMV();
             ViewBag.UserTypeID = new SelectList(DB.UserTypeTables.Where(ut => ut.UserTypeID > 1).ToList(), "UserTypeID", "UserType", "0");
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
