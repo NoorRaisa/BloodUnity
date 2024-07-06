@@ -96,15 +96,11 @@
                         <ul class="nav navbar-nav navbar-right">
 
                             <li>
-                                <a href="#">Home</a>
-                                <ul class="drop-down">
-                                    <li><a href="index.html" title="Home Layout 01">Home 01</a></li>
-                                    <li><a href="home-2.html" title="Home Layout 02">Home 02</a></li>
-                                </ul>
+                                <a href="@Url.Content("~/Home/MainHome")">Home</a>
                             </li>
 
 
-                            <li><a href="about-us.html" title="About Us">About Us</a></li>
+                            <li>@*<a href="about-us.html" title="About Us">About Us</a>*@</li>
 
                             <li>
                                 <a href="#">Campaign</a>
@@ -115,7 +111,7 @@
                             </li>
 
                             <li class="drop">
-                                <a href="#">Pages</a>
+                                <!---<a href="#">Pages</a>
                                 <ul class="drop-down">
 
                                     <li class="drop">
@@ -151,10 +147,10 @@
                                             <li><a href="#">Level 3.3</a></li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul>-->
                             </li>
 
-                            <li>
+                            <!---<li>
                                 <a href="#">Blog</a>
                                 <ul class="drop-down">
                                     <li><a href="blog.html">All Posts</a></li>
@@ -162,7 +158,7 @@
                                 </ul>
                             </li>
 
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="contact.html">Contact</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -173,7 +169,7 @@
     <div class="slider-wrap">
         <div id="slider_1" class="owl-carousel" data-nav="true" data-dots="false" data-autoplay="true" data-autoplaytimeout="17000">
 
-            <div class="slider_item_container" data-bg_img="~/Content/Template/images//home_1_slider_1.jpg" data-bg_color="#555555" data-bg_opacity="0.0">
+            <div class="slider_item_container" data-bg_img="@Url.Content("~/Content/Template/images/2.jpg")" data-bg_color="#555555" data-bg_opacity="0.0">
                 <div class="item">
                     <div class="slider-content">
                         <div class="container text-left">
@@ -181,8 +177,8 @@
                                 <div class="slider-bg">
                                     <div class="col-sm-12 wow zoomInUp" data-wow-duration="1s">
 
-                                        <h3>Donate blood,save life !</h3>
-                                        <h2>
+                                        <h3 style="color:black">Donate blood,save life !</h3>
+                                        <h2 style="color:black">
                                             YOUR BLOOD
                                             <br>
                                             CAN BRING SMILE
@@ -199,7 +195,7 @@
                 </div> <!-- end .item  -->
             </div> <!-- end .slider_item_container  -->
 
-            <div class="slider_item_container" data-bg_img="~/Content/Template/images//home_1_slider_2.jpg" data-bg_color="#555555" data-bg_opacity="0.0">
+            <div class="slider_item_container" data-bg_img="@Url.Content("~/Content/Template/images/5.jpg")" data-bg_color="#555555" data-bg_opacity="0.0">
                 <div class="item">
                     <div class="slider-content">
                         <div class="container text-left">
@@ -207,8 +203,8 @@
                                 <div class="slider-bg" data-animation-in="zoomInUp" data-animation-out="zoomInDown">
                                     <div class="col-sm-12 wow fadeInDown" data-wow-duration="1s">
 
-                                        <h3>Donate blood,save life !</h3>
-                                        <h2>
+                                        <h3 style="color:black">Donate blood,save life !</h3>
+                                        <h2 style="color:black">
                                             DONATE BLOOD
                                             <br>
                                             AND INSPIRES OTHERS.
@@ -267,10 +263,10 @@
 
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 
-                    <figure class="about-img theme-custom-box-shadow">
+                    <!--<figure class="about-img theme-custom-box-shadow">
                         <a class="venobox wow bounceIn" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=nrJtHemSPW4"><i class="fa fa-play"></i></a>
                         <img src="~/Content/Template/images//about_feat_bg.jpg" alt="about" />
-                    </figure> <!-- end .cause-img  -->
+                    </figure>--> <!-- end .cause-img  -->
 
                 </div> <!--  end .col-lg-6 col-md-6 col-sm-12 col-xs-12  -->
 
@@ -280,7 +276,7 @@
     </section> <!--  end .section-about-us -->
     <!-- SECTION TESTIMONIAL   -->
 
-    <section class="section-content-block section-custom-bg" data-bg_img='~/Content/Template/images//testimony_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
+    <section class="section-content-block section-custom-bg" data-bg_img='@Url.Content("~/Content/Template/images//testimony_feat_bg.jpg")'data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
 
         <div class="container margin-top-80">
             <div class="row section-heading-wrapper-alt">
@@ -356,7 +352,7 @@
 
                 <div class="col-lg-6 hidden-md hidden-xs hidden-sm no-padding">
                     <figure>
-                        <img src="~/Content/Template/images//testimony_feat_img.jpg" alt="" class="db" />
+                        <img src="@Url.Content("~/Content/Template/images/3.png")" alt="" class="db" />
                     </figure>
                 </div>
 
@@ -408,53 +404,53 @@
                                 {
                                     foreach (var item in activeallcampaigns)
                                     {
-                                    <div class="col-md-6 col-sm-12">
-                                        <div class="event-layout-1 theme-custom-box-shadow clearfix">
-                                            <figure class="event-img">
-                                                <a href="#">
-                                                    <img src="@Url.Content(item.CampaignPhoto)" alt="">
-                                                </a>
-                                            </figure>
-                                            <div class="event-info">
-                                                <a class="event-date" href="#"><i class="fa fa-calendar-o"></i> @item.CampaignDate.ToString("dd MMMM,yyyy")</a>
-                                                <h4>
-                                                    <a href="#">@item.CampaignTitle</a>
-                                                </h4>
-                                                <div class="event-exceprt">@item.CampaignDetails</div>
-                                                <div class="event-time">
-                                                    <a href="#"><i class="fa fa-clock-o"></i> @item.StartTime - @item.EndTime</a>
-                                                    <a href="#"> <i class="fa fa-map-marker"></i> @item.Location</a>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="event-layout-1 theme-custom-box-shadow clearfix">
+                                                <figure class="event-img">
+                                                    <a href="#">
+                                                        <img src="@Url.Content(item.CampaignPhoto)" alt="">
+                                                    </a>
+                                                </figure>
+                                                <div class="event-info">
+                                                    <a class="event-date" href="#"><i class="fa fa-calendar-o"></i> @item.CampaignDate.ToString("dd MMMM,yyyy")</a>
+                                                    <h4>
+                                                        <a href="#">@item.CampaignTitle</a>
+                                                    </h4>
+                                                    <div class="event-exceprt">@item.CampaignDetails</div>
+                                                    <div class="event-time">
+                                                        <a href="#"><i class="fa fa-clock-o"></i> @item.StartTime - @item.EndTime</a>
+                                                        <a href="#"> <i class="fa fa-map-marker"></i> @item.Location</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     }
                                 }
                                 else
                                 {
 
-                                <div class="col-md-6 col-sm-12">
-                                    <div class="event-layout-1 theme-custom-box-shadow clearfix">
-                                        <figure class="event-img">
-                                            <a href="#">
-                                                <img src="~/Content/Template/images//event_1.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="event-info">
-                                            <a class="event-date" href="#"><i class="fa fa-calendar-o"></i> 00 Month, YYYY</a>
-                                            <h4>
-                                                <a href="#">No Current Campaigns</a>
-                                            </h4>
-                                            <div class="event-exceprt"> Will be Arranged Shortly.</div>
-                                            <div class="event-time">
-                                                <a href="#"><i class="fa fa-clock-o"></i> Expected Time: 10.00 - 3.00</a>
-                                                <a href="#"> <i class="fa fa-map-marker"></i>No Location</a>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="event-layout-1 theme-custom-box-shadow clearfix">
+                                            <figure class="event-img">
+                                                <a href="#">
+                                                    <img src="~/Content/Template/images//event_1.jpg" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="event-info">
+                                                <a class="event-date" href="#"><i class="fa fa-calendar-o"></i> 00 Month, YYYY</a>
+                                                <h4>
+                                                    <a href="#">No Current Campaigns</a>
+                                                </h4>
+                                                <div class="event-exceprt"> Will be Arranged Shortly.</div>
+                                                <div class="event-time">
+                                                    <a href="#"><i class="fa fa-clock-o"></i> Expected Time: 10.00 - 3.00</a>
+                                                    <a href="#"> <i class="fa fa-map-marker"></i>No Location</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                    }
                                 }
+                            }
                         </div>
                     </div>
 
@@ -469,7 +465,7 @@
 
     <!--  SECTION APPOINTMENT BOX -->
 
-    <section class="section-content-block section-custom-bg section-custom-bg-extra-padding" data-bg_img='~/Content/Template/images//appointment_female_bg.jpg' data-bg_color='#000000' data-bg_opacity='0.1'>
+    <section class="section-content-block section-custom-bg section-custom-bg-extra-padding" data-bg_img='@Url.Content("~/Content/Template/images/1.jpg")' data-bg_color='#000000' data-bg_opacity='0.1'>
 
         <div class="container">
             <div class="custom-empty-space" data-height="160px" data-class="col-sm-hidden"></div>
@@ -631,7 +627,7 @@
     </section> <!--  end .appointment-section  -->
     <!-- SECTION TEAM   -->
 
-    <section class="section-content-block section-custom-bg" data-bg_img='~/Content/Template/images//team_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
+    <!--<section class="section-content-block section-custom-bg" data-bg_img='~/Content/Template/images//team_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
 
         <div class="container margin-top-80">
             <div class="row section-heading-wrapper-alt">
@@ -641,9 +637,9 @@
                     <span class="heading-separator heading-separator-horizontal"></span>
                     <h2 class="extra-large">The volunteers who give their time and talents help to fulfill our mission.</h2>
 
-                </div> <!-- end .col-sm-10  -->
+                </div>--> <!-- end .col-sm-10  -->
 
-            </div>
+            <!--</div>
         </div>
 
         <div class="container margin-top-48 margin-bottom-48 wow fadeInLeft">
@@ -659,9 +655,9 @@
                                 <img src="~/Content/Template/images//team_9.jpg" alt="ALEXANDER GARY" />
                             </a>
 
-                        </figure> <!-- end. team-member  -->
+                        </figure>--> <!-- end. team-member  -->
 
-                        <article class="team-info">
+                        <!--<article class="team-info">
                             <h3>ALEXANDER GARY</h3>
                             <h4>Co-Founder</h4>
                         </article>
@@ -673,15 +669,15 @@
                                 <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
                                 <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
                                 <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
-                            </div> <!-- end .author-social-box  -->
+                            </div>--> <!-- end .author-social-box  -->
 
-                        </div>
+                        <!--</div>
 
-                    </div> <!--  end team-layout-1 -->
+                    </div>--> <!--  end team-layout-1 -->
 
-                </div> <!--  end .col-md-4 col-sm-12  -->
+                <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
 
-                <div class="col-md-4 col-sm-12">
+                <!--<div class="col-md-4 col-sm-12">
 
                     <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
 
@@ -690,9 +686,9 @@
                                 <img src="~/Content/Template/images//team_6.jpg" alt="MELISSA MUNOZ" />
                             </a>
 
-                        </figure> <!-- end. team-member  -->
+                        </figure>--> <!-- end. team-member  -->
 
-                        <article class="team-info">
+                        <!--<article class="team-info">
                             <h3>MELISSA MUNOZ</h3>
                             <h4>Founder</h4>
                         </article>
@@ -704,15 +700,15 @@
                                 <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
                                 <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
                                 <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
-                            </div> <!-- end .author-social-box  -->
+                            </div>--> <!-- end .author-social-box  -->
 
-                        </div>
+                        <!--</div>
 
-                    </div> <!--  end team layout-1 -->
+                    </div>--> <!--  end team layout-1 -->
 
-                </div> <!--  end .col-md-4 col-sm-12  -->
+                <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
 
-                <div class="col-md-4 col-sm-12">
+                <!--<div class="col-md-4 col-sm-12">
 
                     <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
 
@@ -721,9 +717,9 @@
                                 <img src="~/Content/Template/images//team_7.jpg" alt="JOHN ABRAHAM" />
                             </a>
 
-                        </figure> <!-- end. team-member  -->
+                        </figure>--> <!-- end. team-member  -->
 
-                        <article class="team-info">
+                        <!--<article class="team-info">
                             <h3>JOHN ABRAHAM</h3>
                             <h4>Manager</h4>
                         </article>
@@ -734,30 +730,30 @@
                                 <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
                                 <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
                                 <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
-                            </div> <!-- end .author-social-box  -->
+                            </div>--> <!-- end .author-social-box  -->
 
-                        </div>
+                        <!--</div>
 
-                    </div> <!--  end team-layout-1 -->
+                    </div>--> <!--  end team-layout-1 -->
 
-                </div> <!--  end .col-md-4 col-sm-12  -->
+                <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
 
 
-            </div> <!-- end .row  -->
+            <!--</div>--> <!-- end .row  -->
 
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-sm-12 text-center">
                     <a class="btn btn-theme margin-top-24" href="#">Become A Volunteer</a>
                 </div>
             </div>
 
-        </div> <!-- end .container  -->
+        </div>--> <!-- end .container  -->
 
-    </section>
+    <!--</section>-->
 
     <!--  SECTION GALLERY  -->
 
-    <section class="section-content-block section-pure-white-bg">
+    <!--<section class="section-content-block section-pure-white-bg">
 
         <div class="container">
 
@@ -767,14 +763,14 @@
                     <h2>CAMPAIGN GALLERY</h2>
                     <span class="heading-separator"></span>
                     <h4>our prestigious voluntary work on campaigns by the team</h4>
-                </div> <!-- end .col-sm-10  -->
+                </div>--> <!-- end .col-sm-10  -->
 
 
-            </div> <!-- end .row  -->
+            <!--</div>--> <!-- end .row  -->
 
-        </div> <!--  end .container -->
+        <!--</div>--> <!--  end .container -->
 
-        <div class="container wow fadeInUp">
+        <!--<div class="container wow fadeInUp">
 
             <div class="row no-padding-gallery">
 
@@ -786,13 +782,13 @@
 
                             <img src="~/Content/Template/images//gallery_1.jpg" alt="gallery image" />
 
-                        </figure> <!-- end .gallery-img  -->
+                        </figure>--> <!-- end .gallery-img  -->
 
-                    </a>
+                    <!--</a>
 
-                </div><!-- end .col-sm-3  -->
+                </div>--><!-- end .col-sm-3  -->
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
                     <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_2.jpg">
 
@@ -800,13 +796,13 @@
 
                             <img src="~/Content/Template/images//gallery_2.jpg" alt="gallery image" />
 
-                        </figure> <!-- end .gallery-img  -->
+                        </figure>--> <!-- end .gallery-img  -->
 
-                    </a> <!-- end .gallery-light-box  -->
+                    <!--</a>--> <!-- end .gallery-light-box  -->
 
-                </div><!-- end .col-sm-3  -->
+                <!--</div>--><!-- end .col-sm-3  -->
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
                     <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_3.jpg">
 
@@ -814,15 +810,15 @@
 
                             <img src="~/Content/Template/images//gallery_3.jpg" alt="gallery image" />
 
-                        </figure> <!-- end .gallery-img  -->
+                        </figure>--> <!-- end .gallery-img  -->
 
-                    </a>
+                    <!--</a>
 
-                </div><!-- end .col-sm-3  -->
+                </div>--><!-- end .col-sm-3  -->
 
-            </div> <!-- end .row  -->
+            <!--</div>--> <!-- end .row  -->
 
-            <div class="row no-padding-gallery">
+            <!--<div class="row no-padding-gallery">
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
@@ -832,13 +828,13 @@
 
                             <img src="~/Content/Template/images//gallery_4.jpg" alt="gallery image" />
 
-                        </figure> <!-- end .gallery-img  -->
+                        </figure>--> <!-- end .gallery-img  -->
 
-                    </a> <!-- end .gallery-light-box  -->
+                    <!--</a>--> <!-- end .gallery-light-box  -->
 
-                </div><!-- end .col-sm-3  -->
+                <!--</div>--><!-- end .col-sm-3  -->
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
                     <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_5.jpg">
 
@@ -846,13 +842,13 @@
 
                             <img src="~/Content/Template/images//gallery_5.jpg" alt="gallery image" />
 
-                        </figure> <!-- end .gallery-img  -->
+                        </figure>--> <!-- end .gallery-img  -->
 
-                    </a>
+                    <!--</a>
 
-                </div><!-- end .col-sm-3  -->
+                </div>--><!-- end .col-sm-3  -->
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
                     <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_6.jpg">
 
@@ -860,20 +856,20 @@
 
                             <img src="~/Content/Template/images//gallery_6.jpg" alt="gallery image" />
 
-                        </figure> <!-- end .gallery-img  -->
+                        </figure>--> <!-- end .gallery-img  -->
 
-                    </a> <!-- end .gallery-light-box  -->
+                    <!--</a>--> <!-- end .gallery-light-box  -->
 
-                </div><!-- end .col-sm-3  -->
+                <!--</div>--><!-- end .col-sm-3  -->
 
-            </div> <!-- end .row  -->
+            <!--</div>--> <!-- end .row  -->
 
-        </div><!-- end .container-fluid  -->
+        <!--</div>--><!-- end .container-fluid  -->
 
-    </section> <!-- end .section-content-block  -->
+    <!--</section>--> <!-- end .section-content-block  -->
     <!-- HIGHLIGHT CTA  -->
 
-    <section class="padding-bottom-100 padding-top-0">
+    @*<section class="padding-bottom-100 padding-top-0">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -889,7 +885,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>*@
     <footer>
 
         <section class="footer-widget-area footer-widget-area-bg">
@@ -910,8 +906,7 @@
 
                                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                                     <p>
-                                        We are world largest and trustful blood donation center. We have been working since 1973 with a prestigious vision to helping patient to provide blood.
-                                        We are working all over the world, organizing blood donation campaign to grow awareness among the people to donate blood.
+                                        We are one of the trustful blood donation center of Bangladesh. We have started working from 2024 with a prestigious vision to helping patient to provide blood.
                                     </p>
                                 </div> <!--  end .col-lg-9  -->
 
@@ -952,7 +947,7 @@
 
                     </div> <!--  end .col-md-4 col-sm-12 -->
 
-                    <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-md-4 col-sm-12 col-xs-12" style="float:right">
 
                         <div class="footer-widget clearfix">
 
@@ -1043,7 +1038,7 @@
 
                     </div> <!--  end .col-md-4 col-sm-12 -->
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    @*<div class="col-md-4 col-sm-6 col-xs-12">
 
                         <div class="footer-widget">
                             <div class="sidebar-widget-wrapper">
@@ -1062,7 +1057,7 @@
                             </div>
                         </div>
 
-                    </div> <!--  end .col-md-4 col-sm-12 -->
+                    </div>*@ <!--  end .col-md-4 col-sm-12 -->
 
                 </div> <!-- end row  -->
 
@@ -1078,7 +1073,7 @@
                 <div class="row clearfix">
 
                     <div class="col-md-12 col-sm-12 text-center">
-                        <p class="copyright-text"> Copyright 2018 - Blood Buddies by BlueWindLab. All Rights Reserved. </p>
+                        <p class="copyright-text"> Copyright 2024 - Blood Unity. All Rights Reserved. </p>
                     </div>  <!-- end .col-sm-6  -->
 
                 </div> <!-- end .row  -->

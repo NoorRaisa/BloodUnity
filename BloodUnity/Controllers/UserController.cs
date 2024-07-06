@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -182,6 +184,7 @@ namespace BloodUnity.Controllers
                             bloodbank.Website = userprofile.BloodBank.Website;
                             bloodbank.CItyID = userprofile.CityID;
                             bloodbank.Address = userprofile.BloodBank.Address;
+                            bloodbank.Location = userprofile.BloodBank.Address;
                             DB.Entry(bloodbank).State = System.Data.Entity.EntityState.Modified;
                             DB.SaveChanges();
                         }
@@ -199,10 +202,19 @@ namespace BloodUnity.Controllers
                         }
                         return RedirectToAction("UserProfile", "User", new {id=userprofile.User.UserID});
                     }
-                    catch
+                    catch (DbEntityValidationException e)
                     {
+                        Console.WriteLine(e);
                         ModelState.AddModelError(string.Empty, "Some Data is Incorrect!Please Provide Correct Details");
+
                     }
+                    catch (DbUpdateException e)
+                    {
+                        Console.WriteLine(e);
+                        ModelState.AddModelError(string.Empty, "Some Data is Incorrect!Please Provide Correct Details");
+
+                    }
+                    
                 }
                 else
                 {

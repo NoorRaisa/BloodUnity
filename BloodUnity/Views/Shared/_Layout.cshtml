@@ -99,11 +99,8 @@
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="#">Home</a>
-                                    <ul class="drop-down">
-                                        <li><a href="index.html" title="Home Layout 01">Home 01</a></li>
-                                        <li><a href="home-2.html" title="Home Layout 02">Home 02</a></li>
-                                    </ul>
+                                    <a href="@Url.Content("~/Home/MainHome")">Home</a>
+                                    
                                 </li>
                                 @if (usertypeid == 1)
                                 {
@@ -149,14 +146,14 @@
                                         </ul>
                                     </li>
                                 }
-                                <li>
+                                @*<li>
                                     <a href="#">Blog</a>
                                     <ul class="drop-down">
                                         <li><a href="blog.html">All Posts</a></li>
                                         <li><a href="single.html">Single Page</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="about-us.html" title="About Us">About Us</a></li>
+                                <li><a href="about-us.html" title="About Us">About Us</a></li>*@
 
                             </ul>
                         </div>
@@ -184,13 +181,12 @@
                             <div class="row">
 
                                 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                    <img src="~/Content/Template/images/cover.png" alt="" />
+                                    <img src="@Url.Content("~/Content/Template/images/cover.png")" alt="" />
                                 </div> <!--  end col-lg-3-->
 
                                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                                     <p>
-                                        We are world largest and trustful blood donation center. We have been working since 1973 with a prestigious vision to helping patient to provide blood.
-                                        We are working all over the world, organizing blood donation campaign to grow awareness among the people to donate blood.
+                                        We are one of the trustful blood donation center of Bangladesh. We have started working from 2024 with a prestigious vision to helping patient to provide blood.
                                     </p>
                                 </div> <!--  end .col-lg-9  -->
 
@@ -231,7 +227,7 @@
 
                     </div> <!--  end .col-md-4 col-sm-12 -->
 
-                    <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="col-md-4 col-sm-12 col-xs-12" style="float:right">
 
                         <div class="footer-widget clearfix">
 
@@ -322,7 +318,7 @@
 
                     </div> <!--  end .col-md-4 col-sm-12 -->
 
-                    <div class="col-md-4 col-sm-6 col-xs-12">
+                    @*<div class="col-md-4 col-sm-6 col-xs-12">
 
                         <div class="footer-widget">
                             <div class="sidebar-widget-wrapper">
@@ -341,7 +337,7 @@
                             </div>
                         </div>
 
-                    </div> <!--  end .col-md-4 col-sm-12 -->
+                    </div>*@ <!--  end .col-md-4 col-sm-12 -->
 
                 </div> <!-- end row  -->
 

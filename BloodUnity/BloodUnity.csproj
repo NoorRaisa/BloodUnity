@@ -240,6 +240,10 @@
     <Content Include="Content\Template\css\styles.css" />
     <Content Include="Content\Template\css\venobox.css" />
     <Content Include="Content\Template\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\Template\images\1.jpg" />
+    <Content Include="Content\Template\images\2.jpg" />
+    <Content Include="Content\Template\images\3.png" />
+    <Content Include="Content\Template\images\5.jpg" />
     <Content Include="Content\Template\images\about_feat_bg.jpg" />
     <Content Include="Content\Template\images\appointment.jpg" />
     <Content Include="Content\Template\images\appointment_female_bg.jpg" />
