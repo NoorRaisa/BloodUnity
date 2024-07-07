@@ -1,10 +1,8 @@
 ﻿using BloodUnity.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BloodUnity.Controllers
@@ -19,29 +17,42 @@ namespace BloodUnity.Controllers
         public ActionResult SelectUser(RegistrationMV registrationMV)
         {
             //ViewBag.msg = "";
-            registrationmv= registrationMV;
-            if (registrationMV.UserTypeID == 2 && registrationMV.ContactNo!= null && registrationMV.User.Description!=null && registrationMV.CityID.ToString()!=null 
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length>=5)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("DonorUser");
-            }
-            
-            else if (registrationMV.UserTypeID == 3 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
-                return RedirectToAction("SeekerUser");
+                var checker = DB.UserTables.Where(u => u.UserName == registrationMV.User.UserName).FirstOrDefault();
+                registrationmv = registrationMV;
+                if (checker != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Username Already Exists!");
+                    return RedirectToAction("AlreadyExists", "Registration");
+                }
+                if (registrationMV.UserTypeID == 2 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
+                    && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
+                {
+                    return RedirectToAction("DonorUser");
+                }
 
-            else if (registrationMV.UserTypeID == 4 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5) 
-                return RedirectToAction("HospitalUser");
+                else if (registrationMV.UserTypeID == 3 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
+                    && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
+                {
+                    return RedirectToAction("SeekerUser");
+                }
 
-            else if (registrationMV.UserTypeID == 5 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
-                && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
-                return RedirectToAction("BloodBankUser");
-            else
-            {
-                ///ModelState.AddModelError(string.Empty, "Please fill all the fields!");
-                return RedirectToAction("MainHome", "Home");
+                else if (registrationMV.UserTypeID == 4 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
+                    && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
+                    return RedirectToAction("HospitalUser");
+
+                else if (registrationMV.UserTypeID == 5 && registrationMV.ContactNo != null && registrationMV.User.Description != null && registrationMV.CityID.ToString() != null
+                    && registrationMV.User.UserName != null && registrationMV.User.EmailAddress != null && registrationMV.User.Password != null && registrationMV.User.Password.Length >= 5)
+                    return RedirectToAction("BloodBankUser");
+                else
+                {
+                    ///ModelState.AddModelError(string.Empty, "Please fill all the fields!");
+                    return RedirectToAction("MainHome", "Home");
+                }
             }
+
+            return View(registrationMV);
             //var registration = new RegistrationMV();
             //return View(registrationmv); 
         }
@@ -57,7 +68,7 @@ namespace BloodUnity.Controllers
             if (ModelState.IsValid)
             {
                 var checktitle = DB.HospitalTables.Where(h => h.FullName == registrationMV.Hospital.FullName.Trim()).FirstOrDefault(); ///if title is registered or not
-                if(checktitle == null)
+                if (checktitle == null)
                 {
                     using (var transaction = DB.Database.BeginTransaction())
                     {
@@ -71,7 +82,7 @@ namespace BloodUnity.Controllers
                             user.UserTypeID = registrationMV.UserTypeID;
                             user.Description = registrationMV.User.Description;
                             DB.UserTables.Add(user);
-                       
+
 
 
                             var hospital = new HospitalTable();
@@ -79,17 +90,18 @@ namespace BloodUnity.Controllers
                             hospital.Address = registrationMV.Hospital.Address;
                             hospital.PhoneNo = registrationMV.ContactNo;
                             hospital.Website = registrationMV.Hospital.Website;
-                            hospital.Email = registrationMV.Hospital.Email;
+                            hospital.Email = registrationMV.User.EmailAddress;
                             hospital.Location = registrationMV.Hospital.Address;
                             hospital.CityID = registrationMV.CityID;
                             hospital.UserID = user.UserID;
                             DB.HospitalTables.Add(hospital);
-                            
+
                             transaction.Commit();
                             ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
-                            return RedirectToAction("MainHome", "Home");
+                            ModelState.AddModelError(string.Empty, "Your Account is Under Review. Please Login after two days!");
+                            ///return RedirectToAction("MainHome", "Home");
                         }
-                        catch 
+                        catch
                         {
                             ModelState.AddModelError(string.Empty, "Please Provide Correct Information!");
                             transaction.Rollback();
@@ -154,7 +166,8 @@ namespace BloodUnity.Controllers
                             DB.SaveChanges();
                             transaction.Commit();
                             ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
-                            return RedirectToAction("MainHome", "Home");
+                            ///return RedirectToAction("MainHome", "Home");
+                            ModelState.AddModelError(string.Empty, "Your Account is Under Review. Please Login after two days!");
                         }
                         catch (DbEntityValidationException e)
                         {
@@ -222,14 +235,15 @@ namespace BloodUnity.Controllers
                             bloodBank.Location = registrationMV.BloodBank.Location;
                             bloodBank.PhoneNo = registrationMV.ContactNo;
                             bloodBank.Website = registrationMV.BloodBank.Website;
-                            bloodBank.Email = registrationMV.BloodBank.Email;
+                            bloodBank.Email = registrationMV.User.EmailAddress;
                             bloodBank.CItyID = registrationMV.CityID;
                             bloodBank.UserID = user.UserID;
                             DB.BloodBankTables.Add(bloodBank);
                             DB.SaveChanges();
                             transaction.Commit();
                             ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
-                            return RedirectToAction("MainHome", "Home");
+                            ModelState.AddModelError(string.Empty, "Your Account is Under Review. Please Login after two days!");
+                            ///return RedirectToAction("MainHome", "Home");
                         }
                         catch
                         {
@@ -252,13 +266,13 @@ namespace BloodUnity.Controllers
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", "0");
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
-            
+
             return View(registrationmv);
         }
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult SeekerUser(RegistrationMV registrationMV)
-    {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SeekerUser(RegistrationMV registrationMV)
+        {
 
             if (ModelState.IsValid)
             {
@@ -293,8 +307,9 @@ namespace BloodUnity.Controllers
                             DB.SeekerTables.Add(seeker);
                             DB.SaveChanges();
                             transaction.Commit();
-                            ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
-                            return RedirectToAction("MainHome", "Home");
+                            ViewData["Message"] = "Thanks for Registration, Your Query will be Reviewed Shortly!";
+                            ModelState.AddModelError(string.Empty, "Your Account is Under Review. Please Login after two days!");
+                            ///return RedirectToAction("MainHome", "Home");
                         }
                         catch (DbEntityValidationException e)
                         {
@@ -321,6 +336,10 @@ namespace BloodUnity.Controllers
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", registrationMV.GenderID);
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationMV.CityID);
             return View(registrationMV);
+        }
+        public ActionResult AlreadyExists()
+        {
+            return View();
         }
     }
 }

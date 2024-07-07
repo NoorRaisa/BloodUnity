@@ -1,0 +1,16 @@
+﻿@model BloodUnity.Models.UserTable
+
+@{
+    ViewBag.Title = "AlreadyExists";
+}
+
+<center><h2>Username Already Exists</h2></center>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    
+}
+
+

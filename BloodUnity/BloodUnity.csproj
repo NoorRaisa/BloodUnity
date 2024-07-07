@@ -441,6 +441,7 @@
     <Content Include="Views\BloodBank\AllCampaigns.cshtml" />
     <Content Include="Views\Home\AllCampaigns.cshtml" />
     <Content Include="Views\Accounts\AddNewDonorByBloodBank.cshtml" />
+    <Content Include="Views\Registration\AlreadyExists.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
