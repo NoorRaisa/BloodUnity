@@ -120,7 +120,7 @@ namespace BloodUnity.Controllers
 
         public ActionResult DonorUser()
         {
-
+            ViewData["Message"] = "Redirecting to Registration Page";
             ViewBag.CityID = new SelectList(DB.CityTables.ToList(), "CityID", "City", registrationmv.CityID);
             ViewBag.BloodGroupID = new SelectList(DB.BloodGroupsTables.ToList(), "BloodGroupID", "BloodGroup", "0");
             ViewBag.GenderID = new SelectList(DB.GenderTables.ToList(), "GenderID", "Gender", "0");
@@ -165,9 +165,9 @@ namespace BloodUnity.Controllers
                             DB.DonorTables.Add(Donor);
                             DB.SaveChanges();
                             transaction.Commit();
-                            ViewData["Message"] = "Thanks for Registratiom, Your Query will be Reviewed Shortly!";
+                            ViewData["Message"] = "Your Account is Under Review. Please Login after two days!";
                             ///return RedirectToAction("MainHome", "Home");
-                            ModelState.AddModelError(string.Empty, "Your Account is Under Review. Please Login after two days!");
+                            ///ModelState.AddModelError(string.Empty, "Your Account is Under Review. Please Login after two days!");
                         }
                         catch (DbEntityValidationException e)
                         {

@@ -95,12 +95,22 @@
                         int.TryParse(sessionusertype, out usertypeid);
                         int.TryParse(userID, out userid);
 
+
+
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav navbar-right">
+                                @if (usertypeid == 0)
+                                {
+                                    <li>
+                                        <a href="@Url.Content("~/Home/MainHome")">Home</a>
 
+                                    </li>
+                                }
                                 <li>
-                                    <a href="@Url.Content("~/Home/MainHome")">Home</a>
-                                    
+                                    <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Content("~/Finder/FinderDonors")">Find Donor</a>
                                 </li>
                                 @if (usertypeid == 1)
                                 {
@@ -147,13 +157,13 @@
                                     </li>
                                 }
                                 @*<li>
-                                    <a href="#">Blog</a>
-                                    <ul class="drop-down">
-                                        <li><a href="blog.html">All Posts</a></li>
-                                        <li><a href="single.html">Single Page</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html" title="About Us">About Us</a></li>*@
+                                        <a href="#">Blog</a>
+                                        <ul class="drop-down">
+                                            <li><a href="blog.html">All Posts</a></li>
+                                            <li><a href="single.html">Single Page</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="about-us.html" title="About Us">About Us</a></li>*@
 
                             </ul>
                         </div>
@@ -317,27 +327,26 @@
                         </div> <!--  end .footer-widget  -->
 
                     </div> <!--  end .col-md-4 col-sm-12 -->
-
                     @*<div class="col-md-4 col-sm-6 col-xs-12">
 
-                        <div class="footer-widget">
-                            <div class="sidebar-widget-wrapper">
-                                <div class="footer-widget-header clearfix">
-                                    <h3>Subscribe Us</h3>
-                                </div>
-                                <p>Signup for regular newsletter and stay up to date with our latest news.</p>
-                                <div class="footer-subscription">
-                                    <p>
-                                        <input id="mc4wp_email" class="form-control" required="" placeholder="Enter Your Email" name="EMAIL" type="email">
-                                    </p>
-                                    <p>
-                                        <input class="btn btn-default" value="Subscribe Now" type="submit">
-                                    </p>
+                            <div class="footer-widget">
+                                <div class="sidebar-widget-wrapper">
+                                    <div class="footer-widget-header clearfix">
+                                        <h3>Subscribe Us</h3>
+                                    </div>
+                                    <p>Signup for regular newsletter and stay up to date with our latest news.</p>
+                                    <div class="footer-subscription">
+                                        <p>
+                                            <input id="mc4wp_email" class="form-control" required="" placeholder="Enter Your Email" name="EMAIL" type="email">
+                                        </p>
+                                        <p>
+                                            <input class="btn btn-default" value="Subscribe Now" type="submit">
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>*@ <!--  end .col-md-4 col-sm-12 -->
+                        </div>*@ <!--  end .col-md-4 col-sm-12 -->
 
                 </div> <!-- end row  -->
 

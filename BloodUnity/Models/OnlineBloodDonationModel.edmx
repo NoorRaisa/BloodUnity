@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OnlineBloodBankDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcceptedTypeTable">
+          <Key>
+            <PropertyRef Name="AcceptedTypeID" />
+          </Key>
+          <Property Name="AcceptedTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AcceptedType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="AccountStatusTable">
           <Key>
             <PropertyRef Name="AccountStatusID" />
@@ -113,18 +120,27 @@
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="RequestStatusTable">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="RequestTable">
           <Key>
             <PropertyRef Name="RequestID" />
           </Key>
           <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RequestDate" Type="date" Nullable="false" />
-          <Property Name="SeekerID" Type="int" Nullable="false" />
-          <Property Name="HospitalID" Type="int" Nullable="false" />
-          <Property Name="BloodBankID" Type="int" Nullable="false" />
-          <Property Name="DonorID" Type="int" Nullable="false" />
+          <Property Name="RequestByID" Type="int" Nullable="false" />
+          <Property Name="AcceptedID" Type="int" Nullable="false" />
           <Property Name="RequiredBloodGroupID" Type="int" Nullable="false" />
           <Property Name="RequestTypeID" Type="int" Nullable="false" />
+          <Property Name="AcceptedTypeID" Type="int" Nullable="false" />
+          <Property Name="RequestStatusID" Type="int" Nullable="false" />
+          <Property Name="ExpectedDate" Type="date" Nullable="false" />
+          <Property Name="RequestDetails" Type="nvarchar" MaxLength="2000" />
         </EntityType>
         <EntityType Name="RequestTypeTable">
           <Key>
@@ -348,6 +364,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_RequestTable_AcceptedTypeTable">
+          <End Role="AcceptedTypeTable" Type="Self.AcceptedTypeTable" Multiplicity="1" />
+          <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcceptedTypeTable">
+              <PropertyRef Name="AcceptedTypeID" />
+            </Principal>
+            <Dependent Role="RequestTable">
+              <PropertyRef Name="AcceptedTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestTable_RequestStatusTable">
+          <End Role="RequestStatusTable" Type="Self.RequestStatusTable" Multiplicity="1" />
+          <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatusTable">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="RequestTable">
+              <PropertyRef Name="RequestStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RequestTable_RequestTypeTable">
           <End Role="RequestTypeTable" Type="Self.RequestTypeTable" Multiplicity="1" />
           <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
@@ -433,6 +473,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OnlineBloodBankDbModelStoreContainer">
+          <EntitySet Name="AcceptedTypeTable" EntityType="Self.AcceptedTypeTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountStatusTable" EntityType="Self.AccountStatusTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BloodBankStockDetailTable" EntityType="Self.BloodBankStockDetailTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BloodBankStockTable" EntityType="Self.BloodBankStockTable" Schema="dbo" store:Type="Tables" />
@@ -443,6 +484,7 @@
           <EntitySet Name="DonorTable" EntityType="Self.DonorTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GenderTable" EntityType="Self.GenderTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalTable" EntityType="Self.HospitalTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestStatusTable" EntityType="Self.RequestStatusTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestTable" EntityType="Self.RequestTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestTypeTable" EntityType="Self.RequestTypeTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeekerTable" EntityType="Self.SeekerTable" Schema="dbo" store:Type="Tables" />
@@ -508,6 +550,14 @@
             <End Role="UserTable" EntitySet="UserTable" />
             <End Role="HospitalTable" EntitySet="HospitalTable" />
           </AssociationSet>
+          <AssociationSet Name="FK_RequestTable_AcceptedTypeTable" Association="Self.FK_RequestTable_AcceptedTypeTable">
+            <End Role="AcceptedTypeTable" EntitySet="AcceptedTypeTable" />
+            <End Role="RequestTable" EntitySet="RequestTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestTable_RequestStatusTable" Association="Self.FK_RequestTable_RequestStatusTable">
+            <End Role="RequestStatusTable" EntitySet="RequestStatusTable" />
+            <End Role="RequestTable" EntitySet="RequestTable" />
+          </AssociationSet>
           <AssociationSet Name="FK_RequestTable_RequestTypeTable" Association="Self.FK_RequestTable_RequestTypeTable">
             <End Role="RequestTypeTable" EntitySet="RequestTypeTable" />
             <End Role="RequestTable" EntitySet="RequestTable" />
@@ -559,27 +609,9 @@
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="BloodBankTable" Relationship="Self.FK_BloodBankStockTable_BloodBankTable" FromRole="BloodBankStockTable" ToRole="BloodBankTable" />
           <NavigationProperty Name="BloodGroupsTable" Relationship="Self.FK_BloodBankStockTable_BloodGroupsTable" FromRole="BloodBankStockTable" ToRole="BloodGroupsTable" />
           <NavigationProperty Name="BloodBankStockDetailTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankStockDetailTable_BloodBankStockTable" FromRole="BloodBankStockTable" ToRole="BloodBankStockDetailTable" />
-        </EntityType>
-        <EntityType Name="BloodBankTable">
-          <Key>
-            <PropertyRef Name="BloodBankID" />
-          </Key>
-          <Property Name="BloodBankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BloodBankName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Website" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CItyID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BloodBankStockTables" Relationship="Self.FK_BloodBankStockTable_BloodBankTable" FromRole="BloodBankTable" ToRole="BloodBankStockTable" />
-          <NavigationProperty Name="CityTable" Relationship="Self.FK_BloodBankTable_CityTable" FromRole="BloodBankTable" ToRole="CityTable" />
-          <NavigationProperty Name="UserTable" Relationship="Self.FK_BloodBankTable_UserTable" FromRole="BloodBankTable" ToRole="UserTable" />
-          <NavigationProperty Name="CampaignTables" Relationship="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable" FromRole="BloodBankTable" ToRole="CampaignTable" />
+          <NavigationProperty Name="BloodBankTable" Relationship="OnlineBloodBankDbModel.FK_BloodBankStockTable_BloodBankTable" FromRole="BloodBankStockTable" ToRole="BloodBankTable" />
         </EntityType>
         <EntityType Name="BloodGroupsTable">
           <Key>
@@ -598,10 +630,10 @@
           </Key>
           <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="City" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="BloodBankTables" Relationship="Self.FK_BloodBankTable_CityTable" FromRole="CityTable" ToRole="BloodBankTable" />
           <NavigationProperty Name="HospitalTables" Relationship="Self.FK_HospitalTable_CityTable" FromRole="CityTable" ToRole="HospitalTable" />
           <NavigationProperty Name="SeekerTables" Relationship="Self.FK_SeekerTable_CityTable" FromRole="CityTable" ToRole="SeekerTable" />
           <NavigationProperty Name="DonorTables" Relationship="OnlineBloodBankDbModel.FK_DonorTable_CityTable" FromRole="CityTable" ToRole="DonorTable" />
+          <NavigationProperty Name="BloodBankTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankTable_CityTable" FromRole="CityTable" ToRole="BloodBankTable" />
         </EntityType>
         <EntityType Name="GenderTable">
           <Key>
@@ -628,27 +660,13 @@
           <NavigationProperty Name="CityTable" Relationship="Self.FK_HospitalTable_CityTable" FromRole="HospitalTable" ToRole="CityTable" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_HospitalTable_UserTable" FromRole="HospitalTable" ToRole="UserTable" />
         </EntityType>
-        <EntityType Name="RequestTable">
-          <Key>
-            <PropertyRef Name="RequestID" />
-          </Key>
-          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="SeekerID" Type="Int32" Nullable="false" />
-          <Property Name="HospitalID" Type="Int32" Nullable="false" />
-          <Property Name="BloodBankID" Type="Int32" Nullable="false" />
-          <Property Name="DonorID" Type="Int32" Nullable="false" />
-          <Property Name="RequiredBloodGroupID" Type="Int32" Nullable="false" />
-          <Property Name="RequestTypeID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RequestTypeTable" Relationship="Self.FK_RequestTable_RequestTypeTable" FromRole="RequestTable" ToRole="RequestTypeTable" />
-        </EntityType>
         <EntityType Name="RequestTypeTable">
           <Key>
             <PropertyRef Name="RequestTypeID" />
           </Key>
           <Property Name="RequestTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RequestType" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="RequestTables" Relationship="Self.FK_RequestTable_RequestTypeTable" FromRole="RequestTypeTable" ToRole="RequestTable" />
+          <NavigationProperty Name="RequestTables" Relationship="OnlineBloodBankDbModel.FK_RequestTable_RequestTypeTable" FromRole="RequestTypeTable" ToRole="RequestTable" />
         </EntityType>
         <EntityType Name="SeekerTable">
           <Key>
@@ -682,11 +700,11 @@
           <Property Name="UserTypeID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AccountStatusTable" Relationship="Self.FK_UserTable_AccountStatusTable" FromRole="UserTable" ToRole="AccountStatusTable" />
-          <NavigationProperty Name="BloodBankTables" Relationship="Self.FK_BloodBankTable_UserTable" FromRole="UserTable" ToRole="BloodBankTable" />
           <NavigationProperty Name="HospitalTables" Relationship="Self.FK_HospitalTable_UserTable" FromRole="UserTable" ToRole="HospitalTable" />
           <NavigationProperty Name="SeekerTables" Relationship="Self.FK_SeekerTable_UserTable" FromRole="UserTable" ToRole="SeekerTable" />
           <NavigationProperty Name="UserTypeTable" Relationship="Self.FK_UserTable_UserTypeTable" FromRole="UserTable" ToRole="UserTypeTable" />
           <NavigationProperty Name="DonorTables" Relationship="OnlineBloodBankDbModel.FK_DonorTable_UserTable" FromRole="UserTable" ToRole="DonorTable" />
+          <NavigationProperty Name="BloodBankTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankTable_UserTable" FromRole="UserTable" ToRole="BloodBankTable" />
         </EntityType>
         <EntityType Name="UserTypeTable">
           <Key>
@@ -708,18 +726,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BloodBankStockTable_BloodBankTable">
-          <End Role="BloodBankTable" Type="Self.BloodBankTable" Multiplicity="1" />
-          <End Role="BloodBankStockTable" Type="Self.BloodBankStockTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodBankTable">
-              <PropertyRef Name="BloodBankID" />
-            </Principal>
-            <Dependent Role="BloodBankStockTable">
-              <PropertyRef Name="BloodBankID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BloodBankStockTable_BloodGroupsTable">
           <End Role="BloodGroupsTable" Type="Self.BloodGroupsTable" Multiplicity="1" />
           <End Role="BloodBankStockTable" Type="Self.BloodBankStockTable" Multiplicity="*" />
@@ -729,30 +735,6 @@
             </Principal>
             <Dependent Role="BloodBankStockTable">
               <PropertyRef Name="BloodGroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BloodBankTable_CityTable">
-          <End Role="CityTable" Type="Self.CityTable" Multiplicity="1" />
-          <End Role="BloodBankTable" Type="Self.BloodBankTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CityTable">
-              <PropertyRef Name="CityID" />
-            </Principal>
-            <Dependent Role="BloodBankTable">
-              <PropertyRef Name="CItyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BloodBankTable_UserTable">
-          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
-          <End Role="BloodBankTable" Type="Self.BloodBankTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserTable">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="BloodBankTable">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -816,18 +798,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RequestTable_RequestTypeTable">
-          <End Role="RequestTypeTable" Type="Self.RequestTypeTable" Multiplicity="1" />
-          <End Role="RequestTable" Type="Self.RequestTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RequestTypeTable">
-              <PropertyRef Name="RequestTypeID" />
-            </Principal>
-            <Dependent Role="RequestTable">
-              <PropertyRef Name="RequestTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SeekerTable_UserTable">
           <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
           <End Role="SeekerTable" Type="Self.SeekerTable" Multiplicity="*" />
@@ -855,12 +825,10 @@
         <EntityContainer Name="OnlineBloodBankDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccountStatusTables" EntityType="Self.AccountStatusTable" />
           <EntitySet Name="BloodBankStockTables" EntityType="Self.BloodBankStockTable" />
-          <EntitySet Name="BloodBankTables" EntityType="Self.BloodBankTable" />
           <EntitySet Name="BloodGroupsTables" EntityType="Self.BloodGroupsTable" />
           <EntitySet Name="CityTables" EntityType="Self.CityTable" />
           <EntitySet Name="GenderTables" EntityType="Self.GenderTable" />
           <EntitySet Name="HospitalTables" EntityType="Self.HospitalTable" />
-          <EntitySet Name="RequestTables" EntityType="Self.RequestTable" />
           <EntitySet Name="RequestTypeTables" EntityType="Self.RequestTypeTable" />
           <EntitySet Name="SeekerTables" EntityType="Self.SeekerTable" />
           <EntitySet Name="UserTables" EntityType="Self.UserTable" />
@@ -869,21 +837,9 @@
             <End Role="AccountStatusTable" EntitySet="AccountStatusTables" />
             <End Role="UserTable" EntitySet="UserTables" />
           </AssociationSet>
-          <AssociationSet Name="FK_BloodBankStockTable_BloodBankTable" Association="Self.FK_BloodBankStockTable_BloodBankTable">
-            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
-            <End Role="BloodBankStockTable" EntitySet="BloodBankStockTables" />
-          </AssociationSet>
           <AssociationSet Name="FK_BloodBankStockTable_BloodGroupsTable" Association="Self.FK_BloodBankStockTable_BloodGroupsTable">
             <End Role="BloodGroupsTable" EntitySet="BloodGroupsTables" />
             <End Role="BloodBankStockTable" EntitySet="BloodBankStockTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BloodBankTable_CityTable" Association="Self.FK_BloodBankTable_CityTable">
-            <End Role="CityTable" EntitySet="CityTables" />
-            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BloodBankTable_UserTable" Association="Self.FK_BloodBankTable_UserTable">
-            <End Role="UserTable" EntitySet="UserTables" />
-            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
           </AssociationSet>
           <AssociationSet Name="FK_SeekerTable_BloodGroupsTable" Association="Self.FK_SeekerTable_BloodGroupsTable">
             <End Role="BloodGroupsTable" EntitySet="BloodGroupsTables" />
@@ -904,10 +860,6 @@
           <AssociationSet Name="FK_HospitalTable_UserTable" Association="Self.FK_HospitalTable_UserTable">
             <End Role="UserTable" EntitySet="UserTables" />
             <End Role="HospitalTable" EntitySet="HospitalTables" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RequestTable_RequestTypeTable" Association="Self.FK_RequestTable_RequestTypeTable">
-            <End Role="RequestTypeTable" EntitySet="RequestTypeTables" />
-            <End Role="RequestTable" EntitySet="RequestTables" />
           </AssociationSet>
           <AssociationSet Name="FK_SeekerTable_UserTable" Association="Self.FK_SeekerTable_UserTable">
             <End Role="UserTable" EntitySet="UserTables" />
@@ -931,10 +883,6 @@
             <End Role="CampaignTable" EntitySet="CampaignTables" />
             <End Role="BloodBankStockDetailTable" EntitySet="BloodBankStockDetailTables" />
           </AssociationSet>
-          <AssociationSet Name="FK_CampaignTable_BloodBankTable" Association="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable">
-            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
-            <End Role="CampaignTable" EntitySet="CampaignTables" />
-          </AssociationSet>
           <EntitySet Name="DonorTables" EntityType="OnlineBloodBankDbModel.DonorTable" />
           <AssociationSet Name="FK_BloodBankStockDetailTable_DonorTable" Association="OnlineBloodBankDbModel.FK_BloodBankStockDetailTable_DonorTable">
             <End Role="DonorTable" EntitySet="DonorTables" />
@@ -955,6 +903,38 @@
           <AssociationSet Name="FK_DonorTable_UserTable" Association="OnlineBloodBankDbModel.FK_DonorTable_UserTable">
             <End Role="UserTable" EntitySet="UserTables" />
             <End Role="DonorTable" EntitySet="DonorTables" />
+          </AssociationSet>
+          <EntitySet Name="BloodBankTables" EntityType="OnlineBloodBankDbModel.BloodBankTable" />
+          <AssociationSet Name="FK_BloodBankStockTable_BloodBankTable" Association="OnlineBloodBankDbModel.FK_BloodBankStockTable_BloodBankTable">
+            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
+            <End Role="BloodBankStockTable" EntitySet="BloodBankStockTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BloodBankTable_CityTable" Association="OnlineBloodBankDbModel.FK_BloodBankTable_CityTable">
+            <End Role="CityTable" EntitySet="CityTables" />
+            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BloodBankTable_UserTable" Association="OnlineBloodBankDbModel.FK_BloodBankTable_UserTable">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaignTable_BloodBankTable" Association="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable">
+            <End Role="BloodBankTable" EntitySet="BloodBankTables" />
+            <End Role="CampaignTable" EntitySet="CampaignTables" />
+          </AssociationSet>
+          <EntitySet Name="AcceptedTypeTables" EntityType="OnlineBloodBankDbModel.AcceptedTypeTable" />
+          <EntitySet Name="RequestStatusTables" EntityType="OnlineBloodBankDbModel.RequestStatusTable" />
+          <EntitySet Name="RequestTables" EntityType="OnlineBloodBankDbModel.RequestTable" />
+          <AssociationSet Name="FK_RequestTable_AcceptedTypeTable" Association="OnlineBloodBankDbModel.FK_RequestTable_AcceptedTypeTable">
+            <End Role="AcceptedTypeTable" EntitySet="AcceptedTypeTables" />
+            <End Role="RequestTable" EntitySet="RequestTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestTable_RequestStatusTable" Association="OnlineBloodBankDbModel.FK_RequestTable_RequestStatusTable">
+            <End Role="RequestStatusTable" EntitySet="RequestStatusTables" />
+            <End Role="RequestTable" EntitySet="RequestTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequestTable_RequestTypeTable" Association="OnlineBloodBankDbModel.FK_RequestTable_RequestTypeTable">
+            <End Role="RequestTypeTable" EntitySet="RequestTypeTables" />
+            <End Role="RequestTable" EntitySet="RequestTables" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BloodBankStockDetailTable">
@@ -985,9 +965,9 @@
           <Property Name="Location" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CampaignDetails" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BloodBankStockDetailTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankStockDetailTable_CampaignTable" FromRole="CampaignTable" ToRole="BloodBankStockDetailTable" />
-          <NavigationProperty Name="BloodBankTable" Relationship="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable" FromRole="CampaignTable" ToRole="BloodBankTable" />
           <Property Name="CampaignTitle" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="CampaignPhoto" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BloodBankTable" Relationship="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable" FromRole="CampaignTable" ToRole="BloodBankTable" />
         </EntityType>
         <Association Name="FK_BloodBankStockDetailTable_BloodBankStockTable">
           <End Type="OnlineBloodBankDbModel.BloodBankStockTable" Role="BloodBankStockTable" Multiplicity="1" />
@@ -1022,18 +1002,6 @@
             </Principal>
             <Dependent Role="BloodBankStockDetailTable">
               <PropertyRef Name="CampaignID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CampaignTable_BloodBankTable">
-          <End Type="OnlineBloodBankDbModel.BloodBankTable" Role="BloodBankTable" Multiplicity="1" />
-          <End Type="OnlineBloodBankDbModel.CampaignTable" Role="CampaignTable" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BloodBankTable">
-              <PropertyRef Name="BloodBankID" />
-            </Principal>
-            <Dependent Role="CampaignTable">
-              <PropertyRef Name="BloodBankID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1117,6 +1085,142 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="BloodBankTable">
+          <Key>
+            <PropertyRef Name="BloodBankID" />
+          </Key>
+          <Property Name="BloodBankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BloodBankName" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CItyID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BloodBankStockTables" Relationship="OnlineBloodBankDbModel.FK_BloodBankStockTable_BloodBankTable" FromRole="BloodBankTable" ToRole="BloodBankStockTable" />
+          <NavigationProperty Name="CityTable" Relationship="OnlineBloodBankDbModel.FK_BloodBankTable_CityTable" FromRole="BloodBankTable" ToRole="CityTable" />
+          <NavigationProperty Name="UserTable" Relationship="OnlineBloodBankDbModel.FK_BloodBankTable_UserTable" FromRole="BloodBankTable" ToRole="UserTable" />
+          <NavigationProperty Name="CampaignTables" Relationship="OnlineBloodBankDbModel.FK_CampaignTable_BloodBankTable" FromRole="BloodBankTable" ToRole="CampaignTable" />
+        </EntityType>
+        <Association Name="FK_BloodBankStockTable_BloodBankTable">
+          <End Type="OnlineBloodBankDbModel.BloodBankTable" Role="BloodBankTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.BloodBankStockTable" Role="BloodBankStockTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodBankTable">
+              <PropertyRef Name="BloodBankID" />
+            </Principal>
+            <Dependent Role="BloodBankStockTable">
+              <PropertyRef Name="BloodBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BloodBankTable_CityTable">
+          <End Type="OnlineBloodBankDbModel.CityTable" Role="CityTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.BloodBankTable" Role="BloodBankTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CityTable">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="BloodBankTable">
+              <PropertyRef Name="CItyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BloodBankTable_UserTable">
+          <End Type="OnlineBloodBankDbModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.BloodBankTable" Role="BloodBankTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BloodBankTable">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaignTable_BloodBankTable">
+          <End Type="OnlineBloodBankDbModel.BloodBankTable" Role="BloodBankTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.CampaignTable" Role="CampaignTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodBankTable">
+              <PropertyRef Name="BloodBankID" />
+            </Principal>
+            <Dependent Role="CampaignTable">
+              <PropertyRef Name="BloodBankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AcceptedTypeTable">
+          <Key>
+            <PropertyRef Name="AcceptedTypeID" />
+          </Key>
+          <Property Name="AcceptedTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AcceptedType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RequestTables" Relationship="OnlineBloodBankDbModel.FK_RequestTable_AcceptedTypeTable" FromRole="AcceptedTypeTable" ToRole="RequestTable" />
+        </EntityType>
+        <EntityType Name="RequestStatusTable">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RequestTables" Relationship="OnlineBloodBankDbModel.FK_RequestTable_RequestStatusTable" FromRole="RequestStatusTable" ToRole="RequestTable" />
+        </EntityType>
+        <EntityType Name="RequestTable">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RequestByID" Type="Int32" Nullable="false" />
+          <Property Name="AcceptedID" Type="Int32" Nullable="false" />
+          <Property Name="RequiredBloodGroupID" Type="Int32" Nullable="false" />
+          <Property Name="RequestTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AcceptedTypeID" Type="Int32" Nullable="false" />
+          <Property Name="RequestStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ExpectedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RequestDetails" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AcceptedTypeTable" Relationship="OnlineBloodBankDbModel.FK_RequestTable_AcceptedTypeTable" FromRole="RequestTable" ToRole="AcceptedTypeTable" />
+          <NavigationProperty Name="RequestStatusTable" Relationship="OnlineBloodBankDbModel.FK_RequestTable_RequestStatusTable" FromRole="RequestTable" ToRole="RequestStatusTable" />
+          <NavigationProperty Name="RequestTypeTable" Relationship="OnlineBloodBankDbModel.FK_RequestTable_RequestTypeTable" FromRole="RequestTable" ToRole="RequestTypeTable" />
+        </EntityType>
+        <Association Name="FK_RequestTable_AcceptedTypeTable">
+          <End Type="OnlineBloodBankDbModel.AcceptedTypeTable" Role="AcceptedTypeTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.RequestTable" Role="RequestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcceptedTypeTable">
+              <PropertyRef Name="AcceptedTypeID" />
+            </Principal>
+            <Dependent Role="RequestTable">
+              <PropertyRef Name="AcceptedTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestTable_RequestStatusTable">
+          <End Type="OnlineBloodBankDbModel.RequestStatusTable" Role="RequestStatusTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.RequestTable" Role="RequestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatusTable">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="RequestTable">
+              <PropertyRef Name="RequestStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequestTable_RequestTypeTable">
+          <End Type="OnlineBloodBankDbModel.RequestTypeTable" Role="RequestTypeTable" Multiplicity="1" />
+          <End Type="OnlineBloodBankDbModel.RequestTable" Role="RequestTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestTypeTable">
+              <PropertyRef Name="RequestTypeID" />
+            </Principal>
+            <Dependent Role="RequestTable">
+              <PropertyRef Name="RequestTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1140,21 +1244,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BloodBankTables">
-            <EntityTypeMapping TypeName="OnlineBloodBankDbModel.BloodBankTable">
-              <MappingFragment StoreEntitySet="BloodBankTable">
-                <ScalarProperty Name="BloodBankID" ColumnName="BloodBankID" />
-                <ScalarProperty Name="BloodBankName" ColumnName="BloodBankName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CItyID" ColumnName="CItyID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1194,20 +1283,6 @@
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="CityID" ColumnName="CityID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RequestTables">
-            <EntityTypeMapping TypeName="OnlineBloodBankDbModel.RequestTable">
-              <MappingFragment StoreEntitySet="RequestTable">
-                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
-                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
-                <ScalarProperty Name="SeekerID" ColumnName="SeekerID" />
-                <ScalarProperty Name="HospitalID" ColumnName="HospitalID" />
-                <ScalarProperty Name="BloodBankID" ColumnName="BloodBankID" />
-                <ScalarProperty Name="DonorID" ColumnName="DonorID" />
-                <ScalarProperty Name="RequiredBloodGroupID" ColumnName="RequiredBloodGroupID" />
-                <ScalarProperty Name="RequestTypeID" ColumnName="RequestTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1298,6 +1373,53 @@
                 <ScalarProperty Name="BloodGroupID" ColumnName="BloodGroupID" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="DonorID" ColumnName="DonorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BloodBankTables">
+            <EntityTypeMapping TypeName="OnlineBloodBankDbModel.BloodBankTable">
+              <MappingFragment StoreEntitySet="BloodBankTable">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CItyID" ColumnName="CItyID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BloodBankName" ColumnName="BloodBankName" />
+                <ScalarProperty Name="BloodBankID" ColumnName="BloodBankID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcceptedTypeTables">
+            <EntityTypeMapping TypeName="OnlineBloodBankDbModel.AcceptedTypeTable">
+              <MappingFragment StoreEntitySet="AcceptedTypeTable">
+                <ScalarProperty Name="AcceptedType" ColumnName="AcceptedType" />
+                <ScalarProperty Name="AcceptedTypeID" ColumnName="AcceptedTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestStatusTables">
+            <EntityTypeMapping TypeName="OnlineBloodBankDbModel.RequestStatusTable">
+              <MappingFragment StoreEntitySet="RequestStatusTable">
+                <ScalarProperty Name="RequestStatus" ColumnName="RequestStatus" />
+                <ScalarProperty Name="RequestStatusID" ColumnName="RequestStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestTables">
+            <EntityTypeMapping TypeName="OnlineBloodBankDbModel.RequestTable">
+              <MappingFragment StoreEntitySet="RequestTable">
+                <ScalarProperty Name="RequestDetails" ColumnName="RequestDetails" />
+                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
+                <ScalarProperty Name="RequestStatusID" ColumnName="RequestStatusID" />
+                <ScalarProperty Name="AcceptedTypeID" ColumnName="AcceptedTypeID" />
+                <ScalarProperty Name="RequestTypeID" ColumnName="RequestTypeID" />
+                <ScalarProperty Name="RequiredBloodGroupID" ColumnName="RequiredBloodGroupID" />
+                <ScalarProperty Name="AcceptedID" ColumnName="AcceptedID" />
+                <ScalarProperty Name="RequestByID" ColumnName="RequestByID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

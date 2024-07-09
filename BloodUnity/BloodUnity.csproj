@@ -126,6 +126,7 @@
     <Compile Include="Controllers\BloodGroupController.cs" />
     <Compile Include="Controllers\CityTablesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FinderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RequestTypeController.cs" />
@@ -135,6 +136,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper_Class\FileHelpers.cs" />
+    <Compile Include="Models\AcceptedTypeTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountStatusMV.cs" />
     <Compile Include="Models\AccountStatusTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
@@ -190,6 +194,9 @@
       <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistrationMV.cs" />
+    <Compile Include="Models\RequestStatusTable.cs">
+      <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RequestTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
@@ -442,6 +449,8 @@
     <Content Include="Views\Home\AllCampaigns.cshtml" />
     <Content Include="Views\Accounts\AddNewDonorByBloodBank.cshtml" />
     <Content Include="Views\Registration\AlreadyExists.cshtml" />
+    <Content Include="Views\Finder\FinderDonors.cshtml" />
+    <Content Include="Views\Home\AboutUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

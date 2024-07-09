@@ -17,10 +17,10 @@ namespace BloodUnity.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserTable()
         {
-            this.BloodBankTables = new HashSet<BloodBankTable>();
             this.HospitalTables = new HashSet<HospitalTable>();
             this.SeekerTables = new HashSet<SeekerTable>();
             this.DonorTables = new HashSet<DonorTable>();
+            this.BloodBankTables = new HashSet<BloodBankTable>();
         }
     
         public int UserID { get; set; }
@@ -33,13 +33,13 @@ namespace BloodUnity.Models
     
         public virtual AccountStatusTable AccountStatusTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BloodBankTable> BloodBankTables { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HospitalTable> HospitalTables { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SeekerTable> SeekerTables { get; set; }
         public virtual UserTypeTable UserTypeTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonorTable> DonorTables { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BloodBankTable> BloodBankTables { get; set; }
     }
 }

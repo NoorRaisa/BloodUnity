@@ -2,7 +2,9 @@
 @{
     Layout = null;
 }
-
+@{BloodUnity.Models.OnlineBloodBankDbEntities Db = new BloodUnity.Models.OnlineBloodBankDbEntities();
+        }
+}
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -98,7 +100,12 @@
                             <li>
                                 <a href="@Url.Content("~/Home/MainHome")">Home</a>
                             </li>
-
+                            <li>
+                                <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Content("~/Finder/FinderDonors")">Find Donor</a>
+                            </li>
 
                             <li>@*<a href="about-us.html" title="About Us">About Us</a>*@</li>
 
@@ -112,53 +119,53 @@
 
                             <li class="drop">
                                 <!---<a href="#">Pages</a>
-                                <ul class="drop-down">
+        <ul class="drop-down">
 
-                                    <li class="drop">
-                                        <a href="#">Elements</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="element-cta.html">CTA/PROMO BOX</a></li>
-                                            <li><a href="element-counter.html">Fun Facts</a></li>
-                                            <li><a href="element-logos.html">Logos/Clients</a></li>
-                                            <li><a href="element-process.html">Process</a></li>
-                                            <li><a href="element-highlights.html">Highlights Box</a></li>
-                                            <li><a href="element-service.html">Services</a></li>
-                                            <li><a href="element-subscribe.html">Subscribe</a></li>
-                                            <li><a href="element-team.html">Team</a></li>
-                                            <li><a href="element-feedback.html">Testimonials</a></li>
-                                        </ul>
-                                    </li>
+            <li class="drop">
+                <a href="#">Elements</a>
+                <ul class="drop-down level3">
+                    <li><a href="element-cta.html">CTA/PROMO BOX</a></li>
+                    <li><a href="element-counter.html">Fun Facts</a></li>
+                    <li><a href="element-logos.html">Logos/Clients</a></li>
+                    <li><a href="element-process.html">Process</a></li>
+                    <li><a href="element-highlights.html">Highlights Box</a></li>
+                    <li><a href="element-service.html">Services</a></li>
+                    <li><a href="element-subscribe.html">Subscribe</a></li>
+                    <li><a href="element-team.html">Team</a></li>
+                    <li><a href="element-feedback.html">Testimonials</a></li>
+                </ul>
+            </li>
 
-                                    <li class="drop">
-                                        <a href="#">Gallery</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="gallery-1.html">Layout 01</a></li>
-                                            <li><a href="gallery-2.html">Layout 02</a></li>
+            <li class="drop">
+                <a href="#">Gallery</a>
+                <ul class="drop-down level3">
+                    <li><a href="gallery-1.html">Layout 01</a></li>
+                    <li><a href="gallery-2.html">Layout 02</a></li>
 
-                                        </ul>
-                                    </li>
-                                    <li><a href="faq.html" title="FAQ">FAQ</a></li>
-                                    <li><a href="404.html" title="404 Page">404 Page</a></li>
-                                    <li class="drop">
-                                        <a href="#">Level 3</a>
-                                        <ul class="drop-down level3">
-                                            <li><a href="#">Level 3.1</a></li>
-                                            <li><a href="#">Level 3.2</a></li>
-                                            <li><a href="#">Level 3.3</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>-->
+                </ul>
+            </li>
+            <li><a href="faq.html" title="FAQ">FAQ</a></li>
+            <li><a href="404.html" title="404 Page">404 Page</a></li>
+            <li class="drop">
+                <a href="#">Level 3</a>
+                <ul class="drop-down level3">
+                    <li><a href="#">Level 3.1</a></li>
+                    <li><a href="#">Level 3.2</a></li>
+                    <li><a href="#">Level 3.3</a></li>
+                </ul>
+            </li>
+        </ul>-->
                             </li>
 
                             <!---<li>
-                                <a href="#">Blog</a>
-                                <ul class="drop-down">
-                                    <li><a href="blog.html">All Posts</a></li>
-                                    <li><a href="single.html">Single Page</a></li>
-                                </ul>
-                            </li>
+        <a href="#">Blog</a>
+        <ul class="drop-down">
+            <li><a href="blog.html">All Posts</a></li>
+            <li><a href="single.html">Single Page</a></li>
+        </ul>
+    </li>
 
-                            <li><a href="contact.html">Contact</a></li>-->
+    <li><a href="contact.html">Contact</a></li>-->
                         </ul>
                     </div>
                 </div>
@@ -185,7 +192,7 @@
                                             <br />
                                             IN OTHER PERSON FACE
                                         </h2>
-                                        <a href="#" class="btn btn-theme margin-top-24">Donate Now</a>
+                                        <a href="#registrationsection" class="btn btn-theme margin-top-24">Find Donor</a>
                                         <a href="#" class="btn btn-theme btn-theme-invert margin-top-24">CALL : +8801760603954</a>
                                     </div>
                                 </div> <!-- end .col-sm-12  -->
@@ -209,7 +216,7 @@
                                             <br>
                                             AND INSPIRES OTHERS.
                                         </h2>
-                                        <a href="#" class="btn btn-theme margin-top-24">Donate Now</a>
+                                        <a href="#registrationsection" class="btn btn-theme margin-top-24">Donate Now</a>
                                     </div>
                                 </div> <!-- end .col-sm-12  -->
                             </div> <!-- end .row  -->
@@ -266,7 +273,8 @@
                     <!--<figure class="about-img theme-custom-box-shadow">
                         <a class="venobox wow bounceIn" data-vbtype="video" data-autoplay="true" href="https://www.youtube.com/watch?v=nrJtHemSPW4"><i class="fa fa-play"></i></a>
                         <img src="~/Content/Template/images//about_feat_bg.jpg" alt="about" />
-                    </figure>--> <!-- end .cause-img  -->
+                    </figure>-->
+                    <!-- end .cause-img  -->
 
                 </div> <!--  end .col-lg-6 col-md-6 col-sm-12 col-xs-12  -->
 
@@ -276,7 +284,7 @@
     </section> <!--  end .section-about-us -->
     <!-- SECTION TESTIMONIAL   -->
 
-    <section class="section-content-block section-custom-bg" data-bg_img='@Url.Content("~/Content/Template/images//testimony_feat_bg.jpg")'data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
+    <section class="section-content-block section-custom-bg" data-bg_img='@Url.Content("~/Content/Template/images//testimony_feat_bg.jpg")' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
 
         <div class="container margin-top-80">
             <div class="row section-heading-wrapper-alt">
@@ -475,7 +483,7 @@
 
     <!--  SECTION APPOINTMENT   -->
 
-    <section class="section-content-block section-secondary-bg">
+    <section id="registrationsection" class="section-content-block section-secondary-bg">
 
         <div class="container">
 
@@ -576,8 +584,11 @@
                     <div class="counter-block-1 text-center">
 
                         <i class="fa fa-heartbeat icon"></i>
-                        <span class="counter">2578</span>
-                        <h4 class="text-capitalize">Success Smile</h4>
+                        @{ 
+                            var donor=Db.DonorTables.Count().ToString();
+                        }
+                        <span class="counter">@Convert.ToInt64(donor)</span>
+                        <h4 class="text-capitalize">Donors</h4>
 
                     </div>
 
@@ -588,8 +599,11 @@
                     <div class="counter-block-1 text-center">
 
                         <i class="fa fa-stethoscope icon"></i>
-                        <span class="counter">3235</span>
-                        <h4 class="text-capitalize">Happy Donors</h4>
+                        @{
+                            var seeker = Db.SeekerTables.Count().ToString();
+                        }
+                    <span class="counter">@Convert.ToInt64(seeker)</span>
+                        <h4 class="text-capitalize">Seekers</h4>
 
                     </div>
 
@@ -600,8 +614,11 @@
                     <div class="counter-block-1 text-center">
 
                         <i class="fa fa-users icon"></i>
-                        <span class="counter">3568</span>
-                        <h4 class="text-capitalize">Happy Recipient</h4>
+                        @{
+                            var Hospital = Db.HospitalTables.Count().ToString();
+                        }
+                    <span class="counter">@Convert.ToInt64(Hospital)</span>
+                        <h4 class="text-capitalize">Hospitals</h4>
 
                     </div>
 
@@ -612,8 +629,11 @@
                     <div class="counter-block-1 text-center">
 
                         <i class="fa fa-building icon"></i>
-                        <span class="counter">1364</span>
-                        <h4 class="text-capitalize">Total Awards</h4>
+                        @{
+                            var bloodbank = Db.SeekerTables.Count().ToString();
+                        }
+                    <span class="counter">@Convert.ToInt64(bloodbank)</span>
+                        <h4 class="text-capitalize">Blood Banks</h4>
 
                     </div>
 
@@ -626,7 +646,6 @@
 
     </section> <!--  end .appointment-section  -->
     <!-- SECTION TEAM   -->
-
     <!--<section class="section-content-block section-custom-bg" data-bg_img='~/Content/Template/images//team_feat_bg.jpg' data-bg_size='cover' data-bg_position='top center' data-bg_opacity="0">
 
         <div class="container margin-top-80">
@@ -637,122 +656,115 @@
                     <span class="heading-separator heading-separator-horizontal"></span>
                     <h2 class="extra-large">The volunteers who give their time and talents help to fulfill our mission.</h2>
 
-                </div>--> <!-- end .col-sm-10  -->
+                </div>-->
+    <!-- end .col-sm-10  -->
+    <!--</div>
+    </div>
 
-            <!--</div>
+    <div class="container margin-top-48 margin-bottom-48 wow fadeInLeft">
+
+        <div class="row">
+
+            <div class="col-md-4 col-sm-12">
+
+                <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+
+                    <figure class="team-member">
+                        <a href="#" title="ALEXANDER GARY">
+                            <img src="~/Content/Template/images//team_9.jpg" alt="ALEXANDER GARY" />
+                        </a>
+
+                    </figure>-->
+    <!-- end. team-member  -->
+    <!--<article class="team-info">
+        <h3>ALEXANDER GARY</h3>
+        <h4>Co-Founder</h4>
+    </article>
+
+    <div class="team-content">
+
+        <div class="team-social-share text-center clearfix">
+            <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+            <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+            <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+            <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+        </div>-->
+    <!-- end .author-social-box  -->
+    <!--</div>
+
+    </div>-->
+    <!--  end team-layout-1 -->
+    <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
+    <!--<div class="col-md-4 col-sm-12">
+
+        <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+
+            <figure class="team-member">
+                <a href="#" title="MELISSA MUNOZ">
+                    <img src="~/Content/Template/images//team_6.jpg" alt="MELISSA MUNOZ" />
+                </a>
+
+            </figure>-->
+    <!-- end. team-member  -->
+    <!--<article class="team-info">
+        <h3>MELISSA MUNOZ</h3>
+        <h4>Founder</h4>
+    </article>
+
+    <div class="team-content">
+
+        <div class="team-social-share text-center clearfix">
+            <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+            <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+            <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+            <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+        </div>-->
+    <!-- end .author-social-box  -->
+    <!--</div>
+
+    </div>-->
+    <!--  end team layout-1 -->
+    <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
+    <!--<div class="col-md-4 col-sm-12">
+
+        <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
+
+            <figure class="team-member">
+                <a href="#" title="JOHN ABRAHAM">
+                    <img src="~/Content/Template/images//team_7.jpg" alt="JOHN ABRAHAM" />
+                </a>
+
+            </figure>-->
+    <!-- end. team-member  -->
+    <!--<article class="team-info">
+        <h3>JOHN ABRAHAM</h3>
+        <h4>Manager</h4>
+    </article>
+    <div class="team-content">
+
+        <div class="team-social-share text-center clearfix">
+            <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
+            <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
+            <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
+            <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
+        </div>-->
+    <!-- end .author-social-box  -->
+    <!--</div>
+
+    </div>-->
+    <!--  end team-layout-1 -->
+    <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
+    <!--</div>--> <!-- end .row  -->
+    <!--<div class="row">
+            <div class="col-sm-12 text-center">
+                <a class="btn btn-theme margin-top-24" href="#">Become A Volunteer</a>
+            </div>
         </div>
 
-        <div class="container margin-top-48 margin-bottom-48 wow fadeInLeft">
-
-            <div class="row">
-
-                <div class="col-md-4 col-sm-12">
-
-                    <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
-
-                        <figure class="team-member">
-                            <a href="#" title="ALEXANDER GARY">
-                                <img src="~/Content/Template/images//team_9.jpg" alt="ALEXANDER GARY" />
-                            </a>
-
-                        </figure>--> <!-- end. team-member  -->
-
-                        <!--<article class="team-info">
-                            <h3>ALEXANDER GARY</h3>
-                            <h4>Co-Founder</h4>
-                        </article>
-
-                        <div class="team-content">
-
-                            <div class="team-social-share text-center clearfix">
-                                <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
-                                <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
-                                <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
-                                <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
-                            </div>--> <!-- end .author-social-box  -->
-
-                        <!--</div>
-
-                    </div>--> <!--  end team-layout-1 -->
-
-                <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
-
-                <!--<div class="col-md-4 col-sm-12">
-
-                    <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
-
-                        <figure class="team-member">
-                            <a href="#" title="MELISSA MUNOZ">
-                                <img src="~/Content/Template/images//team_6.jpg" alt="MELISSA MUNOZ" />
-                            </a>
-
-                        </figure>--> <!-- end. team-member  -->
-
-                        <!--<article class="team-info">
-                            <h3>MELISSA MUNOZ</h3>
-                            <h4>Founder</h4>
-                        </article>
-
-                        <div class="team-content">
-
-                            <div class="team-social-share text-center clearfix">
-                                <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
-                                <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
-                                <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
-                                <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
-                            </div>--> <!-- end .author-social-box  -->
-
-                        <!--</div>
-
-                    </div>--> <!--  end team layout-1 -->
-
-                <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
-
-                <!--<div class="col-md-4 col-sm-12">
-
-                    <div class="team-layout-1 theme-custom-box-shadow theme-custom-box-animation">
-
-                        <figure class="team-member">
-                            <a href="#" title="JOHN ABRAHAM">
-                                <img src="~/Content/Template/images//team_7.jpg" alt="JOHN ABRAHAM" />
-                            </a>
-
-                        </figure>--> <!-- end. team-member  -->
-
-                        <!--<article class="team-info">
-                            <h3>JOHN ABRAHAM</h3>
-                            <h4>Manager</h4>
-                        </article>
-                        <div class="team-content">
-
-                            <div class="team-social-share text-center clearfix">
-                                <a class="fa fa-facebook rectangle" href="#" title="Facebook"></a>
-                                <a class="fa fa-twitter rectangle" href="#" title="Twitter"></a>
-                                <a class="fa fa-google-plus rectangle" href="#" title="Google Plus"></a>
-                                <a class="fa fa-linkedin rectangle" href="#" title="Linkedin"></a>
-                            </div>--> <!-- end .author-social-box  -->
-
-                        <!--</div>
-
-                    </div>--> <!--  end team-layout-1 -->
-
-                <!--</div>--> <!--  end .col-md-4 col-sm-12  -->
-
-
-            <!--</div>--> <!-- end .row  -->
-
-            <!--<div class="row">
-                <div class="col-sm-12 text-center">
-                    <a class="btn btn-theme margin-top-24" href="#">Become A Volunteer</a>
-                </div>
-            </div>
-
-        </div>--> <!-- end .container  -->
-
+    </div>-->
+    <!-- end .container  -->
     <!--</section>-->
-
     <!--  SECTION GALLERY  -->
-
     <!--<section class="section-content-block section-pure-white-bg">
 
         <div class="container">
@@ -763,129 +775,116 @@
                     <h2>CAMPAIGN GALLERY</h2>
                     <span class="heading-separator"></span>
                     <h4>our prestigious voluntary work on campaigns by the team</h4>
-                </div>--> <!-- end .col-sm-10  -->
+                </div>-->
+    <!-- end .col-sm-10  -->
+    <!--</div>--> <!-- end .row  -->
+    <!--</div>--> <!--  end .container -->
+    <!--<div class="container wow fadeInUp">
 
+        <div class="row no-padding-gallery">
 
-            <!--</div>--> <!-- end .row  -->
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
-        <!--</div>--> <!--  end .container -->
+                <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_1.jpg">
 
-        <!--<div class="container wow fadeInUp">
+                    <figure class="gallery-img">
 
-            <div class="row no-padding-gallery">
+                        <img src="~/Content/Template/images//gallery_1.jpg" alt="gallery image" />
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                    </figure>-->
+    <!-- end .gallery-img  -->
+    <!--</a>
 
-                    <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_1.jpg">
+    </div>-->
+    <!-- end .col-sm-3  -->
+    <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
-                        <figure class="gallery-img">
+        <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_2.jpg">
 
-                            <img src="~/Content/Template/images//gallery_1.jpg" alt="gallery image" />
+            <figure class="gallery-img">
 
-                        </figure>--> <!-- end .gallery-img  -->
+                <img src="~/Content/Template/images//gallery_2.jpg" alt="gallery image" />
 
-                    <!--</a>
+            </figure>-->
+    <!-- end .gallery-img  -->
+    <!--</a>--> <!-- end .gallery-light-box  -->
+    <!--</div>--><!-- end .col-sm-3  -->
+    <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
-                </div>--><!-- end .col-sm-3  -->
+        <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_3.jpg">
 
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+            <figure class="gallery-img">
 
-                    <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_2.jpg">
+                <img src="~/Content/Template/images//gallery_3.jpg" alt="gallery image" />
 
-                        <figure class="gallery-img">
+            </figure>-->
+    <!-- end .gallery-img  -->
+    <!--</a>
 
-                            <img src="~/Content/Template/images//gallery_2.jpg" alt="gallery image" />
+    </div>-->
+    <!-- end .col-sm-3  -->
+    <!--</div>--> <!-- end .row  -->
+    <!--<div class="row no-padding-gallery">
 
-                        </figure>--> <!-- end .gallery-img  -->
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
-                    <!--</a>--> <!-- end .gallery-light-box  -->
+            <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_4.jpg">
 
-                <!--</div>--><!-- end .col-sm-3  -->
+                <figure class="gallery-img">
 
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                    <img src="~/Content/Template/images//gallery_4.jpg" alt="gallery image" />
 
-                    <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_3.jpg">
+                </figure>-->
+    <!-- end .gallery-img  -->
+    <!--</a>--> <!-- end .gallery-light-box  -->
+    <!--</div>--><!-- end .col-sm-3  -->
+    <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
-                        <figure class="gallery-img">
+        <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_5.jpg">
 
-                            <img src="~/Content/Template/images//gallery_3.jpg" alt="gallery image" />
+            <figure class="gallery-img">
 
-                        </figure>--> <!-- end .gallery-img  -->
+                <img src="~/Content/Template/images//gallery_5.jpg" alt="gallery image" />
 
-                    <!--</a>
+            </figure>-->
+    <!-- end .gallery-img  -->
+    <!--</a>
 
-                </div>--><!-- end .col-sm-3  -->
+    </div>-->
+    <!-- end .col-sm-3  -->
+    <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
 
-            <!--</div>--> <!-- end .row  -->
+        <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_6.jpg">
 
-            <!--<div class="row no-padding-gallery">
+            <figure class="gallery-img">
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
+                <img src="~/Content/Template/images//gallery_6.jpg" alt="gallery image" />
 
-                    <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_4.jpg">
-
-                        <figure class="gallery-img">
-
-                            <img src="~/Content/Template/images//gallery_4.jpg" alt="gallery image" />
-
-                        </figure>--> <!-- end .gallery-img  -->
-
-                    <!--</a>--> <!-- end .gallery-light-box  -->
-
-                <!--</div>--><!-- end .col-sm-3  -->
-
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
-
-                    <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_5.jpg">
-
-                        <figure class="gallery-img">
-
-                            <img src="~/Content/Template/images//gallery_5.jpg" alt="gallery image" />
-
-                        </figure>--> <!-- end .gallery-img  -->
-
-                    <!--</a>
-
-                </div>--><!-- end .col-sm-3  -->
-
-                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 gallery-container">
-
-                    <a class="gallery-light-box" data-gall="myGallery" href="~/Content/Template/images//gallery_6.jpg">
-
-                        <figure class="gallery-img">
-
-                            <img src="~/Content/Template/images//gallery_6.jpg" alt="gallery image" />
-
-                        </figure>--> <!-- end .gallery-img  -->
-
-                    <!--</a>--> <!-- end .gallery-light-box  -->
-
-                <!--</div>--><!-- end .col-sm-3  -->
-
-            <!--</div>--> <!-- end .row  -->
-
-        <!--</div>--><!-- end .container-fluid  -->
-
+            </figure>-->
+    <!-- end .gallery-img  -->
+    <!--</a>--> <!-- end .gallery-light-box  -->
+    <!--</div>--><!-- end .col-sm-3  -->
+    <!--</div>--> <!-- end .row  -->
+    <!--</div>--><!-- end .container-fluid  -->
     <!--</section>--> <!-- end .section-content-block  -->
     <!-- HIGHLIGHT CTA  -->
-
     @*<section class="padding-bottom-100 padding-top-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="cta-section-1 section-secondary-bg text-center theme-custom-box-shadow">
-                        <h2 class="text-capitalize">Become A Part Of Great Work Today</h2>
-                        <p>
-                            You can give blood at any of our blood donation venues all over the world.
-                            <br />
-                            We have total sixty thousands donor centers and visit thousands of other venues on various occasions.
-                        </p>
-                        <a class="btn btn-theme margin-top-24 wow bounceIn" href="#">JOIN WITH US</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="cta-section-1 section-secondary-bg text-center theme-custom-box-shadow">
+                            <h2 class="text-capitalize">Become A Part Of Great Work Today</h2>
+                            <p>
+                                You can give blood at any of our blood donation venues all over the world.
+                                <br />
+                                We have total sixty thousands donor centers and visit thousands of other venues on various occasions.
+                            </p>
+                            <a class="btn btn-theme margin-top-24 wow bounceIn" href="#">JOIN WITH US</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
     <footer>
 
         <section class="footer-widget-area footer-widget-area-bg">
@@ -1037,27 +1036,26 @@
                         </div> <!--  end .footer-widget  -->
 
                     </div> <!--  end .col-md-4 col-sm-12 -->
-
                     @*<div class="col-md-4 col-sm-6 col-xs-12">
 
-                        <div class="footer-widget">
-                            <div class="sidebar-widget-wrapper">
-                                <div class="footer-widget-header clearfix">
-                                    <h3>Subscribe Us</h3>
-                                </div>
-                                <p>Signup for regular newsletter and stay up to date with our latest news.</p>
-                                <div class="footer-subscription">
-                                    <p>
-                                        <input id="mc4wp_email" class="form-control" required="" placeholder="Enter Your Email" name="EMAIL" type="email">
-                                    </p>
-                                    <p>
-                                        <input class="btn btn-default" value="Subscribe Now" type="submit">
-                                    </p>
+                            <div class="footer-widget">
+                                <div class="sidebar-widget-wrapper">
+                                    <div class="footer-widget-header clearfix">
+                                        <h3>Subscribe Us</h3>
+                                    </div>
+                                    <p>Signup for regular newsletter and stay up to date with our latest news.</p>
+                                    <div class="footer-subscription">
+                                        <p>
+                                            <input id="mc4wp_email" class="form-control" required="" placeholder="Enter Your Email" name="EMAIL" type="email">
+                                        </p>
+                                        <p>
+                                            <input class="btn btn-default" value="Subscribe Now" type="submit">
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>*@ <!--  end .col-md-4 col-sm-12 -->
+                        </div>*@ <!--  end .col-md-4 col-sm-12 -->
 
                 </div> <!-- end row  -->
 
@@ -1090,9 +1088,9 @@
     <a id="backTop">Back To Top</a>
 
     @*<script type="text/javascript">
-        alert('@ViewData["Message"]');
-    </script>*@
-    
+            alert('@ViewData["Message"]');
+        </script>*@
+
     <script src="~/Content/Template/js/jquery.min.js"></script>
     <script src="~/Content/Template/js/bootstrap.min.js"></script>
     <script src="~/Content/Template/js/wow.min.js"></script>
