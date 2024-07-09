@@ -171,6 +171,8 @@
     <Compile Include="Models\DonorTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FinderMV.cs" />
+    <Compile Include="Models\FinderSearchResultMV.cs" />
     <Compile Include="Models\GenderTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
