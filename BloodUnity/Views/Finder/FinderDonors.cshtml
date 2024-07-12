@@ -4,10 +4,14 @@
     ViewBag.Title = "Find Donor";
 }
 @using (Html.BeginForm())
+
 {
+    bool isuserlogin = false;
+    if (!string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+    {
+        isuserlogin = true;
+    }
     @Html.AntiForgeryToken()
-
-
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="col-md-8">
         <div class="contact-form-block">
@@ -29,30 +33,55 @@
                     <input type="submit" style="float:right;padding:5px 24px" value="Search" class="btn btn-theme" />
                 </div>
             </p>
-            <table class="table table-hover">
-                <tr>
-                    <th>
-                        Donor
-                    </th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model.SearchResult)
-                {
-                    <tr>
-                        <td>
-                            <div>
-                                <strong>@item.FullName</strong>
-                            </div>
-                            @item.UserType
-                        </td>
-                        <td class="text-right">
-                            @Html.ActionLink("Request", "Edit", new { id = item.DonorID, donortypeid = item.UserTypeID }, new { @class = "btn btn-primary" })
-                        </td>
-                    </tr>
-                }
-
-            </table>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="accordion">
+
+            @foreach (var item in Model.SearchResult)
+            {
+                <div class="panel panel-default faq-box">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle collapsed"
+                               data-toggle="collapse"
+                               data-parent="#accordion"
+                               href="#@string.Format("collapse{0}",item.UserID)"><strong>@item.FullName (@item.BloodGroup)</strong></a>
+                            @if (isuserlogin == true)
+                            {
+                                @Html.ActionLink("Request", "RequestForBlood", new { donorid = item.DonorID, usertypeid = item.UserTypeID, bloodgroupid = item.BloodGroupID }, new
+                           {
+                               @class = "btn btn-theme-invert",
+                               @style = "float:right; background-color: " +
+                                        "#E83914; border:none; color:white; padding: 10px 22px; " + "text-align:center;display:inline-block;" +
+                                        "font-size:14px;"
+                           })
+                            }
+
+                        </h4>
+                    </div>
+                    @if (isuserlogin == true)
+                    {
+                        <div id="@string.Format("collapse{0}", item.UserID)" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <strong>Type: @item.UserType</strong><br />
+                                <strong>Phone Number: @item.ContactNo</strong><br />
+                                <strong>Address: @item.Address</strong>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="@string.Format("collapse{0}", item.UserID)" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <strong>Please Login or Signup to Get Donor Full Details Here!</strong><br />
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            }
+        </div>
+
     </div>
+
 }

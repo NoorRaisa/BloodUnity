@@ -4,7 +4,7 @@
 }
 @{BloodUnity.Models.OnlineBloodBankDbEntities Db = new BloodUnity.Models.OnlineBloodBankDbEntities();
         }
-}
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -523,6 +523,7 @@
 
                     <div class="appointment-form-wrapper theme-custom-box-shadow text-center clearfix wow zoomIn">
                         <h3 class="join-heading join-heading-alt">Want to Join Us?</h3>
+                        <h6 style="color:orangered">Please Sign In if You Already Joined Us</h6>
                         @using (Html.BeginForm("SelectUser", "Registration", FormMethod.Post, new { @class = "appoinment-form", @name = "form1", @onsubmit = "required(); return false;" }))
                         {
                             @Html.AntiForgeryToken()

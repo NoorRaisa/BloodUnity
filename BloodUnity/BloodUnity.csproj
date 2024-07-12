@@ -196,6 +196,7 @@
       <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistrationMV.cs" />
+    <Compile Include="Models\RequestMV.cs" />
     <Compile Include="Models\RequestStatusTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>
     </Compile>
@@ -453,6 +454,8 @@
     <Content Include="Views\Registration\AlreadyExists.cshtml" />
     <Content Include="Views\Finder\FinderDonors.cshtml" />
     <Content Include="Views\Home\AboutUs.cshtml" />
+    <Content Include="Views\Finder\RequestForBlood.cshtml" />
+    <Content Include="Views\Finder\ShowAllRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

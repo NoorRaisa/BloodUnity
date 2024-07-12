@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BloodUnity.Models.RequestTable>
+
+@{
+    ViewBag.Title = "ShowAllRequests";
+}
+
+<h2>ShowAllRequests</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestByID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcceptedID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequiredBloodGroupID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestDetails)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcceptedTypeTable.AcceptedType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestStatusTable.RequestStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestTypeTable.RequestType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestByID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AcceptedID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequiredBloodGroupID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestDetails)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AcceptedTypeTable.AcceptedType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestStatusTable.RequestStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestTypeTable.RequestType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RequestID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RequestID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RequestID })
+        </td>
+    </tr>
+}
+
+</table>
