@@ -196,6 +196,7 @@
       <DependentUpon>OnlineBloodDonationModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RegistrationMV.cs" />
+    <Compile Include="Models\RequestListMV.cs" />
     <Compile Include="Models\RequestMV.cs" />
     <Compile Include="Models\RequestStatusTable.cs">
       <DependentUpon>OnlineBloodDonationModel.tt</DependentUpon>

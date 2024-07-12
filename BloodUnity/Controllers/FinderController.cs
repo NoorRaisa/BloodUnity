@@ -187,28 +187,44 @@ namespace BloodUnity.Controllers
                 int.TryParse(Convert.ToString(Session["BloodBankID"]), out RequestByID);
             }
             var requests=DB.RequestTables.Where(r=>r.RequestByID==RequestByID && r.RequestTypeID==RequestTypeID).ToList();
-            //var list = new List<RequestMV>();
-            //foreach(var request in requests)
-            //{
-            //    var addrequest=new RequestMV();
-            //    addrequest.RequestID = request.RequestID;
-            //    addrequest.RequestDate = request.RequestDate;
-            //    addrequest.RequestByID=request.RequestByID;
-            //    addrequest.AcceptedID = request.AcceptedID;
-            //    addrequest.AcceptedFullName = "";
-            //    addrequest.AcceptedTypeID = request.AcceptedTypeID;
-            //    addrequest.AcceptedType = "";
-            //    addrequest.RequiredBloodGroupID = request.RequiredBloodGroupID;
-            //    addrequest.BloodGroup = "";
-            //    addrequest.RequestTypeID = addrequest.RequestTypeID;
-            //    addrequest.RequestType = "";
-            //    addrequest.RequestStatus = "";
-            //    addrequest.RequestStatusID = request.RequestStatusID;
-            //    addrequest.ExpectedDate = request.ExpectedDate;
-            //    addrequest.RequestDetails = request.RequestDetails;
-            //    list.Add(addrequest);
-            //}
-            return View(requests);
+            var list = new List<RequestListMV>();
+            foreach(var request in requests)
+            {
+                var addrequest=new RequestListMV();
+                addrequest.RequestID = request.RequestID;
+                addrequest.RequestDate = request.RequestDate.ToString("dd MMMM,yyyy");
+                addrequest.RequestByID=request.RequestByID;
+                addrequest.AcceptedID = request.AcceptedID;
+                if (request.AcceptedTypeID == 1) //donor
+                {
+                    var getdonor = DB.DonorTables.Find(request.AcceptedID);
+                    addrequest.AcceptedFullName = getdonor.FullName;
+                    addrequest.ContactNo = getdonor.ContactNo;
+                    addrequest.Address = getdonor.Location;
+                } 
+                else if(request.AcceptedTypeID==2) //bloodbank
+                {
+                    var getbloodbank = DB.BloodBankTables.Find(request.AcceptedID);
+                    addrequest.AcceptedFullName = getbloodbank.BloodBankName;
+                    addrequest.ContactNo = getbloodbank.PhoneNo;
+                    addrequest.Address = getbloodbank.Address;
+
+                }
+
+                addrequest.AcceptedTypeID = request.AcceptedTypeID;
+                addrequest.AcceptedType = request.AcceptedTypeTable.AcceptedType;
+                addrequest.RequiredBloodGroupID = request.RequiredBloodGroupID;
+                var bloodgroup = DB.BloodGroupsTables.Find(addrequest.RequiredBloodGroupID);
+                addrequest.BloodGroup = bloodgroup.BloodGroup;
+                addrequest.RequestTypeID = addrequest.RequestTypeID;
+                addrequest.RequestType = request.RequestTypeTable.RequestType;
+                addrequest.RequestStatus = request.RequestStatusTable.RequestStatus;
+                addrequest.RequestStatusID = request.RequestStatusID;
+                addrequest.ExpectedDate = request.ExpectedDate.ToString("dd MMMM,yyyy"); 
+                addrequest.RequestDetails = request.RequestDetails;
+                list.Add(addrequest);
+            }
+            return View(list);
         }
 
     }
