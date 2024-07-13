@@ -239,5 +239,100 @@ namespace BloodUnity.Controllers
             return RedirectToAction("ShowAllRequests");
 
         }
+
+        public ActionResult AcceptRequest(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var request = DB.RequestTables.Find(id);
+            request.RequestStatusID = 2;
+            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return RedirectToAction("ShowAllRequests");
+
+        }
+
+        public ActionResult DonorRequests()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            int UserTypeID = 0;
+            int AcceptedTypeID = 0;
+            int AcceptedByID = 0;
+            int.TryParse(Convert.ToString(Session["UserTypeID"]), out UserTypeID);
+
+            if (UserTypeID == 2)//donor
+            {
+                AcceptedTypeID = 1;
+                int.TryParse(Convert.ToString(Session["DonorID"]), out AcceptedByID);
+
+            }
+            else if (UserTypeID == 3)//seeker
+            {
+                
+                int.TryParse(Convert.ToString(Session["SeekerID"]), out AcceptedByID);
+            }
+            else if (UserTypeID == 4)//hospital
+            {
+                
+                int.TryParse(Convert.ToString(Session["HospitalID"]), out AcceptedByID);
+            }
+            else if (UserTypeID == 5)//bloodbank
+            {
+                AcceptedTypeID = 2;
+                int.TryParse(Convert.ToString(Session["BloodBankID"]), out AcceptedByID);
+            }
+            var requests = DB.RequestTables.Where(r => r.AcceptedID == AcceptedByID && r.AcceptedTypeID == AcceptedTypeID).ToList();
+            var list = new List<RequestListMV>();
+            foreach (var request in requests)
+            {
+                var addrequest = new RequestListMV();
+                addrequest.RequestID = request.RequestID;
+                addrequest.RequestDate = request.RequestDate.ToString("dd MMMM,yyyy");
+                addrequest.RequestByID = request.RequestByID;
+                addrequest.AcceptedID = request.AcceptedID;
+                if (request.RequestTypeID == 1) //Seeker
+                {
+                    var getseeker = DB.SeekerTables.Find(request.RequestByID);
+                    addrequest.RequestBy = getseeker.FullName;
+                    addrequest.ContactNo = getseeker.ContactNo;
+                    addrequest.Address = getseeker.Address;
+                }
+                else if (request.RequestTypeID == 2) //Hospital
+                {
+                    var gethospital = DB.HospitalTables.Find(request.RequestByID);
+                    addrequest.AcceptedFullName = gethospital.FullName;
+                    addrequest.ContactNo = gethospital.PhoneNo;
+                    addrequest.Address = gethospital.Address;
+
+                }
+                else if (request.RequestTypeID == 3) //Blood Bank
+                {
+                    var getbloodbank = DB.BloodBankTables.Find(request.RequestByID);
+                    addrequest.AcceptedFullName = getbloodbank.BloodBankName;
+                    addrequest.ContactNo = getbloodbank.PhoneNo;
+                    addrequest.Address = getbloodbank.Address;
+
+                }
+
+                addrequest.AcceptedTypeID = request.AcceptedTypeID;
+                addrequest.AcceptedType = request.AcceptedTypeTable.AcceptedType;
+                addrequest.RequiredBloodGroupID = request.RequiredBloodGroupID;
+                var bloodgroup = DB.BloodGroupsTables.Find(addrequest.RequiredBloodGroupID);
+                addrequest.BloodGroup = bloodgroup.BloodGroup;
+                addrequest.RequestTypeID = addrequest.RequestTypeID;
+                addrequest.RequestType = request.RequestTypeTable.RequestType;
+                addrequest.RequestStatus = request.RequestStatusTable.RequestStatus;
+                addrequest.RequestStatusID = request.RequestStatusID;
+                addrequest.ExpectedDate = request.ExpectedDate.ToString("dd MMMM,yyyy");
+                addrequest.RequestDetails = request.RequestDetails;
+                list.Add(addrequest);
+            }
+            return View(list);
+        }
     }
 }

@@ -457,6 +457,7 @@
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\Finder\RequestForBlood.cshtml" />
     <Content Include="Views\Finder\ShowAllRequests.cshtml" />
+    <Content Include="Views\Finder\DonorRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BloodUnity.Models.RequestListMV>
+
+@{
+    ViewBag.Title = "All Requests";
+}
+
+
+<div class="col-md-12">
+    <div class="contact-form-block">
+        <h2 class="contact-title">All Requests</h2>
+        <p>
+            @Html.ActionLink("New Request", "FinderDonors", null, new { @class = "btn btn-theme" })
+        </p>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Request Date
+                </th>
+                <th>
+                    Donor
+                </th>
+                <th>
+                    Blood Group
+                </th>
+                <th>
+                    Expected Date
+                </th>
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(ModelItem => item.RequestDate)
+
+                    </td>
+
+                    <td>
+                        @item.RequestBy (@item.RequestType)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BloodGroup)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(ModelItem => item.ExpectedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestDetails)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestStatus)
+                    </td>
+                    <td class="btn-group">
+
+                        @if (item.RequestStatusID == 1)
+                        {
+
+
+                            @Html.ActionLink("Accept", "AcceptRequest", new { id = item.RequestID }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Cancel", "CancelRequest", new { id = item.RequestID }, new { @class = "btn btn-danger" })
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
