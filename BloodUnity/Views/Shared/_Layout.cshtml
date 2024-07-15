@@ -116,13 +116,13 @@
                                                     {
                                                         <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")" title="New Accounts Request">Accounts Request</a></li>
                                                     }
-                                                    else if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                    @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
                                                     {
                                                         <li><a href="@Url.Content("~/Finder/ShowAllRequests")" title="All Request">All Requests</a></li>
                                                     }
-                                                    else if (usertypeid == 2 || usertypeid == 5)
+                                                    @if (usertypeid == 2 || usertypeid == 5)
                                                     {
-                                                        <li><a href="@Url.Content("~/Finder/DonorRequests")" title="All Request">New Requests</a></li>
+                                                        <li><a href="@Url.Content("~/Finder/DonorRequests")" title="Seeker Request">Seeker Requests</a></li>
                                                     }
                                                     <li>
                                                         <a href="#">Campaign</a>

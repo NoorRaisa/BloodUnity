@@ -1,0 +1,55 @@
+﻿@model BloodUnity.Models.BloodBankStockMV
+
+@{
+    ViewBag.Title = "Complete";
+}
+
+<div class="col-md-6">
+    <div class="contact-form-block">
+        <h2 class="contact-title">Complete Request For Blood</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.BloodBankID)
+            @Html.HiddenFor(model => model.BloodGroupID)
+            @Html.HiddenFor(model => model.BloodBankStockID)
+            <h4>Blood Bank Details</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Blood Bank
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BloodBank)
+                </dd>
+
+
+                <dt>
+                    Required Blood Group
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BloodGroup)
+                </dd>
+            </dl>
+            <hr />
+
+            <div class="form-group">
+                Enter Blood Quantity(Ltr)
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" style="float:right" ; value="Complete Request" class="btn btn-theme" />
+            </div>
+        }
+
+    </div>
+</div>
+
+

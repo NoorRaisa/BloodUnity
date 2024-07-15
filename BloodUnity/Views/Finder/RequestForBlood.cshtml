@@ -17,7 +17,7 @@
             @Html.HiddenFor(model=>model.AcceptedTypeID)
             @Html.HiddenFor(model=>model.RequiredBloodGroupID)
             <div class="form-group">
-                Sekect Expected Date
+                Select Expected Date
                 @Html.EditorFor(model => model.ExpectedDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ExpectedDate, "", new { @class = "text-danger" })
             </div>

@@ -1,6 +1,7 @@
 ﻿using BloodUnity.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Linq;
 using System.Web;
@@ -24,7 +25,7 @@ namespace BloodUnity.Controllers
         {
             ///var list = new List<FinderSearchResultMV>();
             int userid = 0;
-            int.TryParse(Convert.ToString(Session["UserID"]),out userid);
+            int.TryParse(Convert.ToString(Session["UserID"]), out userid);
             var setdate = DateTime.Now.AddDays(-120);
             var donors = DB.DonorTables.Where(d => d.BloodGroupID == finderMV.BloodGroupID && d.CityID == finderMV.CityID && d.LastDonationDate < setdate).ToList();
             foreach (var donor in donors)
@@ -146,7 +147,7 @@ namespace BloodUnity.Controllers
                 request.RequestDetails = requestMV.RequestDetails;
                 request.RequestStatusID = 1;
                 request.RequestByID = RequestByID;
-                request.RequestTypeID=RequestTypeID;
+                request.RequestTypeID = RequestTypeID;
                 DB.RequestTables.Add(request);
                 DB.SaveChanges();
                 return RedirectToAction("ShowAllRequests");
@@ -158,7 +159,7 @@ namespace BloodUnity.Controllers
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
-                return RedirectToAction("Login","Home");
+                return RedirectToAction("Login", "Home");
             }
             int UserTypeID = 0;
             int RequestTypeID = 0;
@@ -186,14 +187,14 @@ namespace BloodUnity.Controllers
                 RequestTypeID = 3;
                 int.TryParse(Convert.ToString(Session["BloodBankID"]), out RequestByID);
             }
-            var requests=DB.RequestTables.Where(r=>r.RequestByID==RequestByID && r.RequestTypeID==RequestTypeID).ToList();
+            var requests = DB.RequestTables.Where(r => r.RequestByID == RequestByID && r.RequestTypeID == RequestTypeID).ToList();
             var list = new List<RequestListMV>();
-            foreach(var request in requests)
+            foreach (var request in requests)
             {
-                var addrequest=new RequestListMV();
+                var addrequest = new RequestListMV();
                 addrequest.RequestID = request.RequestID;
                 addrequest.RequestDate = request.RequestDate.ToString("dd MMMM,yyyy");
-                addrequest.RequestByID=request.RequestByID;
+                addrequest.RequestByID = request.RequestByID;
                 addrequest.AcceptedID = request.AcceptedID;
                 if (request.AcceptedTypeID == 1) //donor
                 {
@@ -201,8 +202,8 @@ namespace BloodUnity.Controllers
                     addrequest.AcceptedFullName = getdonor.FullName;
                     addrequest.ContactNo = getdonor.ContactNo;
                     addrequest.Address = getdonor.Location;
-                } 
-                else if(request.AcceptedTypeID==2) //bloodbank
+                }
+                else if (request.AcceptedTypeID == 2) //bloodbank
                 {
                     var getbloodbank = DB.BloodBankTables.Find(request.AcceptedID);
                     addrequest.AcceptedFullName = getbloodbank.BloodBankName;
@@ -220,13 +221,13 @@ namespace BloodUnity.Controllers
                 addrequest.RequestType = request.RequestTypeTable.RequestType;
                 addrequest.RequestStatus = request.RequestStatusTable.RequestStatus;
                 addrequest.RequestStatusID = request.RequestStatusID;
-                addrequest.ExpectedDate = request.ExpectedDate.ToString("dd MMMM,yyyy"); 
+                addrequest.ExpectedDate = request.ExpectedDate.ToString("dd MMMM,yyyy");
                 addrequest.RequestDetails = request.RequestDetails;
                 list.Add(addrequest);
             }
             return View(list);
         }
-        public ActionResult CancelRequest (int ? id)
+        public ActionResult CancelRequest(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
@@ -240,6 +241,20 @@ namespace BloodUnity.Controllers
 
         }
 
+        public ActionResult CancelRequestByDonor(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var request = DB.RequestTables.Find(id);
+            request.RequestStatusID = 4;
+            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return RedirectToAction("DonorRequests");
+
+        }
+
         public ActionResult AcceptRequest(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -250,7 +265,7 @@ namespace BloodUnity.Controllers
             request.RequestStatusID = 2;
             DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
             DB.SaveChanges();
-            return RedirectToAction("ShowAllRequests");
+            return RedirectToAction("DonorRequests");
 
         }
 
@@ -273,12 +288,12 @@ namespace BloodUnity.Controllers
             }
             else if (UserTypeID == 3)//seeker
             {
-                
+
                 int.TryParse(Convert.ToString(Session["SeekerID"]), out AcceptedByID);
             }
             else if (UserTypeID == 4)//hospital
             {
-                
+
                 int.TryParse(Convert.ToString(Session["HospitalID"]), out AcceptedByID);
             }
             else if (UserTypeID == 5)//bloodbank
@@ -341,17 +356,69 @@ namespace BloodUnity.Controllers
                 return RedirectToAction("Login", "Home");
             }
             var request = DB.RequestTables.Find(id);
-            if(request.AcceptedTypeID == 1) // Donor
+            if (request.AcceptedTypeID == 1) // Donor
             {
                 var donor = DB.DonorTables.Find(request.AcceptedID);
                 donor.LastDonationDate = DateTime.Now;
                 DB.Entry(donor).State = System.Data.Entity.EntityState.Modified;
                 DB.SaveChanges();
+
+                request.RequestStatusID = 3;
+                DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+                DB.SaveChanges();
+                return RedirectToAction("ShowAllRequests");
             }
-            request.RequestStatusID = 3;
-            DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
-            DB.SaveChanges();
-            return RedirectToAction("ShowAllRequests");
+
+
+            var bloodbank = DB.BloodBankTables.Find(request.AcceptedID);
+            var bloodbankstockMV = new BloodBankStockMV();
+            bloodbankstockMV.BloodBankStockID = request.RequestID;
+            bloodbankstockMV.BloodBankID = bloodbank.BloodBankID;
+            bloodbankstockMV.BloodGroupID = request.RequiredBloodGroupID;
+            bloodbankstockMV.BloodBank = bloodbank.BloodBankName;
+            var bloodgroup = DB.BloodGroupsTables.Find(request.RequiredBloodGroupID);
+            bloodbankstockMV.BloodGroup = bloodgroup.BloodGroup;
+            bloodbankstockMV.Quantity = 1;
+            return View(bloodbankstockMV);
+        }
+
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+            public ActionResult CompleteRequest(BloodBankStockMV bloodBankStockMV)
+            {
+                if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+                {
+                    return RedirectToAction("Login", "Home");
+                }
+                try
+                {
+                    var request = DB.RequestTables.Find(bloodBankStockMV.BloodBankStockID);
+
+                    var bloodstock = DB.BloodBankStockTables.Where(b => b.BloodBankID == bloodBankStockMV.BloodBankID && b.BloodGroupID == bloodBankStockMV.BloodGroupID).FirstOrDefault();
+                    if (bloodstock.Quantity < bloodBankStockMV.Quantity)
+                    {
+                        ModelState.AddModelError(string.Empty, "Available Quantity is " + bloodstock.Quantity + "!");
+                        return View(bloodBankStockMV);
+                    }
+
+                    bloodstock.Quantity = bloodstock.Quantity - bloodBankStockMV.Quantity;
+                    DB.Entry(bloodstock).State = System.Data.Entity.EntityState.Modified;
+                    DB.SaveChanges();
+
+                    request.RequestStatusID = 3;
+                    DB.Entry(request).State = System.Data.Entity.EntityState.Modified;
+                    DB.SaveChanges();
+
+                    return RedirectToAction("ShowAllRequests");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError(string.Empty, "Please Provide Quantity!");
+                    return View(bloodBankStockMV);
+                }
+
+
+
+            }
         }
     }
-}

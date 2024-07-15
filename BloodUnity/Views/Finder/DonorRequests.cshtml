@@ -20,7 +20,7 @@
                     Donor
                 </th>
                 <th>
-                    Blood Group
+                    Required Blood Group
                 </th>
                 <th>
                     Expected Date
@@ -45,7 +45,7 @@
                     </td>
 
                     <td>
-                        @item.RequestBy (@item.RequestType)
+                        @item.RequestBy (@item.RequestType-@item.ContactNo)
 
                     </td>
                     <td>
@@ -68,7 +68,7 @@
 
 
                             @Html.ActionLink("Accept", "AcceptRequest", new { id = item.RequestID }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("Cancel", "CancelRequest", new { id = item.RequestID }, new { @class = "btn btn-danger" })
+                            @Html.ActionLink("Cancel", "CancelRequestByDonor", new { id = item.RequestID }, new { @class = "btn btn-danger" })
                         }
                     </td>
                 </tr>
