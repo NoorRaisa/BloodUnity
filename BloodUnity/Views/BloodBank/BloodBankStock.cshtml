@@ -4,11 +4,22 @@
     ViewBag.Title = "Stock";
 }
 
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="contact-form-block">
         <h2 class="contact-title">Blood Bank Stock</h2>
         <p>
-            @Html.ActionLink("Add Blood", "AddNewDonorByBloodBank","Accounts", null, new { @class = "btn btn-theme" })
+            @{ 
+                BloodUnity.Models.OnlineBloodBankDbEntities Db = new BloodUnity.Models.OnlineBloodBankDbEntities();
+                int bloodbankID = 0;
+                string bloodbankid = Convert.ToString(Session["BloodBankID"]);
+                int.TryParse(bloodbankid, out bloodbankID);
+                var currentdate = DateTime.Now.Date;
+                var currentcampaign = Db.CampaignTables.Where(c => c.CampaignDate == currentdate && c.BloodBankID == bloodbankID).FirstOrDefault();
+            }
+            @if (currentcampaign != null)
+            {
+            @Html.ActionLink("Add Blood", "AddNewDonorByBloodBank", "Accounts", null, new { @class = "btn btn-theme" })
+            }
             @Html.ActionLink("New Campaign", "NewCampaign", null, new { @class = "btn btn-theme" })
             @Html.ActionLink("Campaign History", "CampaignHistory", null, new { @class = "btn btn-theme" })
         </p>
@@ -48,10 +59,6 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
 
-                    <td>
-                        @Html.ActionLink("Supply", "Edit", new { id = item.BloodBankStockID }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Details History", "Details", new { id = item.BloodBankStockID }, new { @class = "btn btn-info" })
-                    </td>
                 </tr>
             }
 

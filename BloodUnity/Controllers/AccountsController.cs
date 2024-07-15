@@ -92,7 +92,7 @@ namespace BloodUnity.Controllers
                 {
                     try
                     {
-                        var checkdonor = DB.DonorTables.Where(d => d.NID.Trim().Replace("-", "") == collectBloodMV.DonorDetails.NID.Replace("-", "").Trim() && collectBloodMV.DonorDetails.AccountStatusID==2).FirstOrDefault();
+                        var checkdonor = DB.DonorTables.Where(d => d.NID.Equals(collectBloodMV.DonorDetails.NID)).FirstOrDefault();
                         if (checkdonor == null)
                         {
                             var user = new UserTable();
@@ -117,7 +117,7 @@ namespace BloodUnity.Controllers
                             Donor.UserID = user.UserID;
                             DB.DonorTables.Add(Donor);
                             DB.SaveChanges();
-                            checkdonor = DB.DonorTables.Where(d => d.NID.Trim().Replace("-", "") == collectBloodMV.DonorDetails.NID.Trim().Replace("-", "")).FirstOrDefault();
+                            checkdonor = DB.DonorTables.Where(d => d.NID == collectBloodMV.DonorDetails.NID).FirstOrDefault();
 
                         }
 

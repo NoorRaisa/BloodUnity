@@ -109,8 +109,10 @@
                                                     <li>
                                                         <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
                                                     </li>
-                                                    <li>
+                                                    <li>@if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                    {
                                                         <a href="@Url.Content("~/Finder/FinderDonors")">Find Donor</a>
+                                                    }
                                                     </li>
                                                     @if (usertypeid == 1)
                                                     {
@@ -128,7 +130,6 @@
                                                         <a href="#">Campaign</a>
                                                         <ul class="drop-down">
                                                             <li><a href="@Url.Content("~/Home/AllCampaigns")">All Campaigns</a></li>
-                                                            <li><a href="event-single.html">Single Campaign</a></li>
                                                             @if (usertypeid == 5)
                                                             {
                                                                 <li><a href="@Url.Content("~/BloodBank/AllCampaigns")">Add Campaigns</a></li>

@@ -115,7 +115,7 @@ namespace BloodUnity.Controllers
 
             if (UserTypeID == 2)//donor
             {
-
+                RequestTypeID = 4;
                 int.TryParse(Convert.ToString(Session["DonorID"]), out RequestByID);
 
             }
