@@ -56,11 +56,11 @@
 
                     <div class="col-md-4col-sm-12">
                         <div class="top-bar-social">
-                            <a href="#"><i class="fa fa-facebook rounded-box"></i></a>
+                            @*<a href="#"><i class="fa fa-facebook rounded-box"></i></a>
                             <a href="#"><i class="fa fa-twitter rounded-box"></i></a>
                             <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
                             <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
-                            <a href="#"><i class="fa fa-youtube rounded-box"></i></a>
+                            <a href="#"><i class="fa fa-youtube rounded-box"></i></a>*@
 
 
 
@@ -119,11 +119,11 @@
                                     </li>
                                 }
                                 <li><a href="#registrationsection">Join Us</a></li>
-                                <li>
+                                @*<li>
                                     <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
-                                </li>
+                                </li>*@
                                 <li>
-                                    @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                    @if (usertypeid==0||usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
                                     {
                                         <a href="@Url.Content("~/Finder/FinderDonors")">Find Donor</a>
                                     }
@@ -339,8 +339,8 @@
                                 </p>
 
                                 <img src="~/Content/Template/images//user_1.jpg" alt="" />
-                                <h6>Brandon Munson</h6>
-                                <span>CTO, Fulcrum Design, USA</span>
+                                <h6>Rahim</h6>
+                                <span>Dhaka,Bangladesh</span>
 
                             </div> <!-- end .testimony-layout-1  -->
 
@@ -351,18 +351,18 @@
                             <div class="testimony-layout-1">
                                 <h3 class="people-quote">Donor Opinion</h3>
                                 <p class="testimony-text">
-                                    I have been a donor since high school. Although I have not been a donor every year, I always want to give to the human race. I love to help others! Moreover it gives a real peace in my mind.
+                                    I have joined them recently. Looking forward to work with them.
                                 </p>
 
                                 <img src="~/Content/Template/images//user_2.jpg" alt="" />
-                                <h6>Munson Brandon</h6>
-                                <span>CTO, Fulcrum Design, USA</span>
+                                <h6>Shumi</h6>
+                                <span>Chittagong, Bangladesh</span>
 
                             </div> <!-- end .testimony-layout-1  -->
 
                         </div> <!--  end col-md-10  -->
 
-                        <div class="col-md-12 col-sm-12">
+                        <!--<div class="col-md-12 col-sm-12">
 
                             <div class="testimony-layout-1">
                                 <h3 class="people-quote">Recipient Opinion</h3>
@@ -374,9 +374,9 @@
                                 <h6>Logan Munson</h6>
                                 <span>CTO, Fulcrum Design, USA</span>
 
-                            </div> <!-- end .testimony-layout-1  -->
+                            </div>--> <!-- end .testimony-layout-1  -->
 
-                        </div> <!--  end col-md-10  -->
+                        <!--</div>--> <!--  end col-md-10  -->
 
                     </div>  <!--  end .row  -->
                 </div>
@@ -956,7 +956,7 @@
 
                                 <div class="textwidget">
 
-                                    <i class="fa fa-envelope-o fa-contact"></i> <p><a href="#">support@bloodunity.com</a><br /><a href="#">helpme@bloodunity.com</a></p>
+                                    <i class="fa fa-envelope-o fa-contact"></i> <p><a href="https://www.gmail.com/">support@bloodunity.com</a><br /></p>
 
                                     <i class="fa fa-location-arrow fa-contact"></i> <p>AUST</p>
 

@@ -7,74 +7,89 @@
 
 <div class="col-md-12">
     <div class="contact-form-block">
-        <h2 class="contact-title">All Requests</h2>
+        <h2 class="contact-title">Seeker Requests</h2>
         @*<p>
-            @Html.ActionLink("New Request", "FinderDonors", null, new { @class = "btn btn-theme" })
-        </p>*@
-        <table class="table table-hover">
-            <tr>
-                <th>
-                    Request Date
-                </th>
-                <th>
-                    Donor
-                </th>
-                <th>
-                    Required Blood Group
-                </th>
-                <th>
-                    Expected Date
-                </th>
-                <th>
-                    Description
-                </th>
-
-                <th>
-                    Status
-                </th>
-
-                <th>Action</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+                @Html.ActionLink("New Request", "FinderDonors", null, new { @class = "btn btn-theme" })
+            </p>*@
+        <table class="table table-hover"id="tbllist">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(ModelItem => item.RequestDate)
+                    <th>
+                        Request Date
+                    </th>
+                    <th>
+                        Donor
+                    </th>
+                    <th>
+                        Required Blood Group
+                    </th>
+                    <th>
+                        Expected Date
+                    </th>
+                    <th>
+                        Description
+                    </th>
 
-                    </td>
+                    <th>
+                        Status
+                    </th>
 
-                    <td>
-                        @item.RequestBy (@item.RequestType-@item.ContactNo)
-
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodGroup)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(ModelItem => item.ExpectedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RequestDetails)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RequestStatus)
-                    </td>
-                    <td class="btn-group">
-
-                        @if (item.RequestStatusID == 1)
-                        {
-
-
-                            @Html.ActionLink("Accept", "AcceptRequest", new { id = item.RequestID }, new { @class = "btn btn-success" })
-                            @Html.ActionLink("Cancel", "CancelRequestByDonor", new { id = item.RequestID }, new { @class = "btn btn-danger" })
-                        }
-                    </td>
+                    <th>Action</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(ModelItem => item.RequestDate)
+
+                        </td>
+
+                        <td>
+                            @item.RequestBy (@item.RequestType-@item.ContactNo)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BloodGroup)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(ModelItem => item.ExpectedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequestDetails)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequestStatus)
+                        </td>
+                        <td class="btn-group">
+
+                            @if (item.RequestStatusID == 1)
+                            {
+
+
+                                @Html.ActionLink("Accept", "AcceptRequest", new { id = item.RequestID }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Cancel", "CancelRequestByDonor", new { id = item.RequestID }, new { @class = "btn btn-danger" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
         </table>
     </div>
 </div>
+<script src="~/Content/Template/js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
+<script type="text/javascript">
+    var js = jQuery.noConflict(true);
+    js(document).ready(function () {
+        js('#tbllist').DataTable({
+
+        });
+    });
+</script>
 

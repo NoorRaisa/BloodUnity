@@ -334,6 +334,13 @@ namespace BloodUnity.Controllers
                     addrequest.Address = getbloodbank.Address;
 
                 }
+                else if(request.RequestTypeID == 4)
+                {
+                    var getdonor=DB.DonorTables.Find(request.RequestByID);
+                    addrequest.AcceptedFullName= getdonor.FullName;
+                    addrequest.ContactNo=getdonor.ContactNo;
+                    addrequest.Address = getdonor.Location;
+                }
 
                 addrequest.AcceptedTypeID = request.AcceptedTypeID;
                 addrequest.AcceptedType = request.AcceptedTypeTable.AcceptedType;

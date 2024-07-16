@@ -258,6 +258,7 @@
     <Content Include="Content\Template\images\about_feat_bg.jpg" />
     <Content Include="Content\Template\images\appointment.jpg" />
     <Content Include="Content\Template\images\appointment_female_bg.jpg" />
+    <Content Include="Content\Template\images\bg.jpg" />
     <Content Include="Content\Template\images\blog_1.jpg" />
     <Content Include="Content\Template\images\blog_2.jpg" />
     <Content Include="Content\Template\images\blog_3.jpg" />
@@ -337,6 +338,8 @@
     <Content Include="Content\Template\images\user_4.jpg" />
     <Content Include="Content\Template\js\bootstrap.min.js" />
     <Content Include="Content\Template\js\custom-scripts.js" />
+    <Content Include="Content\Template\js\datatables-init.js" />
+    <Content Include="Content\Template\js\datatables.min.js" />
     <Content Include="Content\Template\js\gmaps.js" />
     <Content Include="Content\Template\js\jquery.backTop.min.js" />
     <Content Include="Content\Template\js\jquery.counterup.min.js" />

@@ -9,71 +9,89 @@
         <h2 class="contact-title">Blood Bank Campaigns</h2>
         <p>
             @Html.ActionLink("New Campaign", "NewCampaign", null, new { @class = "btn btn-theme" })
-            @Html.ActionLink("Campaign History", "CampaignHistory", null, new { @class = "btn btn-theme" })
+            @*@Html.ActionLink("Campaign History", "CampaignHistory", null, new { @class = "btn btn-theme" })*@
         </p>
-        <table class="table table-hover">
-            <tr>
-                <th>
-                   Campaign Date
-                </th>
-                <th>
-                  Start Time
-                </th>
-                <th>
-                    End Time
-                </th>
-                <th>
-                    Location
-                </th>
-                <th>
-                    Campaign Details
-                </th>
-                <th>
-                    Campaign Title
-                </th>
-                <th>
-                    Campaign Banner
-                </th>
-                <th>
-                    Blood Bank Name
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+        <table class="table table-hover" id="tbllist">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CampaignDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CampaignDetails)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CampaignTitle)
-                    </td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(item.CampaignPhoto))
-                        {
-                            <img src="@Url.Content(item.CampaignPhoto)" alt="Image"
-                                 style="width:100px;height:150px;max-width:100%;height:auto;" />
-                        }
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodBankTable.BloodBankName)
-                    </td>
+                    <th>
+                        Campaign Date
+                    </th>
+                    <th>
+                        Start Time
+                    </th>
+                    <th>
+                        End Time
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        Campaign Details
+                    </th>
+                    <th>
+                        Campaign Title
+                    </th>
+                    <th>
+                        Campaign Banner
+                    </th>
+                    <th>
+                        Blood Bank Name
+                    </th>
                 </tr>
-            }
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CampaignDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CampaignDetails)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CampaignTitle)
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.CampaignPhoto))
+                            {
+                                <img src="@Url.Content(item.CampaignPhoto)" alt="Image"
+                                     style="width:100px;height:150px;max-width:100%;height:auto;" />
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BloodBankTable.BloodBankName)
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
         </table>
     </div>
+
 </div>
+<script src="~/Content/Template/js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
+<script type="text/javascript">
+    var js = jQuery.noConflict(true);
+    js(document).ready(function () {
+        js('#tbllist').DataTable({
+
+        });
+    });
+</script>
