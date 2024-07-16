@@ -109,7 +109,7 @@
                                                     <li>
                                                         <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
                                                     </li>
-                                                    <li>@if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                    <li>@if (usertypeid==2||usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
                                                     {
                                                         <a href="@Url.Content("~/Finder/FinderDonors")">Find Donor</a>
                                                     }
@@ -118,7 +118,7 @@
                                                     {
                                                         <li><a href="@Url.Content("~/Accounts/AllNewUserRequests")" title="New Accounts Request">Accounts Request</a></li>
                                                     }
-                                                    @if (usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                                    @if (usertypeid==2||usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
                                                     {
                                                         <li><a href="@Url.Content("~/Finder/ShowAllRequests")" title="All Request">All Requests</a></li>
                                                     }
