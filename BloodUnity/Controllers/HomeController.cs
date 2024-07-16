@@ -103,7 +103,7 @@ namespace BloodUnity.Controllers
                                 Session["Location"] = donor.Location;
                                 Session["CityID"] = donor.CityID;
                                 Session["City"] = donor.CityTable.City;
-                                return RedirectToAction("Donor","Dashboard");
+                                return RedirectToAction("Finder", "DonorRequests");
                             }
                             else
                             {
@@ -128,7 +128,7 @@ namespace BloodUnity.Controllers
                                 Session["Gender"] = seeker.GenderTable.Gender;
                                 Session["RegistrationDate"] = seeker.RegistrationDate;
                                 Session["Address"] = seeker.Address;
-                                return RedirectToAction("Seeker", "Dashboard");
+                                return RedirectToAction("Finder", "ShowAllRequests");
                             }
                             else
                             {
@@ -149,7 +149,7 @@ namespace BloodUnity.Controllers
                                 Session["Location"] = hospital.Location;
                                 Session["CityID"] = hospital.CityID;
                                 Session["City"] = hospital.CityTable.City;
-                                return RedirectToAction("Hospital", "Dashboard");
+                                return RedirectToAction("Finder", "ShowAllRequests");
                             }
                             else
                             {
@@ -170,7 +170,7 @@ namespace BloodUnity.Controllers
                                 Session["Email"] = bloodbank.Email;
                                 Session["CityID"] = bloodbank.CItyID;
                                 Session["City"] = bloodbank.CityTable.City;
-                                return RedirectToAction("BloodBank", "Dashboard");
+                                return RedirectToAction("BloodBank", "BloodBankStock");
 
                             }
                             else
