@@ -63,9 +63,14 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.RequestStatus)
                         </td>
+                        @{ 
+                            DateTime expected = item.ExpectedDate;
+                            DateTime now = DateTime.Now;
+                            int result = DateTime.Compare(now, expected);
+                            
+                        }
                         <td class="btn-group">
-
-                            @if (item.RequestStatusID == 1)
+                            @if (item.RequestStatusID == 1 && result<=0)
                             {
 
 

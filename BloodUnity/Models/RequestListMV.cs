@@ -24,7 +24,7 @@ namespace BloodUnity.Models
         public string RequestStatus { get; set; }
         public int RequestStatusID { get; set; }
        
-        public string ExpectedDate { get; set; }
+        public DateTime ExpectedDate { get; set; }
         public string ContactNo { get; set; }
         public string Address { get; set; }
 

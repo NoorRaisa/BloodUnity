@@ -134,23 +134,30 @@ namespace BloodUnity.Controllers
                 RequestTypeID = 3;
                 int.TryParse(Convert.ToString(Session["BloodBankID"]), out RequestByID);
             }
-
-
-            if (ModelState.IsValid)
+            var date = DateTime.Now;
+            if (requestMV.ExpectedDate < date)
             {
-                var request = new RequestTable();
-                request.RequestDate = DateTime.Now;
-                request.AcceptedTypeID = requestMV.AcceptedTypeID;
-                request.AcceptedID = requestMV.AcceptedID;
-                request.RequiredBloodGroupID = requestMV.RequiredBloodGroupID;
-                request.ExpectedDate = requestMV.ExpectedDate;
-                request.RequestDetails = requestMV.RequestDetails;
-                request.RequestStatusID = 1;
-                request.RequestByID = RequestByID;
-                request.RequestTypeID = RequestTypeID;
-                DB.RequestTables.Add(request);
-                DB.SaveChanges();
-                return RedirectToAction("ShowAllRequests");
+                ModelState.AddModelError(string.Empty, "Please Provide Correct Date!");
+            }
+            else
+            {
+
+                if (ModelState.IsValid)
+                {
+                    var request = new RequestTable();
+                    request.RequestDate = DateTime.Now;
+                    request.AcceptedTypeID = requestMV.AcceptedTypeID;
+                    request.AcceptedID = requestMV.AcceptedID;
+                    request.RequiredBloodGroupID = requestMV.RequiredBloodGroupID;
+                    request.ExpectedDate = requestMV.ExpectedDate;
+                    request.RequestDetails = requestMV.RequestDetails;
+                    request.RequestStatusID = 1;
+                    request.RequestByID = RequestByID;
+                    request.RequestTypeID = RequestTypeID;
+                    DB.RequestTables.Add(request);
+                    DB.SaveChanges();
+                    return RedirectToAction("ShowAllRequests");
+                }
             }
             return View(requestMV);
         }
@@ -222,7 +229,7 @@ namespace BloodUnity.Controllers
                 addrequest.RequestType = request.RequestTypeTable.RequestType;
                 addrequest.RequestStatus = request.RequestStatusTable.RequestStatus;
                 addrequest.RequestStatusID = request.RequestStatusID;
-                addrequest.ExpectedDate = request.ExpectedDate.ToString("dd MMMM,yyyy");
+                addrequest.ExpectedDate = request.ExpectedDate;
                 addrequest.RequestDetails = request.RequestDetails;
                 list.Add(addrequest);
             }
@@ -321,6 +328,7 @@ namespace BloodUnity.Controllers
                 else if (request.RequestTypeID == 2) //Hospital
                 {
                     var gethospital = DB.HospitalTables.Find(request.RequestByID);
+                    addrequest.RequestBy = gethospital.FullName;
                     addrequest.AcceptedFullName = gethospital.FullName;
                     addrequest.ContactNo = gethospital.PhoneNo;
                     addrequest.Address = gethospital.Address;
@@ -329,6 +337,7 @@ namespace BloodUnity.Controllers
                 else if (request.RequestTypeID == 3) //Blood Bank
                 {
                     var getbloodbank = DB.BloodBankTables.Find(request.RequestByID);
+                    addrequest.RequestBy = getbloodbank.BloodBankName;
                     addrequest.AcceptedFullName = getbloodbank.BloodBankName;
                     addrequest.ContactNo = getbloodbank.PhoneNo;
                     addrequest.Address = getbloodbank.Address;
@@ -337,6 +346,7 @@ namespace BloodUnity.Controllers
                 else if(request.RequestTypeID == 4)
                 {
                     var getdonor=DB.DonorTables.Find(request.RequestByID);
+                    addrequest.RequestBy = getdonor.FullName;
                     addrequest.AcceptedFullName= getdonor.FullName;
                     addrequest.ContactNo=getdonor.ContactNo;
                     addrequest.Address = getdonor.Location;
@@ -351,7 +361,7 @@ namespace BloodUnity.Controllers
                 addrequest.RequestType = request.RequestTypeTable.RequestType;
                 addrequest.RequestStatus = request.RequestStatusTable.RequestStatus;
                 addrequest.RequestStatusID = request.RequestStatusID;
-                addrequest.ExpectedDate = request.ExpectedDate.ToString("dd MMMM,yyyy");
+                addrequest.ExpectedDate = request.ExpectedDate;
                 addrequest.RequestDetails = request.RequestDetails;
                 list.Add(addrequest);
             }

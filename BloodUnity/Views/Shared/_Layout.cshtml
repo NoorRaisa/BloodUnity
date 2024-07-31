@@ -49,11 +49,11 @@
 
                     <div class="col-md-4col-sm-12">
                         <div class="top-bar-social">
-                            <a href="#"><i class="fa fa-facebook rounded-box"></i></a>
+                            @*<a href="#"><i class="fa fa-facebook rounded-box"></i></a>
                             <a href="#"><i class="fa fa-twitter rounded-box"></i></a>
                             <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
                             <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
-                            <a href="#"><i class="fa fa-youtube rounded-box"></i></a>
+                            <a href="#"><i class="fa fa-youtube rounded-box"></i></a>*@
                             @if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
                             {
                                 @Html.ActionLink("Sign In", "Login", "Home", null, new { @class = "btn btn-theme" })
