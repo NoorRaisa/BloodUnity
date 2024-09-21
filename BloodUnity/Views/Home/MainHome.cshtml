@@ -57,10 +57,10 @@
                     <div class="col-md-4col-sm-12">
                         <div class="top-bar-social">
                             @*<a href="#"><i class="fa fa-facebook rounded-box"></i></a>
-                            <a href="#"><i class="fa fa-twitter rounded-box"></i></a>
-                            <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
-                            <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
-                            <a href="#"><i class="fa fa-youtube rounded-box"></i></a>*@
+                                <a href="#"><i class="fa fa-twitter rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-google-plus rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-instagram rounded-box"></i></a>
+                                <a href="#"><i class="fa fa-youtube rounded-box"></i></a>*@
 
 
 
@@ -120,10 +120,10 @@
                                 }
                                 <li><a href="#registrationsection">Join Us</a></li>
                                 @*<li>
-                                    <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
-                                </li>*@
+                                        <a href="@Url.Content("~/Home/AboutUs")">About Us</a>
+                                    </li>*@
                                 <li>
-                                    @if (usertypeid==0||usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
+                                    @if (usertypeid == 0 || usertypeid == 3 || usertypeid == 4 || usertypeid == 5)
                                     {
                                         <a href="@Url.Content("~/Finder/FinderDonors")">Find Donor</a>
                                     }
@@ -159,10 +159,8 @@
                                         <a href="#">Setting</a>
                                         <ul class="drop-down">
                                             <li><a href="@Url.Content("~/User/UserProfile/"+userid+"")">User Profile</a></li>
-                                            <li><a href="@Url.Content("~/AccountStatus/AllAccountStatus")">Account Status</a></li>
                                             <li><a href="@Url.Content("~/BloodGroup/AllBloodGroups")">Blood Group</a></li>
                                             <li><a href="@Url.Content("~/CityTables/Index")">Cities</a></li>
-                                            <li><a href="@Url.Content("~/RequestType/AllRequestType")">Request Type</a></li>
                                             <li><a href="@Url.Content("~/UserType/AllUserTypes")">User Type</a></li>
                                             <li><a href="@Url.Content("~/Home/Logout")">Sign Out</a></li>
 
@@ -361,7 +359,6 @@
                             </div> <!-- end .testimony-layout-1  -->
 
                         </div> <!--  end col-md-10  -->
-
                         <!--<div class="col-md-12 col-sm-12">
 
                             <div class="testimony-layout-1">
@@ -374,8 +371,8 @@
                                 <h6>Logan Munson</h6>
                                 <span>CTO, Fulcrum Design, USA</span>
 
-                            </div>--> <!-- end .testimony-layout-1  -->
-
+                            </div>-->
+                        <!-- end .testimony-layout-1  -->
                         <!--</div>--> <!--  end col-md-10  -->
 
                     </div>  <!--  end .row  -->
